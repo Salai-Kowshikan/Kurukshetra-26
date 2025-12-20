@@ -1,6 +1,6 @@
 export default function Navbar() {
   return (
-    <header className="w-full py-4 bg-white shadow">
+    <header className="w-full py-4 bg-white shadow sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
         <div className="text-xl font-bold">Kurukshetra</div>
         <nav>
