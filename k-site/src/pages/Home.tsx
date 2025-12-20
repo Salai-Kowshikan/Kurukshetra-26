@@ -6,7 +6,10 @@ import About from "@/components/Landing/About"
 
 export default function Home() {
   return (
-    <main className="flex min-h-svh flex-col items-center justify-center">
+    <main
+      className="flex text-white min-h-screen flex-col items-center justify-center"
+      style={{ background: 'linear-gradient(180deg, #000000 0%, #30005A 100%)' }}
+    >
       <Hero />
       <Countdown />
       <Listings />
