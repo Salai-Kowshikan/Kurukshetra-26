@@ -1,10 +1,17 @@
-import { Button } from "@/components/ui/button"
+import Hero from "@/components/Landing/Hero"
+import Countdown from "@/components/Landing/Countdown"
+import Listings from "@/components/Landing/Listings"
+import Patronage from "@/components/Landing/Patronage"
+import About from "@/components/Landing/About"
 
 export default function Home() {
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold mb-4">Welcome to Home</h1>
-      <Button>Click me</Button>
-    </div>
+    <main className="flex min-h-svh flex-col items-center justify-center">
+      <Hero />
+      <Countdown />
+      <Listings />
+      <Patronage />
+      <About />
+    </main>
   )
 }
