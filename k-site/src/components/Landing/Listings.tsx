@@ -1,8 +1,89 @@
+import { useNavigate } from "react-router-dom";
+import { Button } from "../ui/button";
+
+import calendarImg from "../../assets/listings/calendar.svg";
+import screwdriverImg from "../../assets/listings/screwdriver.png";
+import microphoneImg from "../../assets/listings/microphone.png";
+import laptopImg from "../../assets/listings/laptop.png";
+
+type Listing = {
+  title: string;
+  path: string;
+  image: string;
+};
+
 export default function Listings() {
-	return (
-		<section className="w-full py-12">
-			<h3 className="text-3xl font-bold mb-2">Listings</h3>
-			<p className="text-lg">Placeholder for event listings — cards or grid will be displayed here.</p>
-		</section>
-	)
+  const navigate = useNavigate();
+
+  const listings: Listing[] = [
+    { title: "Events", path: "/events", image: calendarImg },
+    { title: "Workshops", path: "/workshops", image: screwdriverImg },
+    { title: "Guest Lectures", path: "/guest-lectures", image: microphoneImg },
+    { title: "Technovation", path: "/technovation", image: laptopImg },
+  ];
+
+  return (
+    <section className="w-full py-6 sm:py-8 md:py-12 lg:py-16">
+      <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 md:gap-8 lg:gap-10 px-4 sm:px-6 md:px-8 lg:px-12 max-w-screen-xl mx-auto">
+        {listings.map((item) => (
+          <Button
+            key={item.title}
+            onClick={() => navigate(item.path)}
+            variant="outline"
+            className="
+              flex-1
+              px-2 py-7
+              sm:px-4 sm:py-6
+              md:px-8 md:py-12
+              lg:px-10 lg:py-14
+
+              rounded-lg
+              bg-black/40
+              backdrop-blur
+              text-white
+
+              flex flex-col items-center justify-center
+              gap-1 sm:gap-2 lg:gap-3
+
+              transition-all duration-300
+              hover:scale-105
+              hover:bg-transparent
+              hover:text-white
+              hover:shadow-[0_0_20px_rgba(168,85,247,0.9)]
+
+              border-2
+              border-transparent
+              [border-image:linear-gradient(90deg,#A855F7,#D946EF,#EC4899)_1]
+            "
+          >
+            <img
+              src={item.image}
+              alt={item.title}
+              className="
+                w-8 h-8
+                sm:w-10 sm:h-10
+                md:w-14 md:h-14
+                lg:w-16 lg:h-16
+                object-contain invert
+              "
+            />
+            <span
+              className="
+                text-[8px]
+                sm:text-xs
+                md:text-sm
+                lg:text-base
+                font-semibold tracking-wide
+                font-[var(--poppins)]
+                text-center
+                whitespace-nowrap
+              "
+            >
+              {item.title}
+            </span>
+          </Button>
+        ))}
+      </div>
+    </section>
+  );
 }
