@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -83,6 +85,12 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  
+  /* Cyberpunk Purple Glitch Palette */
+  --glitch-violet: #b36bff;
+  --glitch-purple: #9b4dff;
+  --glitch-magenta: #ff5fd2;
+  --glitch-lavender: rgba(179, 107, 255, 0.6);
 }
 
 .dark {
@@ -125,5 +133,391 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Glitch animations for countdown */
+@keyframes glitch1 {
+  0% {
+    clip-path: inset(20% 0 30% 0);
+    transform: translate(-5px, 0);
+  }
+  20% {
+    clip-path: inset(50% 0 10% 0);
+    transform: translate(5px, 0);
+  }
+  40% {
+    clip-path: inset(10% 0 70% 0);
+    transform: translate(-5px, 0);
+  }
+  60% {
+    clip-path: inset(60% 0 20% 0);
+    transform: translate(5px, 0);
+  }
+  80% {
+    clip-path: inset(30% 0 40% 0);
+    transform: translate(-5px, 0);
+  }
+  100% {
+    clip-path: inset(20% 0 30% 0);
+    transform: translate(5px, 0);
+  }
+}
+
+@keyframes glitch2 {
+  0% {
+    clip-path: inset(40% 0 20% 0);
+    transform: translate(4px, 4px);
+  }
+  25% {
+    clip-path: inset(10% 0 60% 0);
+    transform: translate(-4px, -4px);
+  }
+  50% {
+    clip-path: inset(70% 0 10% 0);
+    transform: translate(4px, -4px);
+  }
+  75% {
+    clip-path: inset(20% 0 50% 0);
+    transform: translate(-4px, 4px);
+  }
+  100% {
+    clip-path: inset(40% 0 20% 0);
+    transform: translate(4px, 4px);
+  }
+}
+
+@keyframes glitch-skew {
+  0% {
+    transform: skew(0deg) scaleX(1);
+  }
+  25% {
+    transform: skew(5deg) scaleX(0.98);
+  }
+  50% {
+    transform: skew(-5deg) scaleX(1.02);
+  }
+  75% {
+    transform: skew(3deg) scaleX(0.99);
+  }
+  100% {
+    transform: skew(0deg) scaleX(1);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes pixel-shift {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-3px, 2px);
+  }
+  20% {
+    transform: translate(3px, -2px);
+  }
+  30% {
+    transform: translate(-2px, -3px);
+  }
+  40% {
+    transform: translate(2px, 3px);
+  }
+  50% {
+    transform: translate(-3px, -2px);
+  }
+  60% {
+    transform: translate(3px, 2px);
+  }
+  70% {
+    transform: translate(-2px, 3px);
+  }
+  80% {
+    transform: translate(2px, -3px);
+  }
+  90% {
+    transform: translate(-3px, 3px);
+  }
+}
+
+@keyframes rgb-split {
+  0% {
+    text-shadow: 
+      -2px 0 0 #ff00ff,
+      2px 0 0 #00ffff,
+      0 0 10px #ff00ff,
+      0 0 20px #00ffff;
+  }
+  25% {
+    text-shadow: 
+      2px 0 0 #ff00ff,
+      -2px 0 0 #00ffff,
+      0 0 15px #ff00ff,
+      0 0 25px #00ffff;
+  }
+  50% {
+    text-shadow: 
+      -3px 0 0 #ff00ff,
+      3px 0 0 #00ffff,
+      0 0 20px #ff00ff,
+      0 0 30px #00ffff;
+  }
+  75% {
+    text-shadow: 
+      3px 0 0 #ff00ff,
+      -3px 0 0 #00ffff,
+      0 0 15px #ff00ff,
+      0 0 25px #00ffff;
+  }
+  100% {
+    text-shadow: 
+      -2px 0 0 #ff00ff,
+      2px 0 0 #00ffff,
+      0 0 10px #ff00ff,
+      0 0 20px #00ffff;
+  }
+}
+
+.animate-glitch-skew {
+  animation: glitch-skew 0.3s infinite;
+}
+
+.animate-pixel-shift {
+  animation: pixel-shift 0.2s steps(4) infinite;
+}
+
+.animate-rgb-split {
+  animation: rgb-split 0.3s infinite;
+}
+
+.retro-scanline {
+  position: relative;
+  overflow: hidden;
+}
+
+.retro-scanline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(transparent, rgba(0, 255, 255, 0.5), transparent);
+  animation: scanline 2s linear infinite;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.retro-scanline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    transparent 1px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 3px
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+.pixel-border {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* ============================================
+   CYBERPUNK PURPLE GLITCH OVERLAY SYSTEM
+   Non-destructive overlay effect only
+   ============================================ */
+
+/* Glitch wrapper for countdown numbers */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+
+/* Purple glitch layers - only visible during glitch-active */
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.05s;
+}
+
+.glitch::before {
+  color: var(--glitch-magenta);
+  text-shadow: 0 0 8px var(--glitch-magenta), 0 0 15px var(--glitch-magenta);
+  z-index: -1;
+}
+
+.glitch::after {
+  color: var(--glitch-violet);
+  text-shadow: 0 0 8px var(--glitch-violet), 0 0 15px var(--glitch-violet);
+  z-index: -2;
+}
+
+/* Activate glitch layers during burst */
+.glitch-active .glitch::before {
+  opacity: 0.8;
+  animation: glitch-clip 0.4s steps(4) infinite, 
+             glitch-jitter-before 0.3s steps(2) infinite;
+}
+
+.glitch-active .glitch::after {
+  opacity: 0.7;
+  animation: glitch-clip 0.5s steps(3) infinite reverse,
+             glitch-jitter-after 0.35s steps(2) infinite;
+}
+
+/* Main text gets subtle effects during glitch */
+.glitch-active .glitch {
+  animation: glitch-flicker 0.4s steps(6) infinite,
+             glitch-micro-shake 0.3s steps(4) infinite;
+}
+
+/* Glitch Keyframes */
+@keyframes glitch-clip {
+  0% {
+    clip-path: inset(20% 0 30% 0);
+  }
+  25% {
+    clip-path: inset(60% 0 10% 0);
+  }
+  50% {
+    clip-path: inset(10% 0 60% 0);
+  }
+  75% {
+    clip-path: inset(40% 0 25% 0);
+  }
+  100% {
+    clip-path: inset(15% 0 45% 0);
+  }
+}
+
+@keyframes glitch-jitter-before {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-2px, 1px);
+  }
+  50% {
+    transform: translate(2px, -1px);
+  }
+  75% {
+    transform: translate(-1px, -2px);
+  }
+}
+
+@keyframes glitch-jitter-after {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(2px, -1px);
+  }
+  50% {
+    transform: translate(-2px, 2px);
+  }
+  75% {
+    transform: translate(1px, 1px);
+  }
+}
+
+@keyframes glitch-flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0.95;
+  }
+  30% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.92;
+  }
+  70% {
+    opacity: 1;
+  }
+}
+
+@keyframes glitch-micro-shake {
+  0%, 100% {
+    transform: translate(0, 0) skew(0deg) scaleX(1);
+  }
+  25% {
+    transform: translate(1px, 0) skew(0.5deg) scaleX(0.99);
+  }
+  50% {
+    transform: translate(-1px, 0) skew(-0.5deg) scaleX(1.01);
+  }
+  75% {
+    transform: translate(0, 1px) skew(0.3deg) scaleX(0.98);
+  }
+}
+
+/* Purple scanline overlay during glitch */
+.glitch-active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    var(--glitch-lavender) 1px,
+    transparent 2px
+  );
+  opacity: 0.15;
+  pointer-events: none;
+  animation: scanline-glitch 0.3s linear infinite;
+  z-index: 5;
+}
+
+@keyframes scanline-glitch {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(4px);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .glitch-active .glitch::before,
+  .glitch-active .glitch::after,
+  .glitch-active .glitch {
+    animation: none;
+  }
+  
+  .glitch-active .glitch::before {
+    opacity: 0.5;
+    transform: translate(-1px, 0);
+  }
+  
+  .glitch-active .glitch::after {
+    opacity: 0.4;
+    transform: translate(1px, 0);
   }
 }
