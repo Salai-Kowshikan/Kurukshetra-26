@@ -11,7 +11,6 @@ export default function Countdown() {
 	const containerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		// Set your event date here (example: March 15, 2026)
 		const eventDate = new Date('2026-03-15T00:00:00').getTime();
 
 		const timer = setInterval(() => {
@@ -62,7 +61,7 @@ export default function Countdown() {
 		
 		return (
 			<div className="flex flex-col items-center">
-				<div className="relative rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-transparent bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 p-[1.5px] sm:p-[2px]">
+				<div className="relative rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-transparent bg-linear-to-br from-purple-500 via-pink-500 to-purple-600 p-[1.5px] sm:p-0.5">
 					<div 
 						ref={containerRef}
 						className={`bg-black rounded-lg sm:rounded-xl md:rounded-2xl px-3 py-4 sm:px-4 sm:py-5 md:px-6 md:py-8 flex items-center justify-center gap-1 sm:gap-1.5 md:gap-2 relative overflow-hidden retro-scanline ${glitchActive ? 'glitch-active' : ''}`}
@@ -103,14 +102,14 @@ export default function Countdown() {
 	};
 
 	return (
-		<section className="w-full py-8 sm:py-10 md:py-12 lg:py-20 flex flex-col items-center bg-black px-4 sm:px-6">
-			<div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-8 max-w-7xl">
+		<section className="w-full py-8 sm:py-10 md:py-12 lg:py-20 flex flex-col items-centerpx-4 sm:px-6">
+			<div className="grid grid-cols-2 gap-3 sm:gap-3 md:flex md:flex-wrap md:items-center md:justify-center md:gap-4 lg:gap-8 max-w-7xl">
 				<TimeBox value={timeLeft.days} label="Days" />
-				<span className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-7 md:mb-8">:</span>
+				<span className="hidden md:inline-block text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-7 md:mb-8">:</span>
 				<TimeBox value={timeLeft.hours} label="Hours" />
-				<span className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-7 md:mb-8">:</span>
+				<span className="hidden md:inline-block text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-7 md:mb-8">:</span>
 				<TimeBox value={timeLeft.minutes} label="Mins" />
-				<span className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-7 md:mb-8">:</span>
+				<span className="hidden md:inline-block text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-7 md:mb-8">:</span>
 				<TimeBox value={timeLeft.seconds} label="Sec" />
 			</div>
 		</section>
