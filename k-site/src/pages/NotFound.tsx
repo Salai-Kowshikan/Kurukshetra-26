@@ -36,17 +36,17 @@ export default function NotFound() {
         }
       `}</style>
 
-      <div className="pointer-events-none absolute top-[-20%] left-0 h-[500px] w-full bg-fuchsia-700/20 blur-[100px] rounded-full opacity-40"></div>
+      <div className="pointer-events-none absolute top-[-20%] left-0 h-125 w-full bg-fuchsia-700/20 blur-[100px] rounded-full opacity-40"></div>
       <h1 className="z-10 mb-6 flex flex-col items-center justify-center drop-shadow-[0_0_10px_rgba(255,0,255,0.3)]">
         <span className="font-(family-name:--stalinist) text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-[0.2em] uppercase text-white/80">
           OFF THE
         </span>
-        <span className="font-(family-name:--stalinist) text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[0.2em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-purple-500 drop-shadow-[0_0_20px_rgba(217,70,239,0.8)] mt-1">
+        <span className="font-(family-name:--stalinist) text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[0.2em] uppercase text-transparent bg-clip-text bg-linear-to-r from-[#FF00B3] to-[#8A05FF] drop-shadow-[0_0_20px_rgba(217,70,239,0.8)] mt-1">
           TIMELINE
         </span>
       </h1>
       <div className="z-10 w-full max-w-sm rounded-2xl border border-fuchsia-500/30 bg-black/80 p-6 shadow-[0_0_40px_rgba(168,85,247,0.15)] backdrop-blur-xl sm:p-8 text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-transparent pointer-events-none"></div>
+        <div className="absolute inset-0 bg-linear-to-b from-cyan-500/5 to-transparent pointer-events-none"></div>
 
         <div className="mb-8 relative z-10">
           <div className="relative inline-block">
@@ -64,13 +64,13 @@ export default function NotFound() {
         </div>
         <Link to="/" className="w-full block relative z-10">
           <Button 
-            className="w-full h-12 border-0 bg-gradient-to-r from-fuchsia-600 to-purple-600 text-white font-(family-name:--stalinist) tracking-widest uppercase hover:from-fuchsia-500 hover:to-purple-500 hover:shadow-[0_0_30px_rgba(232,121,249,0.6)] hover:scale-[1.02] transition-all duration-300 rounded-lg"
+            className="w-full h-12 border-0 bg-linear-to-r from-fuchsia-600 to-purple-600 text-white font-(family-name:--stalinist) tracking-widest uppercase hover:from-fuchsia-500 hover:to-[#8A05FF] hover:scale-[1.02] transition-all duration-300 rounded-lg"
           >
             Reboot to Home
           </Button>
         </Link>
       </div>
-      <div className="absolute bottom-0 h-[2px] w-full bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent blur-[1px]"></div>
+      <div className="absolute bottom-0 h-0.5 w-full bg-linear-to-r from-transparent via-cyan-500/30 to-transparent blur-[1px]"></div>
     </div>
   );
 }
