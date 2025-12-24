@@ -29,9 +29,9 @@ const Navbar: React.FC = () => {
           onClick={() => setOpen(true)}
           className="flex flex-col justify-center gap-1.5"
         >
-          <span className="w-6 h-[2px] bg-white" />
-          <span className="w-6 h-[2px] bg-white" />
-          <span className="w-6 h-[2px] bg-white" />
+          <span className="w-6 h-0.5 bg-white" />
+          <span className="w-6 h-0.5 bg-white" />
+          <span className="w-6 h-0.5 bg-white" />
         </button>
       </div>
 
@@ -44,6 +44,7 @@ const Navbar: React.FC = () => {
           ${open ? "translate-x-0" : "-translate-x-full"}
           sm:hidden
           z-50
+          flex flex-col
         `}
       >
         {/* Close button */}
@@ -55,17 +56,13 @@ const Navbar: React.FC = () => {
           ×
         </button>
 
-        {/* Menu items */}
-        <div className="mt-20 flex flex-col gap-8 px-8">
+        {/* Menu items (centered on mobile) */}
+        <div className="mt-20 flex-1 flex flex-col justify-center divide-y divide-white/10 px-6">
           {navItems.map((item) => (
             <button
               key={item}
-              className="
-                text-left
-                text-white text-base tracking-wider
-                font-(family-name:--stalinist)
-                cursor-pointer
-              "
+              type="button"
+              className="w-full text-left py-4 px-4 text-white text-base tracking-wider font-(family-name:--stalinist) cursor-pointer hover:bg-white/5 transition-colors duration-150"
             >
               {item}
             </button>
@@ -84,7 +81,7 @@ const Navbar: React.FC = () => {
       {/* ===== DESKTOP NAVBAR ===== */}
       <div className="hidden sm:block">
         <div className="w-full py-8 relative">
-          <div className="absolute top-8 left-0 w-full h-[3px] bg-violet-600" />
+          <div className="absolute top-8 left-0 w-full h-0.75 bg-violet-600" />
 
           <div className="relative flex justify-around max-w-6xl mx-auto px-8">
             {navItems.map((item) => (
