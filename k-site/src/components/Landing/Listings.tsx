@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "../ui/button";
 
 import calendarImg from "../../assets/listings/calendar.svg";
 import screwdriverImg from "../../assets/listings/screwdriver.png";
@@ -24,18 +23,18 @@ export default function Listings() {
 
   return (
     <section className="w-full py-6 sm:py-8 md:py-12 lg:py-16">
-      <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 md:gap-8 lg:gap-10 px-4 sm:px-6 md:px-8 lg:px-12 max-w-screen-xl mx-auto">
+      <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 md:gap-8 lg:gap-10 px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl mx-auto">
         {listings.map((item) => (
-          <Button
+          <button
             key={item.title}
             onClick={() => navigate(item.path)}
-            variant="outline"
+            
             className="
               flex-1
-              px-2 py-7
-              sm:px-4 sm:py-6
-              md:px-8 md:py-12
-              lg:px-10 lg:py-14
+              px-2 py-4
+              sm:px-4 sm:py-5
+              md:px-6 md:py-8
+              lg:px-8 lg:py-10
 
               rounded-lg
               bg-black/40
@@ -52,8 +51,7 @@ export default function Listings() {
               hover:shadow-[0_0_20px_rgba(168,85,247,0.9)]
 
               border-2
-              border-transparent
-              [border-image:linear-gradient(90deg,#A855F7,#D946EF,#EC4899)_1]
+              border-[#E900BD]
             "
           >
             <img
@@ -73,15 +71,15 @@ export default function Listings() {
                 sm:text-xs
                 md:text-sm
                 lg:text-base
-                font-semibold tracking-wide
-                font-[var(--poppins)]
+                tracking-wide
+                font-(family-name:--poppins)
                 text-center
                 whitespace-nowrap
               "
             >
               {item.title}
             </span>
-          </Button>
+          </button>
         ))}
       </div>
     </section>
