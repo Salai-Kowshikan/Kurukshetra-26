@@ -4,6 +4,7 @@ import calendarImg from "../../assets/listings/calendar.svg";
 import screwdriverImg from "../../assets/listings/screwdriver.png";
 import microphoneImg from "../../assets/listings/microphone.png";
 import laptopImg from "../../assets/listings/laptop.png";
+import listingsBg from "../../assets/listing.jpg";
 
 type Listing = {
   title: string;
@@ -22,38 +23,78 @@ export default function Listings() {
   ];
 
   return (
-    <section className="w-full py-6 sm:py-8 md:py-12 lg:py-16">
-      <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 md:gap-8 lg:gap-10 px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl mx-auto">
+    <section
+      className="
+  relative w-full h-screen
+  overflow-hidden
+  flex items-center justify-center
+"
+      style={{
+        backgroundImage: `url(${listingsBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div
+        className="
+    absolute top-0 left-0 w-full h-40 sm:h-56 md:h-72
+    bg-gradient-to-b
+    from-black
+    via-black/70
+    to-transparent
+    z-0
+  "
+      />
+
+      {/* Darken image for readability */}
+      <div className="absolute inset-0 bg-black/50 z-0" />
+
+      {/* Subtle vignette */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.8))] z-0" />
+
+      {/* Accent glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(168,85,247,0.25),transparent_60%)] pointer-events-none z-0" />
+
+      <div
+        className="
+    relative z-10
+    flex flex-col sm:flex-row flex-wrap
+    justify-center items-center
+    gap-3 sm:gap-4 md:gap-8 lg:gap-10
+    px-4 sm:px-6 md:px-8 lg:px-12
+    max-w-7xl mx-auto w-full
+  "
+      >
         {listings.map((item) => (
           <button
             key={item.title}
             onClick={() => navigate(item.path)}
-            
             className="
-              flex-1
-              px-2 py-4
+              w-full sm:w-auto flex-1
+
+              flex flex-row sm:flex-col
+              items-center justify-start sm:justify-center
+              gap-3 sm:gap-2 lg:gap-3
+
+              px-4 py-3
               sm:px-4 sm:py-5
               md:px-6 md:py-8
               lg:px-8 lg:py-10
 
               rounded-lg
-              bg-black/40
-              backdrop-blur
+              bg-black/40 backdrop-blur
               text-white
 
-              flex flex-col items-center justify-center
-              gap-1 sm:gap-2 lg:gap-3
+              border-2 border-[#E900BD]
 
               transition-all duration-300
               hover:scale-105
               hover:bg-transparent
-              hover:text-white
               hover:shadow-[0_0_20px_rgba(168,85,247,0.9)]
-
-              border-2
-              border-[#E900BD]
             "
           >
+            {/* Icon */}
             <img
               src={item.image}
               alt={item.title}
@@ -63,17 +104,17 @@ export default function Listings() {
                 md:w-14 md:h-14
                 lg:w-16 lg:h-16
                 object-contain invert
+                flex-shrink-0
               "
             />
+
+            {/* Text */}
             <span
               className="
-                text-[8px]
-                sm:text-xs
-                md:text-sm
-                lg:text-base
+                text-xs sm:text-sm md:text-base
                 tracking-wide
                 font-(family-name:--poppins)
-                text-center
+                text-left sm:text-center
                 whitespace-nowrap
               "
             >
