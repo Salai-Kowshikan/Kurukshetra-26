@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import logo from "@/assets/K26_Logo[white].final-01.png";
+import { useState, useEffect } from "react";
+import logo from "@/assets/logo.png";
 
 const navItems: string[] = [
   "Sponsors",
@@ -12,8 +12,27 @@ const navItems: string[] = [
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
 
+  const [scrolled, setScrolled] = useState(false);
+
+useEffect(() => {
+  const onScroll = () => {
+    setScrolled(window.scrollY > 20);
+  };
+  window.addEventListener("scroll", onScroll);
+  return () => window.removeEventListener("scroll", onScroll);
+}, []);
+
+
   return (
-    <nav className="w-full bg-black pt-3 relative">
+    <nav
+  className={`
+    fixed top-0 left-0 w-full z-50 pt-3
+    transition-colors duration-300
+    ${scrolled ? "bg-black/80 backdrop-blur-md" : "bg-transparent"}
+  `}
+>
+
+
       {/* ===== MOBILE BAR ===== */}
       <div className="flex items-center justify-between pr-6 pl-2 py-4 sm:hidden">
         {/* Logo */}
@@ -81,7 +100,8 @@ const Navbar: React.FC = () => {
       {/* ===== DESKTOP NAVBAR ===== */}
       <div className="hidden sm:block">
         <div className="w-full py-8 relative">
-          <div className="absolute top-8 left-0 w-full h-0.75 bg-violet-600" />
+          <div className="absolute top-8 left-0 w-full h-[1px] bg-white/20" />
+
 
           <div className="relative flex justify-around max-w-6xl mx-auto px-8">
             {navItems.map((item) => (

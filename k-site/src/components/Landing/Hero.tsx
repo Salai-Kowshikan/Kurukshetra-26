@@ -1,17 +1,38 @@
+import logo from "@/assets/logo.png";
+import heroVideo from "@/assets/landing_vid.mp4";
+import Countdown from "@/components/Landing/Countdown";
+
 export default function Hero() {
-	return (
-		<section className="w-full py-20 flex flex-col items-center justify-center">
-			<h2 className="text-5xl font-extrabold mb-4 font-(family-name:--stalinist)">
-				Hero Headers
-			</h2>
+  return (
+    <section className="relative w-full h-screen overflow-hidden flex items-center justify-center">
+      {/* Background Video */}
+      <video
+        className="absolute top-0 left-0 w-full h-full object-cover"
+        src={heroVideo}
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
 
-			<h3 className="text-2xl font-semibold mb-4 font-(family-name:--poppins)">
-				Poppins — UI / Body sample
-			</h3>
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/60" />
 
-			<p className="max-w-2xl text-center text-lg font-(family-name:--poppins)">
-				This is the hero placeholder — headline, subheading, and a call-to-action will go here.
-			</p>
-		</section>
-	)
+      {/* Content */}
+      <div className="relative z-10 flex flex-col items-center text-center text-white px-4">
+        <img
+          src={logo}
+          alt="Kurukshetra Logo"
+          className="h-24 object-contain mb-6"
+        />
+
+        <h2 className="text-5xl md:text-6xl font-extrabold font-(family-name:--stalinist)">
+          MULTIVERSE <br /> RENAISSANCE
+        </h2>
+
+        {/* Countdown embedded into Hero */}
+        <Countdown />
+      </div>
+    </section>
+  );
 }
