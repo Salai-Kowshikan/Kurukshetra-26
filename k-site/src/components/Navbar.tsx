@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/CTF1.png";
 
 const navItems: string[] = [
   "Sponsors",
@@ -39,7 +39,7 @@ useEffect(() => {
         <img
           src={logo}
           alt="Kurukshetra Logo"
-          className="h-10 object-contain"
+          className="h-20 object-contain"
         />
 
         {/* Hamburger */}

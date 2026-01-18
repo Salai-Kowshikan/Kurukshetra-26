@@ -4,7 +4,7 @@ import Countdown from "@/components/Landing/Countdown";
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-screen overflow-hidden flex items-center justify-center">
+    <section className="relative w-full h-screen overflow-hidden flex items-center justify-center pt-20">
       {/* Background Video */}
       <video
         className="absolute top-0 left-0 w-full h-full object-cover"
@@ -23,10 +23,10 @@ export default function Hero() {
         <img
           src={logo}
           alt="Kurukshetra Logo"
-          className="h-24 object-contain mb-6"
+          className="h-16 md:h-24 object-contain mb-6"
         />
 
-        <h2 className="text-5xl md:text-6xl font-extrabold font-(family-name:--stalinist)">
+        <h2 className="text-xl md:text-6xl font-extrabold font-(family-name:--stalinist)">
           MULTIVERSE <br /> RENAISSANCE
         </h2>
 
