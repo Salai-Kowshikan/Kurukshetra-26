@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
 import logo from "@/assets/CTF1.png";
 
-const navItems: string[] = [
-  "Sponsors",
-  "Projects",
-  "Accommodation",
-  "Contacts",
-  "Login",
+interface NavItem {
+  label: string;
+  url: string;
+}
+
+const navItems: NavItem[] = [
+  { label: "Sponsors", url: "/sponsors" },
+  { label: "Projects", url: "https://www.projects.cegtechforum.in/" },
+  { label: "Accommodation", url: "/accommodation" },
+  { label: "Contacts", url: "/contact" },
+  { label: "Login", url: "/login" },
 ];
 
 const Navbar: React.FC = () => {
@@ -78,13 +83,13 @@ useEffect(() => {
         {/* Menu items (centered on mobile) */}
         <div className="mt-20 flex-1 flex flex-col justify-center divide-y divide-white/10 px-6">
           {navItems.map((item) => (
-            <button
-              key={item}
-              type="button"
-              className="w-full text-left py-4 px-4 text-white text-base tracking-wider font-(family-name:--stalinist) cursor-pointer hover:bg-white/5 transition-colors duration-150"
+            <a
+              key={item.label}
+              href={item.url}
+              className="w-full text-left py-4 px-4 text-white text-base tracking-wider font-(family-name:--stalinist) cursor-pointer hover:bg-white/5 transition-colors duration-150 block"
             >
-              {item}
-            </button>
+              {item.label}
+            </a>
           ))}
         </div>
       </div>
@@ -105,9 +110,10 @@ useEffect(() => {
 
           <div className="relative flex justify-around max-w-6xl mx-auto px-8">
             {navItems.map((item) => (
-              <div
-                key={item}
-                className="relative flex flex-col items-center group"
+              <a
+                key={item.label}
+                href={item.url}
+                className="relative flex flex-col items-center group no-underline"
               >
                 {/* Circle */}
                 <div
@@ -124,7 +130,7 @@ useEffect(() => {
                 </div>
 
                 {/* Button */}
-                <button
+                <span
                   className="
                     mt-6 text-[12px] tracking-wider
                     text-white
@@ -133,9 +139,9 @@ useEffect(() => {
                     font-(family-name:--stalinist)
                   "
                 >
-                  {item}
-                </button>
-              </div>
+                  {item.label}
+                </span>
+              </a>
             ))}
           </div>
         </div>

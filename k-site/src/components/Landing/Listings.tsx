@@ -39,7 +39,7 @@ export default function Listings() {
       <div
         className="
     absolute top-0 left-0 w-full h-40 sm:h-56 md:h-72
-    bg-gradient-to-b
+    bg-linear-to-b
     from-black
     via-black/70
     to-transparent
@@ -104,7 +104,7 @@ export default function Listings() {
                 md:w-14 md:h-14
                 lg:w-16 lg:h-16
                 object-contain invert
-                flex-shrink-0
+                shrink-0
               "
             />
 
