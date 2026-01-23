@@ -32,7 +32,6 @@ const Navbar: React.FC = () => {
       className={`
     fixed top-0 left-0 w-full z-50
     transition-colors duration-300
-    ${scrolled ? "bg-black/80 backdrop-blur-md" : "bg-transparent"}
   `}
     >
       {/* ===== MOBILE BAR ===== */}
@@ -100,7 +99,8 @@ const Navbar: React.FC = () => {
       )}
 
       {/* ===== DESKTOP NAVBAR ===== */}
-      <div className="hidden sm:block">
+      <div className={`hidden sm:block 
+    ${scrolled ? "bg-black/80 backdrop-blur-md" : "bg-transparent"}`}>
         <div className="w-full py-8 relative">
           <div className="absolute top-8 left-1/2 w-[80%] h-px bg-white/20 -translate-x-1/2" />
 

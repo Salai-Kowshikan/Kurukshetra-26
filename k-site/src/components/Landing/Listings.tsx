@@ -25,9 +25,10 @@ export default function Listings() {
   return (
     <section
       className="
-  relative w-full h-screen
+  relative w-full
   overflow-hidden
   flex items-center justify-center
+  py-12 
 "
       // style={{
       //   backgroundImage: `url(${listingsBg})`,
