@@ -1,5 +1,5 @@
 import logo from "@/assets/logo.png";
-import heroVideo from "@/assets/landing_vid.mp4";
+// import heroVideo from "@/assets/landing_vid.mp4";
 import Countdown from "@/components/Landing/Countdown";
 
 export default function Hero() {

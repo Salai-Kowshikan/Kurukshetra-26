@@ -26,14 +26,14 @@ export default function About() {
 					/* Gradient border wrapper */
 					<div
 						key={i}
-						className="rounded-xl p-[2px] bg-gradient-to-l from-[#6101FE] to-[#FF00B3]"
+						className="rounded-xl p-0.5 bg-linear-to-l from-[#6101FE] to-[#FF00B3]"
 					>
 						<article className="relative w-full rounded-xl p-12 bg-black/60 backdrop-blur-md">
 							{/* Title */}
 							<div className="flex justify-center -mt-6">
 								<div
 									className="px-5 py-1.5 rounded-full
-									           bg-gradient-to-l from-[#6101FE] to-[#FF00B3]
+									           bg-linear-to-l from-[#6101FE] to-[#FF00B3]
 									           text-white text-sm md:text-base
 									           font-(family-name:--stalinist)"
 								>
