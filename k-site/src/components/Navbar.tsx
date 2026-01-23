@@ -102,7 +102,7 @@ const Navbar: React.FC = () => {
       <div className={`hidden sm:block 
     ${scrolled ? "bg-black/80 backdrop-blur-md" : "bg-transparent"}`}>
         <div className="w-full py-8 relative">
-          <div className="absolute top-8 left-1/2 w-[80%] h-px bg-white/20 -translate-x-1/2" />
+          <div className="absolute top-8 left-1/2 w-[80%] h-0.5 bg-violet-600 -translate-x-1/2" />
 
           <div className="relative flex justify-center gap-8 w-4/5 mx-auto px-8">
             {navItems.map((item) => (
