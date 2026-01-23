@@ -59,7 +59,7 @@ export default function Countdown() {
         <div className="relative rounded-xl bg-linear-to-br from-purple-500 via-pink-500 to-purple-600 p-[1.5px]">
           <div
             ref={containerRef}
-            className={`bg-black rounded-xl px-4 py-5 flex items-center justify-center gap-1 relative overflow-hidden retro-scanline ${
+            className={`bg-black rounded-xl px-6 py-5 flex items-center justify-center gap-1 relative overflow-hidden retro-scanline ${
               glitchActive ? 'glitch-active' : ''
             }`}
           >

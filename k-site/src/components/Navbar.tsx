@@ -19,25 +19,22 @@ const Navbar: React.FC = () => {
 
   const [scrolled, setScrolled] = useState(false);
 
-useEffect(() => {
-  const onScroll = () => {
-    setScrolled(window.scrollY > 20);
-  };
-  window.addEventListener("scroll", onScroll);
-  return () => window.removeEventListener("scroll", onScroll);
-}, []);
-
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <nav
-  className={`
-    fixed top-0 left-0 w-full z-50 pt-3
+      className={`
+    fixed top-0 left-0 w-full z-50
     transition-colors duration-300
     ${scrolled ? "bg-black/80 backdrop-blur-md" : "bg-transparent"}
   `}
->
-
-
+    >
       {/* ===== MOBILE BAR ===== */}
       <div className="flex items-center justify-between pr-6 pl-2 py-4 sm:hidden">
         {/* Logo */}
@@ -105,10 +102,9 @@ useEffect(() => {
       {/* ===== DESKTOP NAVBAR ===== */}
       <div className="hidden sm:block">
         <div className="w-full py-8 relative">
-          <div className="absolute top-8 left-0 w-full h-[1px] bg-white/20" />
+          <div className="absolute top-8 left-1/2 w-[80%] h-px bg-white/20 -translate-x-1/2" />
 
-
-          <div className="relative flex justify-around max-w-6xl mx-auto px-8">
+          <div className="relative flex justify-center gap-8 w-4/5 mx-auto px-8">
             {navItems.map((item) => (
               <a
                 key={item.label}
@@ -118,13 +114,13 @@ useEffect(() => {
                 {/* Circle */}
                 <div
                   className="
-                    absolute top-0 -translate-y-1/2
-                    w-5 h-5 rounded-full
-                    bg-violet-600
-                    flex items-center justify-center
-                    transform-gpu transition-transform duration-300
-                    group-hover:scale-[1.2]
-                  "
+              absolute top-0 -translate-y-1/2
+              w-5 h-5 rounded-full
+              bg-violet-600
+              flex items-center justify-center
+              transform-gpu transition-transform duration-300
+              group-hover:scale-[1.2]
+            "
                 >
                   <div className="w-2.5 h-2.5 rounded-full bg-pink-500" />
                 </div>
@@ -132,12 +128,12 @@ useEffect(() => {
                 {/* Button */}
                 <span
                   className="
-                    mt-6 text-[12px] tracking-wider
-                    text-white
-                    transition-colors duration-300
-                    group-hover:text-pink-400
-                    font-(family-name:--stalinist)
-                  "
+              mt-4 text-[11px] tracking-wider
+              text-white
+              transition-colors duration-300
+              group-hover:text-pink-400
+              font-(family-name:--stalinist)
+            "
                 >
                   {item.label}
                 </span>

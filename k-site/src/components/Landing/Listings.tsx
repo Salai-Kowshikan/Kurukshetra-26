@@ -4,7 +4,7 @@ import calendarImg from "../../assets/listings/calendar.svg";
 import screwdriverImg from "../../assets/listings/screwdriver.png";
 import microphoneImg from "../../assets/listings/microphone.png";
 import laptopImg from "../../assets/listings/laptop.png";
-import listingsBg from "../../assets/listing.jpg";
+// import listingsBg from "../../assets/listing.jpg";
 
 type Listing = {
   title: string;
@@ -29,32 +29,26 @@ export default function Listings() {
   overflow-hidden
   flex items-center justify-center
 "
-      style={{
-        backgroundImage: `url(${listingsBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
+      // style={{
+      //   backgroundImage: `url(${listingsBg})`,
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      //   backgroundRepeat: "no-repeat",
+      // }}
     >
       <div
         className="
     absolute top-0 left-0 w-full h-40 sm:h-56 md:h-72
-    bg-linear-to-b
-    from-black
-    via-black/70
-    to-transparent
+
     z-0
   "
       />
 
-      {/* Darken image for readability */}
-      <div className="absolute inset-0 bg-black/50 z-0" />
+      {/* <div className="absolute inset-0 bg-black/50 z-0" />
 
-      {/* Subtle vignette */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.8))] z-0" />
 
-      {/* Accent glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(168,85,247,0.25),transparent_60%)] pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(168,85,247,0.25),transparent_60%)] pointer-events-none z-0" /> */}
 
       <div
         className="
