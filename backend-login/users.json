@@ -1,0 +1,19 @@
+[
+  {
+    "email": "admin@test.com",
+    "password": "123456"
+  },
+  {
+    "id": 1769261483173,
+    "type": "other",
+    "email": "otheruser1@gmail.com",
+    "fullName": "Other User",
+    "mobile": "9876543211",
+    "college": "ABC College",
+    "department": "ECE",
+    "year": "2",
+    "state": "Tamil Nadu",
+    "city": "Chennai",
+    "password": "123456"
+  }
+]
