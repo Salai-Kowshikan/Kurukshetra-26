@@ -93,7 +93,7 @@ export default function Countdown() {
   };
 
   return (
-    <div className=" -mt-48 mb-12">
+    <div className=" md:-mt-16 lg:-mt-48 mb-12">
       <div className="grid grid-cols-2 gap-3 md:flex md:items-center md:justify-center md:gap-6">
         <TimeBox value={timeLeft.days} label="Days" />
         <span className="hidden md:inline-block text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 sm:mb-7 md:mb-8">:</span>

@@ -28,7 +28,7 @@ export default function Listings() {
   const rightButtons = listings.slice(2, 4); // Guest Lectures, Technovation
 
   const ButtonGroup = ({ items }: { items: Listing[] }) => (
-    <div className="flex flex-col gap-3 sm:gap-4 md:gap-6 lg:gap-8 w-full items-center md:items-start">
+    <div className="flex flex-col gap-3 max-md:hidden sm:gap-4 md:gap-6 lg:gap-8 w-full items-center md:items-start">
       {items.map((item) => (
         <div
           key={item.title}
@@ -57,7 +57,7 @@ export default function Listings() {
   );
 
   return (
-    <section className="relative w-full overflow-hidden flex items-center justify-center py-8 md:py-12 lg:py-16 -mt-16 md:-mt-24 lg:-mt-16">
+    <section className="relative w-full overflow-hidden flex items-center justify-center py-8 md:py-12 lg:py-16 md:-mt-16 lg:-mt-16">
       <div className="relative max-w-7xl mx-auto w-full px-4 sm:px-6 md:px-8 lg:px-12">
         {/* Mobile Layout - Image and buttons vertically */}
         <div className="md:hidden flex flex-col gap-6">
