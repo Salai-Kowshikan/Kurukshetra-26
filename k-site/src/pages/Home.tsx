@@ -6,17 +6,24 @@ import Background from "@/components/Background";
 export default function Home() {
   return (
     <main
+      className="relative min-h-screen overflow-hidden text-white"
       style={{
         background: "linear-gradient(180deg, #000000 0%, #30005A 100%)",
       }}
-      className="relative text-white min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
-      <div className="fixed inset-0 z-0">
+      {/* Background */}
+      <div className="absolute inset-0 z-0">
         <Background />
       </div>
-      <Hero />
-      <Patronage />
-      <About />
+
+      {/* Foreground content */}
+      <div className="relative z-10 w-full pointer-events-none">
+        <Hero />
+        <Patronage />
+        <About />
+      </div>
+      
     </main>
   );
 }
+
