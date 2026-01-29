@@ -11,7 +11,7 @@ export default function Countdown() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const eventDate = new Date('2026-03-04T00:00:00').getTime();
+    const eventDate = new Date('2026-03-07T00:00:00').getTime();
 
     const timer = setInterval(() => {
       const now = Date.now();
