@@ -7,11 +7,12 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
+  { label: "Home", url: "/" },
   { label: "Sponsors", url: "/sponsors" },
   { label: "Projects", url: "https://www.projects.cegtechforum.in/" },
   { label: "Accommodation", url: "/accommodation" },
   { label: "Contacts", url: "/contact" },
-  { label: "Login", url: "/login" },
+  // { label: "Login", url: "/login" },
 ];
 
 const Navbar: React.FC = () => {
