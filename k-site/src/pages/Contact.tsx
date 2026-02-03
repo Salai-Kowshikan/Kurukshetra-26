@@ -57,7 +57,7 @@ const Contact = () => {
       const formElement = e.currentTarget as HTMLFormElement;
       const formDataToSubmit = new FormData(formElement);
       
-      await fetch("https://formsubmit.co/techops@cegtechforum.in", {
+      await fetch("https://formsubmit.co/hr@cegtechforum.in", {
         method: "POST",
         body: formDataToSubmit,
       });
@@ -90,7 +90,7 @@ rounded-2xl p-4 mt-20 sm:p-6 text-white shadow-2xl">
        {/* Social Icons */}
       <div className="flex gap-3">
         {[
-          { icon: <FaEnvelope />, url: "mailto:info@cegtechforum.in" },
+          { icon: <FaEnvelope />, url: "mailto:hr@cegtechforum.in" },
           { icon: <FaFacebookF />, url: "https://www.facebook.com/kurukshetraceg.org.in/" },
           { icon: <FaInstagram />, url: "https://www.instagram.com/kurukshetra_ceg/" },
           { icon: <FaXTwitter />, url: "https://x.com/kurukshetra_ceg" },
