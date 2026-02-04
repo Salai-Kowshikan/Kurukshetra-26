@@ -60,7 +60,7 @@ export default function ComingSoon() {
             </h2>
           </div>
 
-          <p className="font-(family-name:--poppins) text-cyan-100/70 text-sm sm:text-base uppercase tracking-[0.3em] font-semibold mt-2">
+          <p className="font-(family-name:--orbitron) text-cyan-100/70 text-sm sm:text-base uppercase tracking-[0.3em] font-semibold mt-2">
             Feature Under Construction
           </p>
         </div>
