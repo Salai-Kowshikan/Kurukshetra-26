@@ -77,7 +77,7 @@ const Contact = () => {
   };
 
   return <div className="flex items-center justify-center min-h-screen px-4 py-8
-bg-linear-to-b from-[#FF00B3] to-[#8A05FF] font-(family-name:--poppins)">
+bg-linear-to-b from-[#FF00B3] to-[#8A05FF] font-(family-name:--orbitron)">
 
     <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 
 bg-black/40 backdrop-blur-xl border border-white/10 
