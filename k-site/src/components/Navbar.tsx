@@ -1,23 +1,14 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import logo from "@/assets/CTF1.png";
-
-interface NavItem {
-  label: string;
-  url: string;
-}
-
-const navItems: NavItem[] = [
-  { label: "Sponsors", url: "/sponsors" },
-  { label: "Projects", url: "https://www.projects.cegtechforum.in/" },
-  { label: "Accommodation", url: "/accommodation" },
-  { label: "Contacts", url: "/contact" },
-  { label: "Login", url: "/login" },
-];
+import { useNavbarStore } from "@/store/navbarStore";
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
-
   const [scrolled, setScrolled] = useState(false);
+
+  const navItems = useNavbarStore((state) => state.navItems);
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => {
@@ -27,23 +18,23 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // 🔹 Active page logic
+  const isActive = (url: string) => {
+    if (url === "/") return location.pathname === "/";
+    return location.pathname.startsWith(url);
+  };
+
+
   return (
-    <nav
-      className={`
-    fixed top-0 left-0 w-full z-50
-    transition-colors duration-300
-  `}
-    >
+    <nav className="fixed top-0 left-0 w-full z-50 transition-colors duration-300">
       {/* ===== MOBILE BAR ===== */}
       <div className="flex items-center justify-between pr-6 pl-2 py-4 sm:hidden">
-        {/* Logo */}
         <img
           src={logo}
           alt="Kurukshetra Logo"
           className="h-20 object-contain"
         />
 
-        {/* Hamburger */}
         <button
           aria-label="Open menu"
           onClick={() => setOpen(true)}
@@ -67,7 +58,6 @@ const Navbar: React.FC = () => {
           flex flex-col
         `}
       >
-        {/* Close button */}
         <button
           aria-label="Close menu"
           onClick={() => setOpen(false)}
@@ -76,13 +66,13 @@ const Navbar: React.FC = () => {
           ×
         </button>
 
-        {/* Menu items (centered on mobile) */}
         <div className="mt-20 flex-1 flex flex-col justify-center divide-y divide-white/10 px-6">
           {navItems.map((item) => (
             <a
               key={item.label}
               href={item.url}
-              className="w-full text-left py-4 px-4 text-white text-base tracking-wider font-(family-name:--stalinist) cursor-pointer hover:bg-white/5 transition-colors duration-150 block"
+              className="w-full py-4 px-4 text-white text-base tracking-wider font-(family-name:--stalinist) hover:bg-white/5 transition-colors block"
+              onClick={() => setOpen(false)}
             >
               {item.label}
             </a>
@@ -90,7 +80,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* ===== BACKDROP ===== */}
+      {/* ===== MOBILE BACKDROP ===== */}
       {open && (
         <div
           className="fixed inset-0 bg-black/60 sm:hidden z-40"
@@ -99,47 +89,36 @@ const Navbar: React.FC = () => {
       )}
 
       {/* ===== DESKTOP NAVBAR ===== */}
-      <div className={`hidden sm:block 
-    ${scrolled ? "bg-black/80 backdrop-blur-md" : "bg-transparent"}`}>
-        <div className="w-full py-8 relative">
-          <div className="absolute top-8 left-1/2 w-[80%] h-0.5 bg-violet-600 -translate-x-1/2" />
-
-          <div className="relative flex justify-center gap-8 w-4/5 mx-auto px-8">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.url}
-                className="relative flex flex-col items-center group no-underline"
-              >
-                {/* Circle */}
-                <div
-                  className="
-              absolute top-0 -translate-y-1/2
-              w-5 h-5 rounded-full
-              bg-violet-600
-              flex items-center justify-center
-              transform-gpu transition-transform duration-300
-              group-hover:scale-[1.2]
-            "
-                >
-                  <div className="w-2.5 h-2.5 rounded-full bg-pink-500" />
-                </div>
-
-                {/* Button */}
-                <span
-                  className="
-              mt-4 text-[11px] tracking-wider
-              text-white
-              transition-colors duration-300
-              group-hover:text-pink-400
-              font-(family-name:--stalinist)
-            "
-                >
-                  {item.label}
-                </span>
-              </a>
-            ))}
-          </div>
+      <div className="hidden sm:flex justify-center mt-6">
+        <div
+          className="
+            relative flex items-center gap-2 px-4 py-2
+            rounded-full
+            bg-white/5 backdrop-blur-2xl
+            border border-white/10
+            shadow-[0_0_30px_rgba(168,85,247,0.25)]
+          "
+        >
+          {navItems.map((item) => (
+            <a
+              key={item.label}
+              href={item.url}
+              className={`
+                relative px-5 py-2
+                rounded-full
+                text-xs tracking-wider
+                font-(family-name:--orbitron)
+                transition-all duration-300
+                ${
+                  isActive(item.url)
+                    ? "bg-violet-600/80 text-white"
+                    : "text-white/80 hover:bg-violet-600/80 hover:text-white"
+                }
+              `}
+            >
+              {item.label}
+            </a>
+          ))}
         </div>
       </div>
     </nav>
