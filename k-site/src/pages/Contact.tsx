@@ -34,14 +34,14 @@ const Contact = () => {
     type: "query",
   });
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  // const handleChange = (
+  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  // ) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prev) => ({ ...prev, [name]: value }));
+  // };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const output = {
@@ -51,6 +51,29 @@ const Contact = () => {
 
     console.log("Form Data:");
     console.log(JSON.stringify(output, null, 2));
+
+    // Submit to FormSubmit
+    try {
+      const formElement = e.currentTarget as HTMLFormElement;
+      const formDataToSubmit = new FormData(formElement);
+      
+      await fetch("https://formsubmit.co/hr@cegtechforum.in", {
+        method: "POST",
+        body: formDataToSubmit,
+      });
+    } catch (error) {
+      console.error("Form submission error:", error);
+    }
+
+    // Reset form after submission
+    setFormData({
+      name: "",
+      mobile: "",
+      email: "",
+      company: "",
+      message: "",
+      type: "query",
+    });
   };
 
   return <div className="flex items-center justify-center min-h-screen px-4 py-8
@@ -67,7 +90,7 @@ rounded-2xl p-4 mt-20 sm:p-6 text-white shadow-2xl">
        {/* Social Icons */}
       <div className="flex gap-3">
         {[
-          { icon: <FaEnvelope />, url: "mailto:info@cegtechforum.in" },
+          { icon: <FaEnvelope />, url: "mailto:hr@cegtechforum.in" },
           { icon: <FaFacebookF />, url: "https://www.facebook.com/kurukshetraceg.org.in/" },
           { icon: <FaInstagram />, url: "https://www.instagram.com/kurukshetra_ceg/" },
           { icon: <FaXTwitter />, url: "https://x.com/kurukshetra_ceg" },
@@ -121,15 +144,18 @@ hover:shadow-[0_0_14px_#8A05FF] transition-all duration-200"
             } overflow-hidden`}
           >
             <div className="px-3 sm:px-5 py-3 sm:py-4 text-sm space-y-3">
+              
+              <div className="flex justify-between">
+                <span>Madhan R</span>
+                <a href="tel:+916383747371">+91 63837 47371</a>
+              </div>
+              
               <div className="flex justify-between">
                 <span>Vinothini K</span>
                 <a href="tel:+916381744539">+91 63817 44539</a>
               </div>
 
-              <div className="flex justify-between">
-                <span>Madhan R</span>
-                <a href="tel:+916383747371">+91 63837 47371</a>
-              </div>
+              
               <div className="flex justify-end pt-2">
                 <a href="mailto:hr@cegtechforum.in" className="text-[#FF00B3]">hr@cegtechforum.in</a>
               </div>
@@ -177,93 +203,100 @@ hover:shadow-[0_0_14px_#8A05FF] transition-all duration-200"
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Name */}
-            <div className="flex items-center bg-slate-900 rounded-lg px-3 py-2 sm:px-4 sm:py-3">
-              <FaUser className="text-white mr-3" />
-              <input
-                type="text"
-                name="name"
-                placeholder="Name"
-                value={formData.name}
-                onChange={handleChange}
-                className="bg-transparent outline-none text-white text-sm w-full placeholder:text-white/60"
-                required
-              />
-            </div>
+<form
+  id="contact-form"
+  onSubmit={handleSubmit}
+  className="space-y-4"
+>
+  {/* FormSubmit config */}
+  <input type="hidden" name="_subject" value="New K!26 Form Submission" />
+  <input type="hidden" name="_captcha" value="false" />
+  <input type="hidden" name="_template" value="table" />
 
-            {/* Mobile */}
-            <div className="flex items-center bg-slate-900 rounded-lg px-3 py-2 sm:px-4 sm:py-3">
-              <FaPhoneAlt className="text-white mr-3" />
-              <input
-                type="tel"
-                name="mobile"
-                placeholder="Mobile"
-                value={formData.mobile}
-                onChange={handleChange}
-                className="bg-transparent outline-none text-white text-sm w-full placeholder:text-white/60"
-                required
-              />
-            </div>
+  {/* Name */}
+  <div className="flex items-center bg-slate-900 rounded-lg px-3 py-2 sm:px-4 sm:py-3">
+    <FaUser className="text-white mr-3" />
+    <input
+      type="text"
+      name="Name"
+      placeholder="Name"
+      value={formData.name}
+      onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
+      required
+      className="bg-transparent outline-none text-white text-sm w-full placeholder:text-white/60"
+    />
+  </div>
 
-            {/* Email */}
-            <div className="flex items-center bg-slate-900 rounded-lg px-3 py-2 sm:px-4 sm:py-3">
-              <FaEnvelope className="text-white mr-3" />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-                className="bg-transparent outline-none text-white text-sm w-full placeholder:text-white/60"
-                required
-              />
-            </div>
+  {/* Mobile */}
+  <div className="flex items-center bg-slate-900 rounded-lg px-3 py-2 sm:px-4 sm:py-3">
+    <FaPhoneAlt className="text-white mr-3" />
+    <input
+      type="tel"
+      name="Mobile"
+      placeholder="Mobile"
+      value={formData.mobile}
+      onChange={(e) => setFormData((prev) => ({ ...prev, mobile: e.target.value }))}
+      required
+      pattern="[6-9]{1}[0-9]{9}"
+      maxLength={10}
+      title="Enter a valid 10-digit Indian mobile number"
+      className="bg-transparent outline-none text-white text-sm w-full placeholder:text-white/60"
+    />
+  </div>
 
-            {/*Company*/}
-            <div
-              className={`transition-all duration-500 ease-in-out overflow-hidden
-              ${
-                activeTab === "collaborate"
-                  ? "max-h-20 opacity-100 translate-y-0 mt-4"
-                  : "max-h-0 opacity-0 -translate-y-4"
-              }`}
-            >
-              <div className="flex items-center bg-slate-900 rounded-lg px-3 py-2 sm:px-4 sm:py-3">
-                <FaBuilding className="mr-3 text-white text-lg" />
-                <input
-                  type="text"
-                  name="company"
-                  placeholder="Company / Organization Name"
-                  value={formData.company}
-                  onChange={handleChange}
-                  className="bg-transparent outline-none text-white text-sm  w-full placeholder:text-white/60"
-                  required={activeTab === "collaborate"}
-                />
-              </div>
-            </div>
+  {/* Email */}
+  <div className="flex items-center bg-slate-900 rounded-lg px-3 py-2 sm:px-4 sm:py-3">
+    <FaEnvelope className="text-white mr-3" />
+    <input
+      type="email"
+      name="Email"
+      placeholder="Email"
+      value={formData.email}
+      onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+      required
+      className="bg-transparent outline-none text-white text-sm w-full placeholder:text-white/60"
+    />
+  </div>
 
-            {/* Message */}
-            <div className="flex bg-slate-900 rounded-lg px-4 py-3 min-h-[100px] sm:min-h-[140px]">
-              <FaCommentDots className="text-white mr-3 mt-1" />
-              <textarea
-                name="message"
-                placeholder="Your Message"
-                value={formData.message}
-                onChange={handleChange}
-                className="bg-transparent outline-none text-white text-sm w-full resize-none placeholder:text-white/60"
-                required
-              />
-            </div>
+  {/* Company */}
+  {activeTab === "collaborate" && (
+    <div className="flex items-center bg-slate-900 rounded-lg px-3 py-2 sm:px-4 sm:py-3">
+      <FaBuilding className="mr-3 text-white text-lg" />
+      <input
+        type="text"
+        name="Company"
+        placeholder="Company / Organization Name"
+        value={formData.company}
+        onChange={(e) => setFormData((prev) => ({ ...prev, company: e.target.value }))}
+        required
+        className="bg-transparent outline-none text-white text-sm w-full placeholder:text-white/60"
+      />
+    </div>
+  )}
 
-            {/* Submit */}
-            <button
-              type="submit"
-              className="w-full bg-[#FF00B3] text-white text-sm sm:text-base font-semibold py-2 sm:py-3 rounded-lg hover:bg-slate-900 transition"
-            >
-              Submit
-            </button>
-          </form>
+  {/* Message */}
+  <div className="flex bg-slate-900 rounded-lg px-4 py-3 min-h-[120px]">
+    <FaCommentDots className="text-white mr-3 mt-1" />
+    <textarea
+      name="Message"
+      placeholder="Your Message"
+      value={formData.message}
+      onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
+      required
+      className="bg-transparent outline-none text-white text-sm w-full resize-none placeholder:text-white/60"
+    />
+  </div>
+
+  {/* Submit */}
+  <button
+    type="submit"
+    className="w-full bg-[#FF00B3] text-white font-semibold py-3 rounded-lg hover:bg-slate-900 transition"
+  >
+    Submit
+  </button>
+</form>
+
+
         </div>
     </div>
   </div>;

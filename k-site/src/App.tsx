@@ -31,6 +31,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<Contact />} />
+
+        <Route path="*" element={<ComingSoon />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
