@@ -1,19 +1,19 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "@/pages/Home";
 import NotFound from "@/pages/NotFound";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Accommodation from "@/pages/Accommodation";
-import Login from "@/pages/Login";
-import Register from "@/pages/Register";
 import Contact from "@/pages/Contact";
+import ComingSoon from "@/pages/ComingSoon";
 
-//  NEW IMPORTS
-import Events from "@/pages/Events";
-import Workshops from "@/pages/Workshops";
-import GuestLectures from "@/pages/GuestLectures";
-import Technovation from "@/pages/Technovation";
+const comingSoonPaths = [
+  "/accommodation",
+  "/login",
+  "/register",
+  "/workshops",
+  "/guest-lectures",
+];
 
 function App() {
   return (
@@ -21,18 +21,36 @@ function App() {
       <Navbar />
 
       <Routes>
+        {/* Visible pages */}
         <Route path="/" element={<Home />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/workshops" element={<Workshops />} />
-        <Route path="/guest-lectures" element={<GuestLectures />} />
-        <Route path="/technovation" element={<Technovation />} />
-
-        <Route path="/accommodation" element={<Accommodation />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<Contact />} />
 
-        <Route path="*" element={<ComingSoon />} />
+        {/* Pages redirected to ComingSoon */}
+        {comingSoonPaths.map((path) => (
+          <Route key={path} path={path} element={<ComingSoon />} />
+        ))}
+
+        {/* External redirects to Unstop */}
+        <Route
+          path="/events"
+          element={
+            <Navigate
+              to="https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664"
+              replace
+            />
+          }
+        />
+        <Route
+          path="/technovation"
+          element={
+            <Navigate
+              to="https://unstop.com/p/technovation-kurukshetra-2026-anna-university-ceg-tech-forum-1628748?utm_medium=Share&utm_source=vhcnzgkj55361&utm_campaign=Competitions"
+              replace
+            />
+          }
+        />
+
+        {/* Catch all - NotFound */}
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
