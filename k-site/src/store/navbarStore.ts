@@ -8,7 +8,7 @@ export interface NavItem {
 
 type NavbarMode = "home" | "full";
 
-interface NavbarStore {
+export interface NavbarStore {
   mode: NavbarMode;
   navItems: NavItem[];
   setHomeNavbar: () => void;

@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import logo from "@/assets/CTF1.png";
-import { useNavbarStore } from "@/store/navbarStore";
+import { useNavbarStore, type NavItem, type NavbarStore } from "@/store/navbarStore";
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
   // const [scrolled, setScrolled] = useState(false);
 
-  const navItems = useNavbarStore((state: any) => state.navItems);
-  const setFullNavbar = useNavbarStore((state: any) => state.setFullNavbar);
-  const setHomeNavbar = useNavbarStore((state: any) => state.setHomeNavbar);
+  const navItems = useNavbarStore((state: NavbarStore) => state.navItems);
+  const setFullNavbar = useNavbarStore((state: NavbarStore) => state.setFullNavbar);
+  const setHomeNavbar = useNavbarStore((state: NavbarStore) => state.setHomeNavbar);
   const location = useLocation();
 
   useEffect(() => {
@@ -88,7 +88,7 @@ const Navbar: React.FC = () => {
         </button>
 
         <div className="mt-20 flex-1 flex flex-col justify-center divide-y divide-white/10 px-6">
-          {navItems.map((item) => (
+          {navItems.map((item: NavItem) => (
             <a
               key={item.label}
               href={item.url}
@@ -122,7 +122,7 @@ const Navbar: React.FC = () => {
             shadow-[0_0_30px_rgba(168,85,247,0.25)]
           "
         >
-          {navItems.map((item) => (
+          {navItems.map((item: NavItem) => (
             <a
               key={item.label}
               href={item.url}
