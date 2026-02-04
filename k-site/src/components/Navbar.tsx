@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
       <div className="flex items-center justify-between pr-6 pl-2 py-4 sm:hidden">
         <img
           src={logo}
-          alt="Kurukshetra Logo"
+          alt="CTF Logo"
           className="h-20 object-contain"
         />
 

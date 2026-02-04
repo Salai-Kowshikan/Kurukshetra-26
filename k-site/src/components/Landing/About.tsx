@@ -1,6 +1,6 @@
 import about1 from "@/assets/ceg_logo.png";
 import about2 from "@/assets/CTF1.png";
-import about3 from "@/assets/logo.png";
+import about3 from "@/assets/K'26_Logo.png";
 import about4 from "@/assets/vyuhaa_logo.png";
 
 const TITLES = [
