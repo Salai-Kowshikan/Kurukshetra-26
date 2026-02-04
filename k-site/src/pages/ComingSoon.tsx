@@ -39,10 +39,10 @@ export default function ComingSoon() {
       <div className="pointer-events-none absolute top-[-20%] left-0 h-125 w-full bg-fuchsia-700/20 blur-[100px] rounded-full opacity-40"></div>
 
       <h1 className="z-10 mb-6 flex flex-col items-center justify-center drop-shadow-[0_0_10px_rgba(255,0,255,0.3)]">
-        <span className="font-(family-name:--stalinist) text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-[0.2em] uppercase text-white/80">
+        <span className="font-(family-name:--wallpoet) text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-[0.2em] uppercase text-white/80">
           SOMETHING
         </span>
-        <span className="font-(family-name:--stalinist) text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[0.2em] uppercase text-transparent bg-clip-text bg-linear-to-r from-[#FF00B3] to-[#8A05FF] drop-shadow-[0_0_20px_rgba(217,70,239,0.8)] mt-1">
+        <span className="font-(family-name:--wallpoet) text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-[0.2em] uppercase text-transparent bg-clip-text bg-linear-to-r from-[#FF00B3] to-[#8A05FF] drop-shadow-[0_0_20px_rgba(217,70,239,0.8)] mt-1">
           BIG IS LOADING
         </span>
       </h1>
@@ -54,7 +54,7 @@ export default function ComingSoon() {
           <div className="relative inline-block w-fit">
             <h2
               data-text="COMING SOON"
-              className="glitch-text font-(family-name:--stalinist) text-4xl sm:text-6xl text-cyan-400 tracking-widest drop-shadow-[0_0_25px_rgba(34,211,238,0.6)] mb-2 relative z-20"
+              className="glitch-text font-(family-name:--wallpoet) text-4xl sm:text-6xl text-cyan-400 tracking-widest drop-shadow-[0_0_25px_rgba(34,211,238,0.6)] mb-2 relative z-20"
             >
               COMING SOON
             </h2>
@@ -67,7 +67,7 @@ export default function ComingSoon() {
 
         <Link to="/" className="w-full block relative z-10">
           <Button 
-            className="w-full h-12 border-0 bg-linear-to-r from-fuchsia-600 to-purple-600 text-white font-(family-name:--stalinist) tracking-widest uppercase hover:from-fuchsia-500 hover:to-[#8A05FF] hover:scale-[1.02] transition-all duration-300 rounded-lg"
+            className="w-full h-12 border-0 bg-linear-to-r from-fuchsia-600 to-purple-600 text-white font-(family-name:--wallpoet) tracking-widest uppercase hover:from-fuchsia-500 hover:to-[#8A05FF] hover:scale-[1.02] transition-all duration-300 rounded-lg"
           >
             Back to Reality
           </Button>

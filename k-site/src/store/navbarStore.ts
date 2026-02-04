@@ -25,7 +25,7 @@ const baseNavItems: NavItem[] = [
 
 const featureNavItems: NavItem[] = [
   { label: "Events", url: "https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664", isExternal: true },
-  { label: "Workshops", url: "/https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664", isExternal: true},
+  { label: "Workshops", url: "https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664", isExternal: true},
   { label: "Guest Lectures", url: "/guest-lectures" },
   { label: "Technovation", url: "https://unstop.com/p/technovation-kurukshetra-2026-anna-university-ceg-tech-forum-1628748?utm_medium=Share&utm_source=vhcnzgkj55361&utm_campaign=Competitions", isExternal: true },
 ];

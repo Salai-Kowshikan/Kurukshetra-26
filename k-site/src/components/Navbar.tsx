@@ -94,7 +94,7 @@ const Navbar: React.FC = () => {
               href={item.url}
               target={item.isExternal ? "_blank" : undefined}
               rel={item.isExternal ? "noopener noreferrer" : undefined}
-              className="w-full py-4 px-4 text-white text-base tracking-wider font-(family-name:--stalinist) hover:bg-white/5 transition-colors block"
+              className="w-full py-4 px-4 text-white text-base tracking-wider font-(family-name:--wallpoet) hover:bg-white/5 transition-colors block"
               onClick={handleMenuClose}
             >
               {item.label}

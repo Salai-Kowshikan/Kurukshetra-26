@@ -35,7 +35,7 @@ export default function About() {
 									className="px-5 py-1.5 rounded-full
 									           bg-linear-to-l from-[#6101FE] to-[#FF00B3]
 									           text-white text-sm md:text-base text-center
-									           font-(family-name:--stalinist)"
+									           font-(family-name:--wallpoet)"
 								>
 									{title}
 								</div>
