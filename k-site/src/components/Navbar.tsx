@@ -5,19 +5,19 @@ import { useNavbarStore } from "@/store/navbarStore";
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  // const [scrolled, setScrolled] = useState(false);
 
-  const navItems = useNavbarStore((state) => state.navItems);
-  const setFullNavbar = useNavbarStore((state) => state.setFullNavbar);
-  const setHomeNavbar = useNavbarStore((state) => state.setHomeNavbar);
+  const navItems = useNavbarStore((state: any) => state.navItems);
+  const setFullNavbar = useNavbarStore((state: any) => state.setFullNavbar);
+  const setHomeNavbar = useNavbarStore((state: any) => state.setHomeNavbar);
   const location = useLocation();
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 20);
+    const handleScroll = () => {
+      // Scroll handler for future use
     };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -92,6 +92,8 @@ const Navbar: React.FC = () => {
             <a
               key={item.label}
               href={item.url}
+              target={item.isExternal ? "_blank" : undefined}
+              rel={item.isExternal ? "noopener noreferrer" : undefined}
               className="w-full py-4 px-4 text-white text-base tracking-wider font-(family-name:--stalinist) hover:bg-white/5 transition-colors block"
               onClick={handleMenuClose}
             >
@@ -124,6 +126,8 @@ const Navbar: React.FC = () => {
             <a
               key={item.label}
               href={item.url}
+              target={item.isExternal ? "_blank" : undefined}
+              rel={item.isExternal ? "noopener noreferrer" : undefined}
               className={`
                 relative px-5 py-2
                 rounded-full
