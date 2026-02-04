@@ -4,6 +4,7 @@
 @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Wallpoet&display=swap');
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -55,6 +56,7 @@
   --radius: 0.625rem;
   --poppins: Poppins, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --stalinist: 'Stalinist One', ui-serif, Georgia, serif;
+  --wallpoet: 'Wallpoet', ui-serif, Georgia, serif;
   --orbitron: 'Orbitron', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);

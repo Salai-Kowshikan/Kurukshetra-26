@@ -28,7 +28,7 @@ export default function Hero() {
         />
 
         <h2
-          className="text-xl sm:text-3xl md:text-6xl font-extrabold font-(family-name:--stalinist)
+          className="text-xl sm:text-3xl md:text-6xl font-extrabold font-(family-name:--wallpoet)
              bg-linear-to-r from-[#6101FE] to-[#FF00B3]
              bg-clip-text text-transparent
              "
