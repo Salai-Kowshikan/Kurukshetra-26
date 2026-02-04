@@ -7,7 +7,7 @@ import About from "@/components/Landing/About";
 import Background from "@/components/Background";
 
 export default function Home() {
-  const setHomeNavbar = useNavbarStore((s) => s.setHomeNavbar);
+  const setHomeNavbar = useNavbarStore((s: any) => s.setHomeNavbar);
 
   useEffect(() => {
     setHomeNavbar();
