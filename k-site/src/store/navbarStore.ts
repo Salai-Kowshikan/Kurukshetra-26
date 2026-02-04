@@ -19,14 +19,14 @@ const baseNavItems: NavItem[] = [
   { label: "Projects", url: "https://www.projects.cegtechforum.in/" },
   { label: "Accommodation", url: "/accommodation" },
   { label: "Contacts", url: "/contact" },
-  { label: "Login", url: "/login" },
+  // { label: "Login", url: "/login" },
 ];
 
 const featureNavItems: NavItem[] = [
-  { label: "Events", url: "/events" },
+  { label: "Events", url: "https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664" },
   { label: "Workshops", url: "/workshops" },
   { label: "Guest Lectures", url: "/guest-lectures" },
-  { label: "Technovation", url: "/technovation" },
+  { label: "Technovation", url: "https://unstop.com/p/technovation-kurukshetra-2026-anna-university-ceg-tech-forum-1628748?utm_medium=Share&utm_source=vhcnzgkj55361&utm_campaign=Competitions" },
 ];
 
 export const useNavbarStore = create<NavbarStore>((set) => ({

@@ -26,7 +26,7 @@ export default function Home() {
       </div>
 
       {/* Foreground content */}
-      <div className="relative z-10 w-full pointer-events-none">
+      <div className="relative z-10 w-full ">
         <Hero />
         <Patronage />
         <About />
