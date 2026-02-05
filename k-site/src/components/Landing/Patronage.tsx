@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import patronage1 from "@/assets/patronage-1.png";
 import patronage2 from "@/assets/patronage-2.png";
-import patronage3 from "@/assets/patronage-3.png";
+import patronage3 from "@/assets/unesco-01.jpg.jpeg";
 import ieee from "@/assets/ieee_logo.png";
 
 const images = [
