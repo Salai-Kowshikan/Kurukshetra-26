@@ -3,11 +3,12 @@ import { create } from "zustand";
 export interface NavItem {
   label: string;
   url: string;
+  isExternal?: boolean;
 }
 
 type NavbarMode = "home" | "full";
 
-interface NavbarStore {
+export interface NavbarStore {
   mode: NavbarMode;
   navItems: NavItem[];
   setHomeNavbar: () => void;
@@ -16,10 +17,10 @@ interface NavbarStore {
 
 const baseNavItems: NavItem[] = [
   { label: "Home", url: "/" },
-  { label: "Projects", url: "https://www.projects.cegtechforum.in/" },
+  { label: "Projects", url: "https://www.projects.cegtechforum.in/", isExternal: true },
   { label: "Accommodation", url: "/accommodation" },
   { label: "Contacts", url: "/contact" },
-  { label: "Login", url: "/login" },
+  // { label: "Login", url: "/login" },
 ];
 
 const featureNavItems: NavItem[] = [

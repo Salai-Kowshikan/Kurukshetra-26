@@ -12,27 +12,24 @@ type Listing = {
   title: string;
   path: string;
   image: string;
+  isExternal?: boolean;
 };
 
-export default function Listings() {
+const ButtonGroup = ({ items }: { items: Listing[] }) => {
   const navigate = useNavigate();
 
-  const listings: Listing[] = [
-    { title: "Events", path: "/events", image: calendarImg },
-    { title: "Workshops", path: "/workshops", image: screwdriverImg },
-    { title: "Guest Lectures", path: "/guest-lectures", image: microphoneImg },
-    { title: "Technovation", path: "/technovation", image: laptopImg },
-  ];
-
-  const leftButtons = listings.slice(0, 2); // Events, Workshops
-  const rightButtons = listings.slice(2, 4); // Guest Lectures, Technovation
-
-  const ButtonGroup = ({ items }: { items: Listing[] }) => (
+  return (
     <div className="flex flex-col gap-3 max-md:hidden sm:gap-4 md:gap-6 lg:gap-8 w-full items-center md:items-start">
       {items.map((item) => (
         <div
           key={item.title}
-          onClick={() => navigate(item.path)}
+          onClick={() => {
+            if (item.isExternal) {
+              window.open(item.path, '_blank')
+            } else {
+              navigate(item.path);
+            }
+          }}
           className="cursor-pointer"
         >
           <SpotlightCard 
@@ -55,6 +52,18 @@ export default function Listings() {
       ))}
     </div>
   );
+};
+
+export default function Listings() {
+  const listings: Listing[] = [
+    { title: "Events", path: "https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664", image: calendarImg, isExternal: true },
+    { title: "Workshops", path: "https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664", image: screwdriverImg, isExternal: true },
+    { title: "Guest Lectures", path: "/guest-lectures", image: microphoneImg },
+    { title: "Technovation", path: "https://unstop.com/p/technovation-kurukshetra-2026-anna-university-ceg-tech-forum-1628748?utm_medium=Share&utm_source=vhcnzgkj55361&utm_campaign=Competitions", image: laptopImg, isExternal: true },
+  ];
+
+  const leftButtons = listings.slice(0, 2); // Events, Workshops
+  const rightButtons = listings.slice(2, 4); // Guest Lectures, Technovation
 
   return (
     <section className="relative w-full overflow-hidden flex items-center justify-center py-8 md:py-12 lg:py-16 md:-mt-16 lg:-mt-16">

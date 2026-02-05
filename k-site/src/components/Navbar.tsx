@@ -1,24 +1,45 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import logo from "@/assets/CTF1.png";
-import { useNavbarStore } from "@/store/navbarStore";
+import { useNavbarStore, type NavItem, type NavbarStore } from "@/store/navbarStore";
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  // const [scrolled, setScrolled] = useState(false);
 
-  const navItems = useNavbarStore((state) => state.navItems);
+  const navItems = useNavbarStore((state: NavbarStore) => state.navItems);
+  const setFullNavbar = useNavbarStore((state: NavbarStore) => state.setFullNavbar);
+  const setHomeNavbar = useNavbarStore((state: NavbarStore) => state.setHomeNavbar);
   const location = useLocation();
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 20);
+    const handleScroll = () => {
+      // Scroll handler for future use
     };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 🔹 Active page logic
+  useEffect(() => {
+    if (location.pathname !== "/") {
+      setFullNavbar(); 
+    } else if (!open) {
+      setHomeNavbar(); 
+    }
+  }, [location.pathname, open, setFullNavbar, setHomeNavbar]);
+
+  const handleMenuOpen = () => {
+    setOpen(true);
+    setFullNavbar(); 
+  };
+
+  const handleMenuClose = () => {
+    setOpen(false);
+    if (location.pathname === "/") {
+      setHomeNavbar();
+    }
+  };
+
   const isActive = (url: string) => {
     if (url === "/") return location.pathname === "/";
     return location.pathname.startsWith(url);
@@ -31,13 +52,13 @@ const Navbar: React.FC = () => {
       <div className="flex items-center justify-between pr-6 pl-2 py-4 sm:hidden">
         <img
           src={logo}
-          alt="Kurukshetra Logo"
+          alt="CTF Logo"
           className="h-20 object-contain"
         />
 
         <button
           aria-label="Open menu"
-          onClick={() => setOpen(true)}
+          onClick={handleMenuOpen}
           className="flex flex-col justify-center gap-1.5"
         >
           <span className="w-6 h-0.5 bg-white" />
@@ -60,19 +81,21 @@ const Navbar: React.FC = () => {
       >
         <button
           aria-label="Close menu"
-          onClick={() => setOpen(false)}
+          onClick={handleMenuClose}
           className="absolute top-4 right-4 text-white text-2xl"
         >
           ×
         </button>
 
         <div className="mt-20 flex-1 flex flex-col justify-center divide-y divide-white/10 px-6">
-          {navItems.map((item) => (
+          {navItems.map((item: NavItem) => (
             <a
               key={item.label}
               href={item.url}
-              className="w-full py-4 px-4 text-white text-base tracking-wider font-(family-name:--stalinist) hover:bg-white/5 transition-colors block"
-              onClick={() => setOpen(false)}
+              target={item.isExternal ? "_blank" : undefined}
+              rel={item.isExternal ? "noopener noreferrer" : undefined}
+              className="w-full py-4 px-4 text-white text-base tracking-wider font-(family-name:--wallpoet) hover:bg-white/5 transition-colors block"
+              onClick={handleMenuClose}
             >
               {item.label}
             </a>
@@ -84,7 +107,7 @@ const Navbar: React.FC = () => {
       {open && (
         <div
           className="fixed inset-0 bg-black/60 sm:hidden z-40"
-          onClick={() => setOpen(false)}
+          onClick={handleMenuClose}
         />
       )}
 
@@ -99,10 +122,12 @@ const Navbar: React.FC = () => {
             shadow-[0_0_30px_rgba(168,85,247,0.25)]
           "
         >
-          {navItems.map((item) => (
+          {navItems.map((item: NavItem) => (
             <a
               key={item.label}
               href={item.url}
+              target={item.isExternal ? "_blank" : undefined}
+              rel={item.isExternal ? "noopener noreferrer" : undefined}
               className={`
                 relative px-5 py-2
                 rounded-full

@@ -1,4 +1,4 @@
-import logo from "@/assets/logo.png";
+import logo from "@/assets/K'26_Logo.png";
 // import heroVideo from "@/assets/landing_vid.mp4";
 import Countdown from "@/components/Landing/Countdown";
 import Listings from "@/components/Landing/Listings";
@@ -24,11 +24,11 @@ export default function Hero() {
         <img
           src={logo}
           alt="Kurukshetra Logo"
-          className="h-16  md:h-24 object-contain mb-6"
+          className="h-16  md:h-24 object-contain mb-6 lg:p-2 p-0"
         />
 
         <h2
-          className="text-xl sm:text-3xl md:text-6xl font-extrabold font-(family-name:--stalinist)
+          className="text-xl sm:text-3xl md:text-6xl font-extrabold font-(family-name:--wallpoet)
              bg-linear-to-r from-[#6101FE] to-[#FF00B3]
              bg-clip-text text-transparent
              "
