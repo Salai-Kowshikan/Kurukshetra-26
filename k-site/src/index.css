@@ -95,6 +95,10 @@
   --glitch-purple: #9b4dff;
   --glitch-magenta: #ff5fd2;
   --glitch-lavender: rgba(179, 107, 255, 0.6);
+  --contact-bg:
+    radial-gradient(1200px 600px at 20% 20%, rgba(142, 0, 255, 0.35), transparent 60%),
+    radial-gradient(1000px 500px at 80% 30%, rgba(255, 0, 200, 0.25), transparent 55%),
+    linear-gradient(180deg, #1a002a 0%, #0c0015 100%);
 }
 
 .dark {

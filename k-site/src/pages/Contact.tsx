@@ -76,230 +76,247 @@ const Contact = () => {
     });
   };
 
-  return <div className="flex items-center justify-center min-h-screen px-4 py-8
-bg-linear-to-b from-[#FF00B3] to-[#8A05FF] font-(family-name:--orbitron)">
-
-    <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 
-bg-black/40 backdrop-blur-xl border border-white/10 
-rounded-2xl p-4 mt-20 sm:p-6 text-white shadow-2xl">
-      
-      <div className="flex flex-col gap-6">
-
-        <h2 className="text-base sm:text-lg font-semibold text-white">CONNECT</h2>
-
-       {/* Social Icons */}
-      <div className="flex gap-3">
-        {[
-          { icon: <FaEnvelope />, url: "mailto:hr@cegtechforum.in" },
-          { icon: <FaFacebookF />, url: "https://www.facebook.com/kurukshetraceg.org.in/" },
-          { icon: <FaInstagram />, url: "https://www.instagram.com/kurukshetra_ceg/" },
-          { icon: <FaXTwitter />, url: "https://x.com/kurukshetra_ceg" },
-          { icon: <FaLinkedinIn />, url: "https://www.linkedin.com/in/cegtechforum/" },
-        ].map((item, i) => (
-          <a
-            key={i}
-            href={item.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-10 h-10 sm:w-12 sm:h-12 text-sm sm:text-lg box-border flex items-center justify-center 
-border border-transparent bg-black/70 rounded-lg 
-hover:border-[3px] hover:border-[#8A05FF] 
-hover:shadow-[0_0_14px_#8A05FF] transition-all duration-200"
-          >
-            {item.icon}
-          </a>
-        ))}
-      </div>
+    return (
+    <div
+      className="min-h-screen flex items-start justify-center px-4 pt-24 pb-16 font-(family-name:--orbitron)"
+      style={{ background: "var(--contact-bg)" }}
+    >
+      <div className="w-full max-w-[1140px] grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-8 md:justify-between">
+        {/* LEFT PANEL */}
+        <div className="rounded-[28px] border border-white/25 bg-white/5 backdrop-blur-2xl shadow-[0_0_40px_rgba(140,0,255,0.25)] p-6 sm:p-8 md:w-[520px] md:justify-self-start">
+          <div className="flex flex-col gap-4">
+            <h2 className="text-base sm:text-lg font-semibold text-white tracking-widest">CONNECT</h2>
 
 
-        {/* Map Embed */}
-        <div className="rounded-lg overflow-hidden border border-white/10">
-          <iframe
-            title="map"
-            src="https://maps.google.com/maps?q=CEG%20Tech%20Forum&t=&z=13&ie=UTF8&iwloc=&output=embed"
-            className="w-full h-40 sm:h-52 md:h-60"
-          />
-        </div>
+            {/* Social Icons */}
+            <div className="flex gap-4 mt-1">
+              {[
+                { icon: <FaEnvelope />, url: "mailto:hr@cegtechforum.in" },
+                { icon: <FaFacebookF />, url: "https://www.facebook.com/kurukshetraceg.org.in/" },
+                { icon: <FaInstagram />, url: "https://www.instagram.com/kurukshetra_ceg/" },
+                { icon: <FaXTwitter />, url: "https://x.com/kurukshetra_ceg" },
+                { icon: <FaLinkedinIn />, url: "https://www.linkedin.com/in/cegtechforum/" },
+              ].map((item, i) => (
+                <a
+                  key={i}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-11 h-11 sm:w-12 sm:h-12 text-sm sm:text-lg box-border flex items-center justify-center border border-white/40 bg-white/5 rounded-full backdrop-blur-sm hover:border-[#8A05FF] hover:shadow-[0_0_18px_rgba(138,5,255,0.8)] transition-all duration-200"
+                >
+                  {item.icon}
+                </a>
+              ))}
+            </div>
 
-        {/* Contact Info */}
-        <div className="backdrop-blur-md bg-transparent border border-white/20 rounded-lg text-white overflow-hidden">
+            {/* Map Embed */}
+            <div className="rounded-2xl overflow-hidden border border-white/25 bg-black/20">
+              <iframe
+                title="map"
+                src="https://maps.google.com/maps?q=CEG%20Tech%20Forum&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                className="w-full h-40 sm:h-52 md:h-60"
+              />
+            </div>
 
-          {/* Header Bar */}
-          <button
-            onClick={() => setOpen(!open)}
-            className={`w-full flex justify-between items-center px-5 py-4 text-white-300 font-medium ${open ? "text-[#FF00B3]" : "text-white"}`}
-          >
-            <span>General Inquiries [HR]:</span>
-            <FaChevronDown
-              className={`transition-transform duration-300 ${
-                open ? "rotate-180" : ""
-              }`}
-            />
-          </button>
 
-          {/* Expandable Content */}
-          <div
-            className={`transition-all duration-300 ease-in-out ${
-              open ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
-            } overflow-hidden`}
-          >
-            <div className="px-3 sm:px-5 py-3 sm:py-4 text-sm space-y-3">
-              
-              <div className="flex justify-between">
-                <span>Madhan R</span>
-                <a href="tel:+916383747371">+91 63837 47371</a>
+
+            {/* Contact Info */}
+            <div className="backdrop-blur-md bg-black/30 border border-white/25 rounded-2xl text-white overflow-hidden">
+
+              {/* Header Bar */}
+              <button
+                onClick={() => setOpen(!open)}
+                className={`w-full flex justify-between items-center px-5 py-3 rounded-t-2xl bg-white/10 text-white/90 font-medium ${open ? "text-[#FF00B3]" : "text-white"}`}
+              >
+                <span>General Inquiries [HR]:</span>
+                <FaChevronDown
+                  className={`transition-transform duration-300 ${
+                    open ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              {/* Expandable Content */}
+              <div
+                className={`transition-all duration-300 ease-in-out ${
+                  open ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+                } overflow-hidden border-t border-white/10`}
+              >
+                <div className="px-3 sm:px-5 py-3 sm:py-4 text-sm space-y-3">
+                  
+                  <div className="flex justify-between">
+                    <span>Madhan R</span>
+                    <a href="tel:+916383747371">+91 63837 47371</a>
+                  </div>
+                  
+                  <div className="flex justify-between">
+                    <span>Vinothini K</span>
+                    <a href="tel:+916381744539">+91 63817 44539</a>
+                  </div>
+
+                  <div className="flex justify-end pt-2">
+                    <a href="mailto:hr@cegtechforum.in" className="text-[#FF00B3]">hr@cegtechforum.in</a>
+                  </div>
+                </div>
               </div>
-              
-              <div className="flex justify-between">
-                <span>Vinothini K</span>
-                <a href="tel:+916381744539">+91 63817 44539</a>
-              </div>
 
-              
-              <div className="flex justify-end pt-2">
-                <a href="mailto:hr@cegtechforum.in" className="text-[#FF00B3]">hr@cegtechforum.in</a>
-              </div>
             </div>
           </div>
+        </div>
 
+        {/* RIGHT PANEL */}
+        <div className="rounded-[28px] border border-white/25 bg-[#3a1f46] backdrop-blur-2xl shadow-[0_0_40px_rgba(140,0,255,0.25)] p-6 sm:p-8 md:w-[520px] md:justify-self-end">
+          
+            <h2 className="text-lg sm:text-xl font-semibold mb-5 tracking-widest text-white/90">
+              CONTACT US
+            </h2>
+
+            {/* Tabs */}
+            <div className="flex bg-[#2b1633] rounded-full mb-6 p-1.5 border border-white/20">
+              <button
+                onClick={() => {
+                  setActiveTab("query");
+                  setFormData((prev) => ({ ...prev, type: "query", company: "" }));
+                }}
+                className={`flex-1 py-2.5 rounded-full text-sm transition ${
+                  activeTab === "query"
+                    ? "bg-[#7a28ff] text-white shadow-[inset_0_0_8px_rgba(255,255,255,0.2),0_0_12px_rgba(122,40,255,0.6)]"
+                    : "text-white/60"
+                }`}
+              >
+                Query
+              </button>
+
+              <button
+                onClick={() => {
+                  setActiveTab("collaborate");
+                  setFormData((prev) => ({ ...prev, type: "collaborate" }));
+                }}
+                className={`flex-1 py-2.5 rounded-full text-sm transition ${
+                  activeTab === "collaborate"
+                    ? "bg-[#7a28ff] text-white shadow-[inset_0_0_8px_rgba(255,255,255,0.2),0_0_12px_rgba(122,40,255,0.6)]"
+                    : "text-white/60"
+                }`}
+              >
+                Collaborate
+              </button>
+
+            </div>
+
+            {/* Form */}
+            <form
+              id="contact-form"
+              onSubmit={handleSubmit}
+              className="space-y-4"
+            >
+              {/* FormSubmit config */}
+              <input type="hidden" name="_subject" value="New K!26 Form Submission" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+
+              {/* Name */}
+              <div className="flex items-center bg-[#4a2a58] rounded-full px-5 py-2.5 border border-white/25">
+                <FaUser className="text-white mr-3" />
+                <input
+                  type="text"
+                  name="Name"
+                  placeholder="Name"
+                  value={formData.name}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
+                  required
+                  className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white/50"
+                />
+              </div>
+
+              {/* Mobile */}
+              <div className="flex items-center bg-[#4a2a58] rounded-full px-5 py-2.5 border border-white/25">
+                <FaPhoneAlt className="text-white mr-3" />
+                <input
+                  type="tel"
+                  name="Mobile"
+                  placeholder="Mobile"
+                  value={formData.mobile}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, mobile: e.target.value }))}
+                  required
+                  pattern="[6-9]{1}[0-9]{9}"
+                  maxLength={10}
+                  title="Enter a valid 10-digit Indian mobile number"
+                  className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white/50"
+                />
+              </div>
+
+              {/* Email */}
+              <div className="flex items-center bg-[#4a2a58] rounded-full px-5 py-2.5 border border-white/25">
+                <FaEnvelope className="text-white mr-3" />
+                <input
+                  type="email"
+                  name="Email"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+                  required
+                  className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white/50"
+                />
+              </div>
+
+              {/* Company */}
+              {activeTab === "collaborate" && (
+                <div className="flex items-center bg-[#4a2a58] rounded-full px-5 py-2.5 border border-white/25">
+                  <FaBuilding className="mr-3 text-white text-lg" />
+                  <input
+                    type="text"
+                    name="Company"
+                    placeholder="Company / Organization Name"
+                    value={formData.company}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, company: e.target.value }))}
+                    required
+                    className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white/50"
+                  />
+                </div>
+              )}
+
+              {/* Message */}
+              <div className="flex bg-[#4a2a58] rounded-[22px] px-5 py-3 min-h-[140px] border border-white/25">
+                <FaCommentDots className="text-white mr-3 mt-1" />
+                <textarea
+                  name="Message"
+                  placeholder="Your Message"
+                  value={formData.message}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
+                  required
+                  className="bg-transparent outline-none text-white text-sm w-full resize-none placeholder:text-white/60"
+                />
+              </div>
+
+              {/* Submit */}
+              <button
+                type="submit"
+                className="w-full bg-[#7a28ff] text-white font-semibold py-3.5 rounded-full hover:shadow-[0_0_24px_rgba(122,40,255,0.85)] transition"
+              >
+                Submit
+              </button>
+            </form>
         </div>
       </div>
-
-      <div className="bg-transparent backdrop-blur-lg rounded-xl p-4 sm:p-5 shadow-xl">
-          <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6">
-            CONTACT US
-          </h2>
-
-          {/* Tabs */}
-          <div className="flex bg-slate-900 rounded-lg mb-6 p-1">
-            <button
-              onClick={() => {
-                setActiveTab("query");
-                setFormData((prev) => ({ ...prev, type: "query", company: "" }));
-              }}
-              className={`flex-1 py-2 rounded-lg text-sm transition ${
-                activeTab === "query"
-                  ? "border-2 border-orange-400 text-orange-400"
-                  : "text-white"
-              }`}
-            >
-              Query
-            </button>
-
-            <button
-              onClick={() => {
-                setActiveTab("collaborate");
-                setFormData((prev) => ({ ...prev, type: "collaborate" }));
-              }}
-              className={`flex-1 py-2 rounded-lg text-sm transition ${
-                activeTab === "collaborate"
-                  ? "border-2 border-orange-400 text-orange-400"
-                  : "text-white"
-              }`}
-            >
-              Collaborate
-            </button>
-
-          </div>
-
-          {/* Form */}
-<form
-  id="contact-form"
-  onSubmit={handleSubmit}
-  className="space-y-4"
->
-  {/* FormSubmit config */}
-  <input type="hidden" name="_subject" value="New K!26 Form Submission" />
-  <input type="hidden" name="_captcha" value="false" />
-  <input type="hidden" name="_template" value="table" />
-
-  {/* Name */}
-  <div className="flex items-center bg-slate-900 rounded-lg px-3 py-2 sm:px-4 sm:py-3">
-    <FaUser className="text-white mr-3" />
-    <input
-      type="text"
-      name="Name"
-      placeholder="Name"
-      value={formData.name}
-      onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
-      required
-      className="bg-transparent outline-none text-white text-sm w-full placeholder:text-white/60"
-    />
-  </div>
-
-  {/* Mobile */}
-  <div className="flex items-center bg-slate-900 rounded-lg px-3 py-2 sm:px-4 sm:py-3">
-    <FaPhoneAlt className="text-white mr-3" />
-    <input
-      type="tel"
-      name="Mobile"
-      placeholder="Mobile"
-      value={formData.mobile}
-      onChange={(e) => setFormData((prev) => ({ ...prev, mobile: e.target.value }))}
-      required
-      pattern="[6-9]{1}[0-9]{9}"
-      maxLength={10}
-      title="Enter a valid 10-digit Indian mobile number"
-      className="bg-transparent outline-none text-white text-sm w-full placeholder:text-white/60"
-    />
-  </div>
-
-  {/* Email */}
-  <div className="flex items-center bg-slate-900 rounded-lg px-3 py-2 sm:px-4 sm:py-3">
-    <FaEnvelope className="text-white mr-3" />
-    <input
-      type="email"
-      name="Email"
-      placeholder="Email"
-      value={formData.email}
-      onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
-      required
-      className="bg-transparent outline-none text-white text-sm w-full placeholder:text-white/60"
-    />
-  </div>
-
-  {/* Company */}
-  {activeTab === "collaborate" && (
-    <div className="flex items-center bg-slate-900 rounded-lg px-3 py-2 sm:px-4 sm:py-3">
-      <FaBuilding className="mr-3 text-white text-lg" />
-      <input
-        type="text"
-        name="Company"
-        placeholder="Company / Organization Name"
-        value={formData.company}
-        onChange={(e) => setFormData((prev) => ({ ...prev, company: e.target.value }))}
-        required
-        className="bg-transparent outline-none text-white text-sm w-full placeholder:text-white/60"
-      />
     </div>
-  )}
-
-  {/* Message */}
-  <div className="flex bg-slate-900 rounded-lg px-4 py-3 min-h-[120px]">
-    <FaCommentDots className="text-white mr-3 mt-1" />
-    <textarea
-      name="Message"
-      placeholder="Your Message"
-      value={formData.message}
-      onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
-      required
-      className="bg-transparent outline-none text-white text-sm w-full resize-none placeholder:text-white/60"
-    />
-  </div>
-
-  {/* Submit */}
-  <button
-    type="submit"
-    className="w-full bg-[#FF00B3] text-white font-semibold py-3 rounded-lg hover:bg-slate-900 transition"
-  >
-    Submit
-  </button>
-</form>
-
-
-        </div>
-    </div>
-  </div>;
+  );
 }
 
 export default Contact;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

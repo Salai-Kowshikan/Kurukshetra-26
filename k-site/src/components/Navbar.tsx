@@ -115,7 +115,7 @@ const Navbar: React.FC = () => {
       <div className="hidden sm:flex justify-center mt-6">
         <div
           className="
-            relative flex items-center gap-2 px-4 py-2
+            relative flex items-center justify-center gap-2 px-4 py-2 w-[96%] max-w-[1260px]
             rounded-full
             bg-white/5 backdrop-blur-2xl
             border border-white/10
@@ -151,3 +151,5 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+
+
