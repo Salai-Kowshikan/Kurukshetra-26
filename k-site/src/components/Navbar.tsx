@@ -5,7 +5,6 @@ import { useNavbarStore, type NavItem, type NavbarStore } from "@/store/navbarSt
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
-  // const [scrolled, setScrolled] = useState(false);
 
   const navItems = useNavbarStore((state: NavbarStore) => state.navItems);
   const setFullNavbar = useNavbarStore((state: NavbarStore) => state.setFullNavbar);
@@ -22,15 +21,15 @@ const Navbar: React.FC = () => {
 
   useEffect(() => {
     if (location.pathname !== "/") {
-      setFullNavbar(); 
+      setFullNavbar();
     } else if (!open) {
-      setHomeNavbar(); 
+      setHomeNavbar();
     }
   }, [location.pathname, open, setFullNavbar, setHomeNavbar]);
 
   const handleMenuOpen = () => {
     setOpen(true);
-    setFullNavbar(); 
+    setFullNavbar();
   };
 
   const handleMenuClose = () => {
@@ -44,7 +43,6 @@ const Navbar: React.FC = () => {
     if (url === "/") return location.pathname === "/";
     return location.pathname.startsWith(url);
   };
-
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 transition-colors duration-300">
@@ -84,7 +82,7 @@ const Navbar: React.FC = () => {
           onClick={handleMenuClose}
           className="absolute top-4 right-4 text-white text-2xl"
         >
-          Ã—
+          ×
         </button>
 
         <div className="mt-20 flex-1 flex flex-col justify-center divide-y divide-white/10 px-6">
@@ -114,13 +112,7 @@ const Navbar: React.FC = () => {
       {/* ===== DESKTOP NAVBAR ===== */}
       <div className="hidden sm:flex justify-center mt-6">
         <div
-          className="
-            relative flex items-center justify-center gap-2 px-4 py-2 w-[96%] max-w-[1260px]
-            rounded-full
-            bg-white/5 backdrop-blur-2xl
-            border border-white/10
-            shadow-[0_0_30px_rgba(168,85,247,0.25)]
-          "
+          className={`relative flex items-center gap-3 px-6 py-2 rounded-full bg-white/5 backdrop-blur-2xl border border-white/10 shadow-[0_0_30px_rgba(168,85,247,0.25)] ${location.pathname === "/contact" ? "w-[96%] max-w-[1260px] justify-center" : "justify-center"}`}
         >
           {navItems.map((item: NavItem) => (
             <a
@@ -129,7 +121,7 @@ const Navbar: React.FC = () => {
               target={item.isExternal ? "_blank" : undefined}
               rel={item.isExternal ? "noopener noreferrer" : undefined}
               className={`
-                relative px-5 py-2
+                relative px-6 py-2
                 rounded-full
                 text-xs tracking-wider
                 font-(family-name:--orbitron)
@@ -151,5 +143,6 @@ const Navbar: React.FC = () => {
 };
 
 export default Navbar;
+
 
 
