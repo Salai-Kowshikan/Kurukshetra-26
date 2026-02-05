@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 
 import Home from "@/pages/Home";
 import NotFound from "@/pages/NotFound";
@@ -11,9 +12,16 @@ const comingSoonPaths = [
   "/accommodation",
   "/login",
   "/register",
-  "/workshops",
   "/guest-lectures",
 ];
+
+// External redirect component
+const ExternalRedirect = ({ url }: { url: string }) => {
+  useEffect(() => {
+    window.location.href = url;
+  }, [url]);
+  return null;
+};
 
 function App() {
   return (
@@ -34,19 +42,19 @@ function App() {
         <Route
           path="/events"
           element={
-            <Navigate
-              to="https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664"
-              replace
-            />
+            <ExternalRedirect url="https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664" />
+          }
+        />
+        <Route
+          path="/workshops"
+          element={
+            <ExternalRedirect url="https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664" />
           }
         />
         <Route
           path="/technovation"
           element={
-            <Navigate
-              to="https://unstop.com/p/technovation-kurukshetra-2026-anna-university-ceg-tech-forum-1628748?utm_medium=Share&utm_source=vhcnzgkj55361&utm_campaign=Competitions"
-              replace
-            />
+            <ExternalRedirect url="https://unstop.com/p/technovation-kurukshetra-2026-anna-university-ceg-tech-forum-1628748?utm_medium=Share&utm_source=vhcnzgkj55361&utm_campaign=Competitions" />
           }
         />
 
