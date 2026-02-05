@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import patronage1 from "@/assets/patronage-1.png";
 import patronage2 from "@/assets/patronage-2.png";
-import patronage3 from "@/assets/patronage-3.png";
+import patronage3 from "@/assets/unesco-01.jpg.jpeg";
 import ieee from "@/assets/ieee_logo.png";
 
 const images = [
@@ -31,7 +31,7 @@ export default function Patronage() {
 	return (
 		<section className="w-full py-12">
 			<h3
-				className="text-md z-10 text-center md:text-2xl py-4 font-extrabold font-(family-name:--stalinist) bg-linear-to-r from-[#6101FE] to-[#FF00B3] bg-clip-text text-transparent"
+				className="text-md z-10 text-center md:text-2xl py-4 font-extrabold font-(family-name:--wallpoet) bg-linear-to-r from-[#6101FE] to-[#FF00B3] bg-clip-text text-transparent"
 			>
 				OUR PATRONAGES AND CERTIFICATIONS
 			</h3>
