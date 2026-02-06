@@ -80,7 +80,7 @@ const Contact = () => {
 
   return (
     <div
-      className="relative min-h-screen flex items-center justify-center px-4 pt-24 pb-16 font-(family-name:--orbitron) overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center px-3 sm:px-4 pt-28 sm:pt-24 pb-8 sm:pb-16 font-(family-name:--orbitron) overflow-hidden"
       style={{ background: "var(--contact-bg)" }}
     >
       <img
@@ -104,9 +104,9 @@ const Contact = () => {
         disableAnimations={false}
       />
 
-      <div className="relative z-10 w-full max-w-[1140px] grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-stretch">
+      <div className="relative z-10 w-full max-w-[1140px] grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 items-stretch mt-4 sm:mt-0">
         {/* LEFT PANEL */}
-        <div className="rounded-[28px] border border-white/50 backdrop-blur-xs shadow-[0_0_40px_rgba(140,0,255,0.25)] p-6 sm:p-8 w-full md:max-w-[540px] md:justify-self-start flex flex-col h-full">
+        <div className="rounded-[20px] sm:rounded-[28px] border border-white/50 backdrop-blur-xs shadow-[0_0_40px_rgba(140,0,255,0.25)] p-4 sm:p-6 md:p-8 w-full md:max-w-[540px] md:justify-self-start flex flex-col h-full">
           <div className="flex flex-col gap-4 h-full">
             <h2 className="text-base sm:text-lg font-semibold text-white tracking-widest">
               CONNECT
@@ -114,7 +114,7 @@ const Contact = () => {
 
 
             {/* Social Icons */}
-            <div className="flex gap-4 mt-1">
+            <div className="flex gap-3 sm:gap-4 mt-1 flex-wrap justify-center sm:justify-start">
               {[
                 { icon: <FaEnvelope />, url: "mailto:hr@cegtechforum.in" },
                 { icon: <FaFacebookF />, url: "https://www.facebook.com/kurukshetraceg.org.in/" },
@@ -127,7 +127,7 @@ const Contact = () => {
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 sm:w-12 sm:h-12 text-sm sm:text-lg box-border flex items-center justify-center border border-white/50 text-white rounded-full backdrop-blur-xs hover:border-[#8A05FF] hover:bg-[#8A05FF] hover:text-white hover:shadow-[0_0_18px_rgba(138,5,255,0.8)] transition-all duration-200"
+                  className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 text-sm sm:text-base md:text-lg box-border flex items-center justify-center border border-white/50 text-white rounded-full backdrop-blur-xs hover:border-[#8A05FF] hover:bg-[#8A05FF] hover:text-white hover:shadow-[0_0_18px_rgba(138,5,255,0.8)] transition-all duration-200"
                 >
                   {item.icon}
                 </a>
@@ -135,27 +135,27 @@ const Contact = () => {
             </div>
 
             {/* Map Embed */}
-            <div className="rounded-2xl overflow-hidden border border-white/25 bg-black/5 mt-1 backdrop-blur-sm">
+            <div className="rounded-xl sm:rounded-2xl overflow-hidden border border-white/25 bg-black/5 mt-1 backdrop-blur-sm">
               <iframe
                 title="map"
                 src="https://maps.google.com/maps?q=CEG%20Tech%20Forum&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                className="w-full h-40 sm:h-52 md:h-60"
+                className="w-full h-48 sm:h-52 md:h-60"
               />
             </div>
 
 
 
             {/* Contact Info */}
-            <div className="mt-4 backdrop-blur-xs border border-white/50 rounded-2xl text-white overflow-hidden">
+            <div className="mt-4 backdrop-blur-xs border border-white/50 rounded-xl sm:rounded-2xl text-white overflow-hidden">
 
               {/* Header Bar */}
               <button
                 onClick={() => setOpen(!open)}
-                className={`w-full flex justify-between items-center px-5 py-3 rounded-t-2xl  text-white font-medium ${open ? "text-[#FF00B3]" : "text-white"}`}
+                className={`w-full flex justify-between items-center px-4 sm:px-5 py-2.5 sm:py-3 rounded-t-xl sm:rounded-t-2xl text-white font-medium text-sm sm:text-base ${open ? "text-[#FF00B3]" : "text-white"}`}
               >
-                <span>General Inquiries [HR]:</span>
+                <span className="text-left pr-2">General Inquiries [HR]:</span>
                 <FaChevronDown
-                  className={`transition-transform duration-300 ${
+                  className={`transition-transform duration-300 flex-shrink-0 ${
                     open ? "rotate-180" : ""
                   }`}
                 />
@@ -167,20 +167,20 @@ const Contact = () => {
                   open ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
                 } overflow-hidden border-t border-white/10`}
               >
-                <div className="px-3 sm:px-5 py-3 sm:py-4 text-sm space-y-3">
+                <div className="px-4 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm space-y-2 sm:space-y-3">
                   
-                  <div className="flex justify-between">
+                  <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0">
                     <span>Madhan R</span>
-                    <a href="tel:+916383747371">+91 63837 47371</a>
+                    <a href="tel:+916383747371" className="text-white/90 hover:text-white">+91 63837 47371</a>
                   </div>
                   
-                  <div className="flex justify-between">
+                  <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0">
                     <span>Vinothini K</span>
-                    <a href="tel:+916381744539">+91 63817 44539</a>
+                    <a href="tel:+916381744539" className="text-white/90 hover:text-white">+91 63817 44539</a>
                   </div>
 
-                  <div className="flex justify-end pt-2">
-                    <a href="mailto:hr@cegtechforum.in" className="text-white">hr@cegtechforum.in</a>
+                  <div className="flex justify-start sm:justify-end pt-2">
+                    <a href="mailto:hr@cegtechforum.in" className="text-white/90 hover:text-white break-all">hr@cegtechforum.in</a>
                   </div>
                 </div>
               </div>
@@ -190,13 +190,13 @@ const Contact = () => {
         </div>
 
         {/* RIGHT PANEL */}
-        <div className="rounded-[28px] border border-white/50 backdrop-blur-xs shadow-[0_0_40px_rgba(140,0,255,0.25)] p-6 sm:p-8 w-full md:max-w-[540px] md:justify-self-end flex flex-col h-full">
-          <h2 className="text-lg sm:text-xl font-semibold mb-5 tracking-widest text-white/90">
+        <div className="rounded-[20px] sm:rounded-[28px] border border-white/50 backdrop-blur-xs shadow-[0_0_40px_rgba(140,0,255,0.25)] p-4 sm:p-6 md:p-8 w-full md:max-w-[540px] md:justify-self-end flex flex-col h-full">
+          <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-4 sm:mb-5 tracking-widest text-white/90">
             CONTACT US
           </h2>
 
           {/* Tabs */}
-          <div className="flex rounded-full mb-6 p-1.5 border border-white/50">
+          <div className="flex rounded-full mb-4 sm:mb-6 p-1 sm:p-1.5 border border-white/50">
             <button
               onClick={() => {
                 setActiveTab("query");
@@ -206,7 +206,7 @@ const Contact = () => {
                   company: "",
                 }));
               }}
-              className={`flex-1 py-2.5 rounded-full text-sm transition ${
+              className={`flex-1 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm transition ${
                 activeTab === "query"
                   ? "bg-[#7a28ff] text-white shadow-[inset_0_0_8px_rgba(255,255,255,0.2),0_0_12px_rgba(122,40,255,0.6)]"
                   : "text-white"
@@ -220,7 +220,7 @@ const Contact = () => {
                 setActiveTab("collaborate");
                 setFormData((prev) => ({ ...prev, type: "collaborate" }));
               }}
-              className={`flex-1 py-2.5 rounded-full text-sm transition ${
+              className={`flex-1 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm transition ${
                 activeTab === "collaborate"
                   ? "bg-[#7a28ff] text-white shadow-[inset_0_0_8px_rgba(255,255,255,0.2),0_0_12px_rgba(122,40,255,0.6)]"
                   : "text-white"
@@ -245,10 +245,10 @@ const Contact = () => {
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_template" value="table" />
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {/* Name */}
-              <div className="flex items-center rounded-full px-5 py-2.5 border border-white/50">
-                <FaUser className="text-white mr-3" />
+              <div className="flex items-center rounded-full px-4 sm:px-5 py-2 sm:py-2.5 border border-white/50">
+                <FaUser className="text-white mr-2 sm:mr-3 flex-shrink-0 text-sm sm:text-base" />
                 <input
                   type="text"
                   name="Name"
@@ -261,13 +261,13 @@ const Contact = () => {
                     }))
                   }
                   required
-                  className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white"
+                  className="bg-transparent outline-none text-white/90 text-sm sm:text-base w-full placeholder:text-white/70"
                 />
               </div>
 
               {/* Mobile */}
-              <div className="flex items-center rounded-full px-5 py-2.5 border border-white/50">
-                <FaPhoneAlt className="text-white mr-3" />
+              <div className="flex items-center rounded-full px-4 sm:px-5 py-2 sm:py-2.5 border border-white/50">
+                <FaPhoneAlt className="text-white mr-2 sm:mr-3 flex-shrink-0 text-sm sm:text-base" />
                 <input
                   type="tel"
                   name="Mobile"
@@ -283,13 +283,13 @@ const Contact = () => {
                   pattern="[6-9]{1}[0-9]{9}"
                   maxLength={10}
                   title="Enter a valid 10-digit Indian mobile number"
-                  className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white"
+                  className="bg-transparent outline-none text-white/90 text-sm sm:text-base w-full placeholder:text-white/70"
                 />
               </div>
 
               {/* Email */}
-              <div className="flex items-center rounded-full px-5 py-2.5 border border-white/50">
-                <FaEnvelope className="text-white mr-3" />
+              <div className="flex items-center rounded-full px-4 sm:px-5 py-2 sm:py-2.5 border border-white/50">
+                <FaEnvelope className="text-white mr-2 sm:mr-3 flex-shrink-0 text-sm sm:text-base" />
                 <input
                   type="email"
                   name="Email"
@@ -302,14 +302,14 @@ const Contact = () => {
                     }))
                   }
                   required
-                  className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white"
+                  className="bg-transparent outline-none text-white/90 text-sm sm:text-base w-full placeholder:text-white/70"
                 />
               </div>
 
               {/* Company */}
               {activeTab === "collaborate" && (
-                <div className="flex items-center rounded-full px-5 py-2.5 border border-white/50">
-                  <FaBuilding className="mr-3 text-white text-lg" />
+                <div className="flex items-center rounded-full px-4 sm:px-5 py-2 sm:py-2.5 border border-white/50">
+                  <FaBuilding className="mr-2 sm:mr-3 text-white text-sm sm:text-lg flex-shrink-0" />
                   <input
                     type="text"
                     name="Company"
@@ -322,14 +322,14 @@ const Contact = () => {
                       }))
                     }
                     required
-                    className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white"
+                    className="bg-transparent outline-none text-white/90 text-sm sm:text-base w-full placeholder:text-white/70"
                   />
                 </div>
               )}
 
               {/* Message */}
-              <div className="flex rounded-[22px] px-5 py-3 min-h-[140px] border border-white/50">
-                <FaCommentDots className="text-white mr-3 mt-1" />
+              <div className="flex rounded-[18px] sm:rounded-[22px] px-4 sm:px-5 py-2.5 sm:py-3 min-h-[120px] sm:min-h-[140px] border border-white/50">
+                <FaCommentDots className="text-white mr-2 sm:mr-3 mt-1 flex-shrink-0 text-sm sm:text-base" />
                 <textarea
                   name="Message"
                   placeholder="Your Message"
@@ -341,7 +341,7 @@ const Contact = () => {
                     }))
                   }
                   required
-                  className="bg-transparent outline-none text-white text-sm w-full resize-none placeholder:text-white"
+                  className="bg-transparent outline-none text-white text-sm sm:text-base w-full resize-none placeholder:text-white/70"
                 />
               </div>
             </div>
@@ -349,7 +349,7 @@ const Contact = () => {
             {/* Submit */}
             <button
               type="submit"
-              className="mt-4 w-full bg-[#7a28ff] text-white font-semibold py-3.5 rounded-full hover:shadow-[0_0_24px_rgba(122,40,255,0.85)] transition"
+              className="mt-4 sm:mt-6 w-full bg-[#7a28ff] text-white font-semibold py-3 sm:py-3.5 rounded-full hover:shadow-[0_0_24px_rgba(122,40,255,0.85)] transition text-sm sm:text-base"
             >
               Submit
             </button>
