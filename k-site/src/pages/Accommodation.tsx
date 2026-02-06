@@ -1,5 +1,6 @@
 import { useState } from "react";
-import bg from "../assets/listing.jpg";
+import bg from "../assets/Img.png";
+import MagicBento from "./MagicBento";
 
 type Gender = "Male" | "Female" | "Others";
 
@@ -29,34 +30,56 @@ export default function Accommodation() {
   };
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden flex flex-col items-center pt-26 ">
-      <img src={bg} className="absolute inset-0 w-full h-full object-cover" />
-      <div className="absolute inset-0 bg-black/70" />
+    <section 
+      className="relative min-h-screen flex items-center justify-center px-3 sm:px-4 pt-28 sm:pt-24 pb-8 sm:pb-16 font-(family-name:--orbitron) overflow-hidden"
+      style={{ background: "var(--contact-bg)" }}
+    >
+      <img 
+        src={bg} 
+        alt="Kurukshetra accommodation background" 
+        className="absolute inset-0 w-full h-full object-cover object-bottom opacity-80 pointer-events-none z-0" 
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/15 z-[1]" />
 
-      {/* PAGE TITLE */}
-      <h1
-        style={{
-          fontFamily: "Stalinist One, sans-serif",
-          background: "linear-gradient(90deg, #7C3AED 0%, #EC4899 100%)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-        }}
-        className="
-          relative z-10 text-center mx-auto mb-6
-          max-w-[92vw]
-          text-[1.15rem] tracking-[0.005em]
-          xs:text-[1.35rem] xs:tracking-[0.01em]
-          sm:text-[1.8rem] sm:tracking-[0.035em]
-          md:text-[2.4rem] md:tracking-[0.06em]
-        "
-      >
-        ACCOMMODATION
-      </h1>
+      <MagicBento
+        className="z-[2]"
+        textAutoHide={true}
+        enableStars
+        enableSpotlight
+        enableBorderGlow={true}
+        enableTilt={false}
+        clickEffect
+        spotlightRadius={400}
+        particleCount={12}
+        glowColor="132, 0, 255"
+        disableAnimations={false}
+      />
 
-      {/* CONTAINER */}
-      <div className="relative z-10 max-w-[960px] w-[90%] rounded-2xl
-        border border-white/20 bg-white/5 backdrop-blur-xl
-        px-7 py-8 md:px-10 md:py-10">
+      <div className="relative z-10 w-full max-w-[1140px] flex flex-col items-center mt-4 sm:mt-0">
+        {/* PAGE TITLE */}
+        <h1
+          style={{
+            fontFamily: "Stalinist One, sans-serif",
+            background: "linear-gradient(90deg, #7C3AED 0%, #EC4899 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+          className="
+            text-center mx-auto mb-6
+            max-w-[92vw]
+            text-[1.15rem] tracking-[0.005em]
+            xs:text-[1.35rem] xs:tracking-[0.01em]
+            sm:text-[1.8rem] sm:tracking-[0.035em]
+            md:text-[2.4rem] md:tracking-[0.06em]
+          "
+        >
+          ACCOMMODATION
+        </h1>
+
+        {/* CONTAINER */}
+        <div className="w-full max-w-[960px] rounded-[20px] sm:rounded-[28px]
+          border border-white/25 bg-black/10 backdrop-blur-sm
+          px-4 sm:px-7 md:px-10 py-6 sm:py-8 md:py-10 shadow-[0_0_40px_rgba(140,0,255,0.25)]">
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
@@ -80,7 +103,7 @@ export default function Accommodation() {
 
             {/* Dates */}
             <div className="flex flex-wrap justify-center gap-4 p-3 rounded-xl
-              bg-white/10 border border-white/25">
+              bg-black/20 border border-white/25 backdrop-blur-sm">
               {dates.map((d) => {
                 const sel = selectedDates.includes(d);
                 return (
@@ -108,7 +131,7 @@ export default function Accommodation() {
 
             {/* Gender */}
             <div className="flex justify-center gap-6 p-3 rounded-xl
-              bg-white/10 border border-white/25">
+              bg-black/20 border border-white/25 backdrop-blur-sm">
               {(["Male", "Female", "Others"] as Gender[]).map((g) => {
                 const sel = gender === g;
                 return (
@@ -226,8 +249,8 @@ export default function Accommodation() {
                   <div
                     key={n}
                     style={{ fontFamily: "Poppins, sans-serif" }}
-                    className="px-5 py-2.5 rounded-lg bg-white/10
-                      border border-white/25 text-[0.8rem]
+                    className="px-5 py-2.5 rounded-lg bg-black/20
+                      border border-white/25 text-[0.8rem] backdrop-blur-sm
                       grid grid-cols-[1fr_auto] items-center gap-6"
                   >
                     <span className="text-left text-white/85">{n}</span>
@@ -239,6 +262,7 @@ export default function Accommodation() {
 
           </div>
         </div>
+      </div>
       </div>
     </section>
   );
