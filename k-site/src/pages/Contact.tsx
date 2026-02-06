@@ -86,9 +86,9 @@ const Contact = () => {
       <img
         src={bg}
         alt="Kurukshetra contact background"
-        className="absolute inset-0 w-full h-full object-cover opacity-80 pointer-events-none z-0"
+        className="absolute inset-0 w-full h-full object-cover object-bottom pointer-events-none z-0"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/55 z-[1]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/15 z-[1]" />
 
       <MagicBento
         className="z-[2]"
@@ -106,7 +106,7 @@ const Contact = () => {
 
       <div className="relative z-10 w-full max-w-[1140px] grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-stretch">
         {/* LEFT PANEL */}
-        <div className="rounded-[28px] border border-white/25 bg-black/10 backdrop-blur-sm shadow-[0_0_40px_rgba(140,0,255,0.25)] p-6 sm:p-8 w-full md:max-w-[540px] md:justify-self-start flex flex-col h-full">
+        <div className="rounded-[28px] border border-white/50 backdrop-blur-xs shadow-[0_0_40px_rgba(140,0,255,0.25)] p-6 sm:p-8 w-full md:max-w-[540px] md:justify-self-start flex flex-col h-full">
           <div className="flex flex-col gap-4 h-full">
             <h2 className="text-base sm:text-lg font-semibold text-white tracking-widest">
               CONNECT
@@ -127,7 +127,7 @@ const Contact = () => {
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 sm:w-12 sm:h-12 text-sm sm:text-lg box-border flex items-center justify-center border border-white/40 bg-black/50 text-white/90 rounded-full backdrop-blur-sm hover:border-[#8A05FF] hover:bg-[#8A05FF] hover:text-white hover:shadow-[0_0_18px_rgba(138,5,255,0.8)] transition-all duration-200"
+                  className="w-11 h-11 sm:w-12 sm:h-12 text-sm sm:text-lg box-border flex items-center justify-center border border-white/50 text-white rounded-full backdrop-blur-xs hover:border-[#8A05FF] hover:bg-[#8A05FF] hover:text-white hover:shadow-[0_0_18px_rgba(138,5,255,0.8)] transition-all duration-200"
                 >
                   {item.icon}
                 </a>
@@ -146,12 +146,12 @@ const Contact = () => {
 
 
             {/* Contact Info */}
-            <div className="mt-4 backdrop-blur-md bg-black/10 border border-white/25 rounded-2xl text-white overflow-hidden">
+            <div className="mt-4 backdrop-blur-xs border border-white/50 rounded-2xl text-white overflow-hidden">
 
               {/* Header Bar */}
               <button
                 onClick={() => setOpen(!open)}
-                className={`w-full flex justify-between items-center px-5 py-3 rounded-t-2xl  text-white/90 font-medium ${open ? "text-[#FF00B3]" : "text-white"}`}
+                className={`w-full flex justify-between items-center px-5 py-3 rounded-t-2xl  text-white font-medium ${open ? "text-[#FF00B3]" : "text-white"}`}
               >
                 <span>General Inquiries [HR]:</span>
                 <FaChevronDown
@@ -190,13 +190,13 @@ const Contact = () => {
         </div>
 
         {/* RIGHT PANEL */}
-        <div className="rounded-[28px] border border-white/25 bg-black/10 backdrop-blur-sm shadow-[0_0_40px_rgba(140,0,255,0.25)] p-6 sm:p-8 w-full md:max-w-[540px] md:justify-self-end flex flex-col h-full">
+        <div className="rounded-[28px] border border-white/50 backdrop-blur-xs shadow-[0_0_40px_rgba(140,0,255,0.25)] p-6 sm:p-8 w-full md:max-w-[540px] md:justify-self-end flex flex-col h-full">
           <h2 className="text-lg sm:text-xl font-semibold mb-5 tracking-widest text-white/90">
             CONTACT US
           </h2>
 
           {/* Tabs */}
-          <div className="flex rounded-full mb-6 p-1.5 border border-white/20 bg-black/25">
+          <div className="flex rounded-full mb-6 p-1.5 border border-white/50">
             <button
               onClick={() => {
                 setActiveTab("query");
@@ -247,7 +247,7 @@ const Contact = () => {
 
             <div className="space-y-4">
               {/* Name */}
-              <div className="flex items-center rounded-full px-5 py-2.5 border border-white/25">
+              <div className="flex items-center rounded-full px-5 py-2.5 border border-white/50">
                 <FaUser className="text-white mr-3" />
                 <input
                   type="text"
@@ -266,7 +266,7 @@ const Contact = () => {
               </div>
 
               {/* Mobile */}
-              <div className="flex items-center rounded-full px-5 py-2.5 border border-white/25">
+              <div className="flex items-center rounded-full px-5 py-2.5 border border-white/50">
                 <FaPhoneAlt className="text-white mr-3" />
                 <input
                   type="tel"
@@ -288,7 +288,7 @@ const Contact = () => {
               </div>
 
               {/* Email */}
-              <div className="flex items-center rounded-full px-5 py-2.5 border border-white/25">
+              <div className="flex items-center rounded-full px-5 py-2.5 border border-white/50">
                 <FaEnvelope className="text-white mr-3" />
                 <input
                   type="email"
@@ -308,7 +308,7 @@ const Contact = () => {
 
               {/* Company */}
               {activeTab === "collaborate" && (
-                <div className="flex items-center rounded-full px-5 py-2.5 border border-white/25">
+                <div className="flex items-center rounded-full px-5 py-2.5 border border-white/50">
                   <FaBuilding className="mr-3 text-white text-lg" />
                   <input
                     type="text"
@@ -328,7 +328,7 @@ const Contact = () => {
               )}
 
               {/* Message */}
-              <div className="flex rounded-[22px] px-5 py-3 min-h-[140px] border border-white/25">
+              <div className="flex rounded-[22px] px-5 py-3 min-h-[140px] border border-white/50">
                 <FaCommentDots className="text-white mr-3 mt-1" />
                 <textarea
                   name="Message"
