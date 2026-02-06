@@ -1,4 +1,5 @@
 import { useState } from "react";
+import bg from "../assets/Img.png";
 import {
   FaUser,
   FaPhoneAlt,
@@ -81,9 +82,10 @@ const Contact = () => {
       className="min-h-screen flex items-start justify-center px-4 pt-24 pb-16 font-(family-name:--orbitron)"
       style={{ background: "var(--contact-bg)" }}
     >
+      <img src={bg} className="absolute inset-0 w-full h-full object-cover" />
       <div className="w-full max-w-[1140px] grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-8 md:justify-between">
         {/* LEFT PANEL */}
-        <div className="rounded-[28px] border border-white/25 bg-white/5 backdrop-blur-2xl shadow-[0_0_40px_rgba(140,0,255,0.25)] p-6 sm:p-8 md:w-[520px] md:justify-self-start">
+        <div className="rounded-[28px] border border-white/25  backdrop-blur-xs shadow-[0_0_40px_rgba(140,0,255,0.25)] p-6 sm:p-8 md:w-[520px] md:justify-self-start">
           <div className="flex flex-col gap-4">
             <h2 className="text-base sm:text-lg font-semibold text-white tracking-widest">CONNECT</h2>
 
@@ -126,7 +128,7 @@ const Contact = () => {
               {/* Header Bar */}
               <button
                 onClick={() => setOpen(!open)}
-                className={`w-full flex justify-between items-center px-5 py-3 rounded-t-2xl bg-white/10 text-white/90 font-medium ${open ? "text-[#FF00B3]" : "text-white"}`}
+                className={`w-full flex justify-between items-center px-5 py-3 rounded-t-2xl  text-white/90 font-medium ${open ? "text-[#FF00B3]" : "text-white"}`}
               >
                 <span>General Inquiries [HR]:</span>
                 <FaChevronDown
@@ -155,7 +157,7 @@ const Contact = () => {
                   </div>
 
                   <div className="flex justify-end pt-2">
-                    <a href="mailto:hr@cegtechforum.in" className="text-[#FF00B3]">hr@cegtechforum.in</a>
+                    <a href="mailto:hr@cegtechforum.in" className="text-white">hr@cegtechforum.in</a>
                   </div>
                 </div>
               </div>
@@ -165,14 +167,14 @@ const Contact = () => {
         </div>
 
         {/* RIGHT PANEL */}
-        <div className="rounded-[28px] border border-white/25 bg-[#3a1f46] backdrop-blur-2xl shadow-[0_0_40px_rgba(140,0,255,0.25)] p-6 sm:p-8 md:w-[520px] md:justify-self-end">
+        <div className="rounded-[28px] border border-white/25  backdrop-blur-xs shadow-[0_0_40px_rgba(140,0,255,0.25)] p-6 sm:p-8 md:w-[520px] md:justify-self-end">
           
             <h2 className="text-lg sm:text-xl font-semibold mb-5 tracking-widest text-white/90">
               CONTACT US
             </h2>
 
             {/* Tabs */}
-            <div className="flex bg-[#2b1633] rounded-full mb-6 p-1.5 border border-white/20">
+            <div className="flex rounded-full mb-6 p-1.5 border border-white/20">
               <button
                 onClick={() => {
                   setActiveTab("query");
@@ -181,7 +183,7 @@ const Contact = () => {
                 className={`flex-1 py-2.5 rounded-full text-sm transition ${
                   activeTab === "query"
                     ? "bg-[#7a28ff] text-white shadow-[inset_0_0_8px_rgba(255,255,255,0.2),0_0_12px_rgba(122,40,255,0.6)]"
-                    : "text-white/60"
+                    : "text-white"
                 }`}
               >
                 Query
@@ -195,7 +197,7 @@ const Contact = () => {
                 className={`flex-1 py-2.5 rounded-full text-sm transition ${
                   activeTab === "collaborate"
                     ? "bg-[#7a28ff] text-white shadow-[inset_0_0_8px_rgba(255,255,255,0.2),0_0_12px_rgba(122,40,255,0.6)]"
-                    : "text-white/60"
+                    : "text-white"
                 }`}
               >
                 Collaborate
@@ -215,7 +217,7 @@ const Contact = () => {
               <input type="hidden" name="_template" value="table" />
 
               {/* Name */}
-              <div className="flex items-center bg-[#4a2a58] rounded-full px-5 py-2.5 border border-white/25">
+              <div className="flex items-center  rounded-full px-5 py-2.5 border border-white/25">
                 <FaUser className="text-white mr-3" />
                 <input
                   type="text"
@@ -224,12 +226,12 @@ const Contact = () => {
                   value={formData.name}
                   onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
                   required
-                  className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white/50"
+                  className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white"
                 />
               </div>
 
               {/* Mobile */}
-              <div className="flex items-center bg-[#4a2a58] rounded-full px-5 py-2.5 border border-white/25">
+              <div className="flex items-center  rounded-full px-5 py-2.5 border border-white/25">
                 <FaPhoneAlt className="text-white mr-3" />
                 <input
                   type="tel"
@@ -241,12 +243,12 @@ const Contact = () => {
                   pattern="[6-9]{1}[0-9]{9}"
                   maxLength={10}
                   title="Enter a valid 10-digit Indian mobile number"
-                  className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white/50"
+                  className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white"
                 />
               </div>
 
               {/* Email */}
-              <div className="flex items-center bg-[#4a2a58] rounded-full px-5 py-2.5 border border-white/25">
+              <div className="flex items-center  rounded-full px-5 py-2.5 border border-white/25">
                 <FaEnvelope className="text-white mr-3" />
                 <input
                   type="email"
@@ -255,13 +257,13 @@ const Contact = () => {
                   value={formData.email}
                   onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
                   required
-                  className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white/50"
+                  className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white"
                 />
               </div>
 
               {/* Company */}
               {activeTab === "collaborate" && (
-                <div className="flex items-center bg-[#4a2a58] rounded-full px-5 py-2.5 border border-white/25">
+                <div className="flex items-center  rounded-full px-5 py-2.5 border border-white/25">
                   <FaBuilding className="mr-3 text-white text-lg" />
                   <input
                     type="text"
@@ -270,13 +272,13 @@ const Contact = () => {
                     value={formData.company}
                     onChange={(e) => setFormData((prev) => ({ ...prev, company: e.target.value }))}
                     required
-                    className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white/50"
+                    className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white"
                   />
                 </div>
               )}
 
               {/* Message */}
-              <div className="flex bg-[#4a2a58] rounded-[22px] px-5 py-3 min-h-[140px] border border-white/25">
+              <div className="flex  rounded-[22px] px-5 py-3 min-h-[140px] border border-white/25">
                 <FaCommentDots className="text-white mr-3 mt-1" />
                 <textarea
                   name="Message"
@@ -284,7 +286,7 @@ const Contact = () => {
                   value={formData.message}
                   onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
                   required
-                  className="bg-transparent outline-none text-white text-sm w-full resize-none placeholder:text-white/60"
+                  className="bg-transparent outline-none text-white text-sm w-full resize-none placeholder:text-white"
                 />
               </div>
 
