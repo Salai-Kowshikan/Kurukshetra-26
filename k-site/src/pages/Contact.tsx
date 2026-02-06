@@ -1,5 +1,6 @@
 import { useState } from "react";
 import bg from "../assets/Img.png";
+import MagicBento from "./MagicBento";
 import {
   FaUser,
   FaPhoneAlt,
@@ -57,7 +58,7 @@ const Contact = () => {
     try {
       const formElement = e.currentTarget as HTMLFormElement;
       const formDataToSubmit = new FormData(formElement);
-      
+
       await fetch("https://formsubmit.co/hr@cegtechforum.in", {
         method: "POST",
         body: formDataToSubmit,
@@ -77,17 +78,39 @@ const Contact = () => {
     });
   };
 
-    return (
+  return (
     <div
-      className="min-h-screen flex items-start justify-center px-4 pt-24 pb-16 font-(family-name:--orbitron)"
+      className="relative min-h-screen flex items-center justify-center px-4 pt-24 pb-16 font-(family-name:--orbitron) overflow-hidden"
       style={{ background: "var(--contact-bg)" }}
     >
-      <img src={bg} className="absolute inset-0 w-full h-full object-cover" />
-      <div className="w-full max-w-[1140px] grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-8 md:justify-between">
+      <img
+        src={bg}
+        alt="Kurukshetra contact background"
+        className="absolute inset-0 w-full h-full object-cover opacity-80 pointer-events-none z-0"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/55 z-[1]" />
+
+      <MagicBento
+        className="z-[2]"
+        textAutoHide={true}
+        enableStars
+        enableSpotlight
+        enableBorderGlow={true}
+        enableTilt={false}
+        clickEffect
+        spotlightRadius={400}
+        particleCount={12}
+        glowColor="132, 0, 255"
+        disableAnimations={false}
+      />
+
+      <div className="relative z-10 w-full max-w-[1140px] grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 items-stretch">
         {/* LEFT PANEL */}
-        <div className="rounded-[28px] border border-white/25  backdrop-blur-xs shadow-[0_0_40px_rgba(140,0,255,0.25)] p-6 sm:p-8 md:w-[520px] md:justify-self-start">
-          <div className="flex flex-col gap-4">
-            <h2 className="text-base sm:text-lg font-semibold text-white tracking-widest">CONNECT</h2>
+        <div className="rounded-[28px] border border-white/25 bg-black/10 backdrop-blur-sm shadow-[0_0_40px_rgba(140,0,255,0.25)] p-6 sm:p-8 w-full md:max-w-[540px] md:justify-self-start flex flex-col h-full">
+          <div className="flex flex-col gap-4 h-full">
+            <h2 className="text-base sm:text-lg font-semibold text-white tracking-widest">
+              CONNECT
+            </h2>
 
 
             {/* Social Icons */}
@@ -104,7 +127,7 @@ const Contact = () => {
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 sm:w-12 sm:h-12 text-sm sm:text-lg box-border flex items-center justify-center border border-white/40 bg-white/5 rounded-full backdrop-blur-sm hover:border-[#8A05FF] hover:shadow-[0_0_18px_rgba(138,5,255,0.8)] transition-all duration-200"
+                  className="w-11 h-11 sm:w-12 sm:h-12 text-sm sm:text-lg box-border flex items-center justify-center border border-white/40 bg-black/50 text-white/90 rounded-full backdrop-blur-sm hover:border-[#8A05FF] hover:bg-[#8A05FF] hover:text-white hover:shadow-[0_0_18px_rgba(138,5,255,0.8)] transition-all duration-200"
                 >
                   {item.icon}
                 </a>
@@ -112,7 +135,7 @@ const Contact = () => {
             </div>
 
             {/* Map Embed */}
-            <div className="rounded-2xl overflow-hidden border border-white/25 bg-black/20">
+            <div className="rounded-2xl overflow-hidden border border-white/25 bg-black/5 mt-1 backdrop-blur-sm">
               <iframe
                 title="map"
                 src="https://maps.google.com/maps?q=CEG%20Tech%20Forum&t=&z=13&ie=UTF8&iwloc=&output=embed"
@@ -123,7 +146,7 @@ const Contact = () => {
 
 
             {/* Contact Info */}
-            <div className="backdrop-blur-md bg-black/30 border border-white/25 rounded-2xl text-white overflow-hidden">
+            <div className="mt-4 backdrop-blur-md bg-black/10 border border-white/25 rounded-2xl text-white overflow-hidden">
 
               {/* Header Bar */}
               <button
@@ -167,78 +190,95 @@ const Contact = () => {
         </div>
 
         {/* RIGHT PANEL */}
-        <div className="rounded-[28px] border border-white/25  backdrop-blur-xs shadow-[0_0_40px_rgba(140,0,255,0.25)] p-6 sm:p-8 md:w-[520px] md:justify-self-end">
-          
-            <h2 className="text-lg sm:text-xl font-semibold mb-5 tracking-widest text-white/90">
-              CONTACT US
-            </h2>
+        <div className="rounded-[28px] border border-white/25 bg-black/10 backdrop-blur-sm shadow-[0_0_40px_rgba(140,0,255,0.25)] p-6 sm:p-8 w-full md:max-w-[540px] md:justify-self-end flex flex-col h-full">
+          <h2 className="text-lg sm:text-xl font-semibold mb-5 tracking-widest text-white/90">
+            CONTACT US
+          </h2>
 
-            {/* Tabs */}
-            <div className="flex rounded-full mb-6 p-1.5 border border-white/20">
-              <button
-                onClick={() => {
-                  setActiveTab("query");
-                  setFormData((prev) => ({ ...prev, type: "query", company: "" }));
-                }}
-                className={`flex-1 py-2.5 rounded-full text-sm transition ${
-                  activeTab === "query"
-                    ? "bg-[#7a28ff] text-white shadow-[inset_0_0_8px_rgba(255,255,255,0.2),0_0_12px_rgba(122,40,255,0.6)]"
-                    : "text-white"
-                }`}
-              >
-                Query
-              </button>
-
-              <button
-                onClick={() => {
-                  setActiveTab("collaborate");
-                  setFormData((prev) => ({ ...prev, type: "collaborate" }));
-                }}
-                className={`flex-1 py-2.5 rounded-full text-sm transition ${
-                  activeTab === "collaborate"
-                    ? "bg-[#7a28ff] text-white shadow-[inset_0_0_8px_rgba(255,255,255,0.2),0_0_12px_rgba(122,40,255,0.6)]"
-                    : "text-white"
-                }`}
-              >
-                Collaborate
-              </button>
-
-            </div>
-
-            {/* Form */}
-            <form
-              id="contact-form"
-              onSubmit={handleSubmit}
-              className="space-y-4"
+          {/* Tabs */}
+          <div className="flex rounded-full mb-6 p-1.5 border border-white/20 bg-black/25">
+            <button
+              onClick={() => {
+                setActiveTab("query");
+                setFormData((prev) => ({
+                  ...prev,
+                  type: "query",
+                  company: "",
+                }));
+              }}
+              className={`flex-1 py-2.5 rounded-full text-sm transition ${
+                activeTab === "query"
+                  ? "bg-[#7a28ff] text-white shadow-[inset_0_0_8px_rgba(255,255,255,0.2),0_0_12px_rgba(122,40,255,0.6)]"
+                  : "text-white"
+              }`}
             >
-              {/* FormSubmit config */}
-              <input type="hidden" name="_subject" value="New K!26 Form Submission" />
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_template" value="table" />
+              Query
+            </button>
 
+            <button
+              onClick={() => {
+                setActiveTab("collaborate");
+                setFormData((prev) => ({ ...prev, type: "collaborate" }));
+              }}
+              className={`flex-1 py-2.5 rounded-full text-sm transition ${
+                activeTab === "collaborate"
+                  ? "bg-[#7a28ff] text-white shadow-[inset_0_0_8px_rgba(255,255,255,0.2),0_0_12px_rgba(122,40,255,0.6)]"
+                  : "text-white"
+              }`}
+            >
+              Collaborate
+            </button>
+          </div>
+
+          {/* Form */}
+          <form
+            id="contact-form"
+            onSubmit={handleSubmit}
+            className="space-y-4 flex-1 flex flex-col"
+          >
+            {/* FormSubmit config */}
+            <input
+              type="hidden"
+              name="_subject"
+              value="New K!26 Form Submission"
+            />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+
+            <div className="space-y-4">
               {/* Name */}
-              <div className="flex items-center  rounded-full px-5 py-2.5 border border-white/25">
+              <div className="flex items-center rounded-full px-5 py-2.5 border border-white/25">
                 <FaUser className="text-white mr-3" />
                 <input
                   type="text"
                   name="Name"
                   placeholder="Name"
                   value={formData.name}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      name: e.target.value,
+                    }))
+                  }
                   required
                   className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white"
                 />
               </div>
 
               {/* Mobile */}
-              <div className="flex items-center  rounded-full px-5 py-2.5 border border-white/25">
+              <div className="flex items-center rounded-full px-5 py-2.5 border border-white/25">
                 <FaPhoneAlt className="text-white mr-3" />
                 <input
                   type="tel"
                   name="Mobile"
                   placeholder="Mobile"
                   value={formData.mobile}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, mobile: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      mobile: e.target.value,
+                    }))
+                  }
                   required
                   pattern="[6-9]{1}[0-9]{9}"
                   maxLength={10}
@@ -248,14 +288,19 @@ const Contact = () => {
               </div>
 
               {/* Email */}
-              <div className="flex items-center  rounded-full px-5 py-2.5 border border-white/25">
+              <div className="flex items-center rounded-full px-5 py-2.5 border border-white/25">
                 <FaEnvelope className="text-white mr-3" />
                 <input
                   type="email"
                   name="Email"
                   placeholder="Email"
                   value={formData.email}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      email: e.target.value,
+                    }))
+                  }
                   required
                   className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white"
                 />
@@ -263,14 +308,19 @@ const Contact = () => {
 
               {/* Company */}
               {activeTab === "collaborate" && (
-                <div className="flex items-center  rounded-full px-5 py-2.5 border border-white/25">
+                <div className="flex items-center rounded-full px-5 py-2.5 border border-white/25">
                   <FaBuilding className="mr-3 text-white text-lg" />
                   <input
                     type="text"
                     name="Company"
                     placeholder="Company / Organization Name"
                     value={formData.company}
-                    onChange={(e) => setFormData((prev) => ({ ...prev, company: e.target.value }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        company: e.target.value,
+                      }))
+                    }
                     required
                     className="bg-transparent outline-none text-white/90 text-sm w-full placeholder:text-white"
                   />
@@ -278,31 +328,37 @@ const Contact = () => {
               )}
 
               {/* Message */}
-              <div className="flex  rounded-[22px] px-5 py-3 min-h-[140px] border border-white/25">
+              <div className="flex rounded-[22px] px-5 py-3 min-h-[140px] border border-white/25">
                 <FaCommentDots className="text-white mr-3 mt-1" />
                 <textarea
                   name="Message"
                   placeholder="Your Message"
                   value={formData.message}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      message: e.target.value,
+                    }))
+                  }
                   required
                   className="bg-transparent outline-none text-white text-sm w-full resize-none placeholder:text-white"
                 />
               </div>
+            </div>
 
-              {/* Submit */}
-              <button
-                type="submit"
-                className="w-full bg-[#7a28ff] text-white font-semibold py-3.5 rounded-full hover:shadow-[0_0_24px_rgba(122,40,255,0.85)] transition"
-              >
-                Submit
-              </button>
-            </form>
+            {/* Submit */}
+            <button
+              type="submit"
+              className="mt-4 w-full bg-[#7a28ff] text-white font-semibold py-3.5 rounded-full hover:shadow-[0_0_24px_rgba(122,40,255,0.85)] transition"
+            >
+              Submit
+            </button>
+          </form>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Contact;
 
