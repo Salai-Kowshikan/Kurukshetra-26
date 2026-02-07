@@ -9,7 +9,7 @@ export default function Accommodation() {
   const [gender, setGender] = useState<Gender | null>(null);
   const [food, setFood] = useState(false);
 
-  const dates = ["Feb 20", "Feb 21", "Feb 22", "Feb 23"];
+  const dates = ["MAR 7", "MAR 8", "MAR 9"];
   const total = selectedDates.length * (food ? 450 : 300);
 
   const toggleDate = (d: string) => {
@@ -37,9 +37,8 @@ export default function Accommodation() {
       <img 
         src={bg} 
         alt="Kurukshetra accommodation background" 
-        className="absolute inset-0 w-full h-full object-cover object-bottom opacity-80 pointer-events-none z-0" 
+        className="absolute inset-0 w-full h-full object-cover object-bottom pointer-events-none z-0" 
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/15 z-[1]" />
 
       <MagicBento
         className="z-[2]"
@@ -59,13 +58,11 @@ export default function Accommodation() {
         {/* PAGE TITLE */}
         <h1
           style={{
-            fontFamily: "Stalinist One, sans-serif",
-            background: "linear-gradient(90deg, #7C3AED 0%, #EC4899 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
+            fontFamily: "Orbitron, sans-serif",
+            fontWeight: 700,
           }}
           className="
-            text-center mx-auto mb-6
+            text-center mx-auto mb-6 text-white
             max-w-[92vw]
             text-[1.15rem] tracking-[0.005em]
             xs:text-[1.35rem] xs:tracking-[0.01em]
@@ -78,7 +75,7 @@ export default function Accommodation() {
 
         {/* CONTAINER */}
         <div className="w-full max-w-[960px] rounded-[20px] sm:rounded-[28px]
-          border border-white/25 bg-black/10 backdrop-blur-sm
+          border border-white/70 backdrop-blur-xs
           px-4 sm:px-7 md:px-10 py-6 sm:py-8 md:py-10 shadow-[0_0_40px_rgba(140,0,255,0.25)]">
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -88,22 +85,22 @@ export default function Accommodation() {
 
             <h2
               style={{ fontFamily: "Orbitron, sans-serif" }}
-              className="text-[1.55rem] tracking-wide text-violet-600"
+              className="text-[1.55rem] tracking-wide text-white"
             >
               Accommodation Charges
             </h2>
 
             <p
-              style={{ fontFamily: "Poppins, sans-serif" }}
-              className="text-[1.05rem] leading-relaxed text-pink-400"
+              style={{ fontFamily: "Orbitron, sans-serif" }}
+              className="text-[0.9rem] leading-relaxed text-white"
             >
               Without food – Rs.300 per day <br />
               With food – Rs.450 per day
             </p>
 
             {/* Dates */}
-            <div className="flex flex-wrap justify-center gap-4 p-3 rounded-xl
-              bg-black/20 border border-white/25 backdrop-blur-sm">
+            <div className="flex flex-wrap justify-center gap-4 p-3 rounded-3xl
+               border border-white/70 ]">
               {dates.map((d) => {
                 const sel = selectedDates.includes(d);
                 return (
@@ -113,14 +110,14 @@ export default function Accommodation() {
                     className="flex items-center gap-3 cursor-pointer select-none"
                   >
                     <div
-                      className={`w-5 h-5 rounded-md flex items-center justify-center border
-                        ${sel ? "border-violet-600 bg-violet-600 text-black" : "border-white/40"}`}
+                      className={`w-5 h-5 rounded-xs flex items-center justify-center border
+                        ${sel ? "border-violet-600 bg-violet-600 text-white" : "border-white/70"}`}
                     >
                       {sel && "✓"}
                     </div>
-                    <span
-                      style={{ fontFamily: "Poppins, sans-serif" }}
-                      className="text-[0.8rem] text-white/85"
+                    <span 
+                      style={{ fontFamily: "Orbitron, sans-serif" }}
+                      className="text-[0.8rem] text-white"
                     >
                       {d}
                     </span>
@@ -130,8 +127,8 @@ export default function Accommodation() {
             </div>
 
             {/* Gender */}
-            <div className="flex justify-center gap-6 p-3 rounded-xl
-              bg-black/20 border border-white/25 backdrop-blur-sm">
+            <div className="flex justify-center gap-6 p-3 rounded-3xl
+               border border-white/70 ">
               {(["Male", "Female", "Others"] as Gender[]).map((g) => {
                 const sel = gender === g;
                 return (
@@ -142,13 +139,13 @@ export default function Accommodation() {
                   >
                     <div
                       className={`w-5 h-5 rounded-full flex items-center justify-center border
-                        ${sel ? "border-violet-600 bg-violet-600 text-black" : "border-white/40"}`}
+                        ${sel ? "border-violet-600 bg-violet-600 text-white" : "border-white/70"}`}
                     >
                       {sel && "✓"}
                     </div>
                     <span
-                      style={{ fontFamily: "Poppins, sans-serif" }}
-                      className="text-[0.8rem] text-white/85"
+                      style={{ fontFamily: "Orbitron, sans-serif" }}
+                      className="text-[0.8rem] text-white"
                     >
                       {g}
                     </span>
@@ -159,9 +156,9 @@ export default function Accommodation() {
 
             {/* Food */}
             <label
-              style={{ fontFamily: "Poppins, sans-serif" }}
+              style={{ fontFamily: "Orbitron, sans-serif" }}
               className="flex items-center justify-center gap-3
-                text-[0.8rem] text-white/85 cursor-pointer"
+                text-[0.7rem] text-white cursor-pointer"
             >
               <input
                 type="checkbox"
@@ -176,16 +173,16 @@ export default function Accommodation() {
             <div className="flex justify-center flex-wrap gap-4 pt-3">
               <div
                 style={{ fontFamily: "Orbitron, sans-serif", letterSpacing: "0.04em" }}
-                className="px-6 py-2.5 rounded-lg bg-black/40
-                  border border-white/40 text-violet-600 text-[1rem]"
+                className="px-6 py-2.5 rounded-3xl
+                  border border-white/70 text-white text-[1rem]"
               >
                 Total – Rs.{total}/-
               </div>
 
               <div
                 style={{ fontFamily: "Orbitron, sans-serif", letterSpacing: "0.04em" }}
-                className="px-6 py-2.5 rounded-lg bg-black/40
-                  border border-white/40 text-violet-600 text-[1rem] cursor-pointer"
+                className="px-6 py-2.5 rounded-3xl
+                  border border-white/70 text-white text-[1rem] cursor-pointer"
               >
                 Instruction
               </div>
@@ -196,8 +193,8 @@ export default function Accommodation() {
               style={{ fontFamily: "Orbitron, sans-serif", letterSpacing: "0.04em" }}
               disabled={!gender || selectedDates.length === 0}
               onClick={handleSubmit}
-              className="mt-3 px-10 py-3 rounded-lg
-                bg-violet-600 text-white/85
+              className="mt-3 px-10 py-3 rounded-3xl
+                bg-violet-600 text-white
                 border border-violet-600
                 disabled:opacity-50"
             >
@@ -205,29 +202,32 @@ export default function Accommodation() {
             </button>
           </div>
 
+           {/* Mobile separator */} 
+          <div className="block md:hidden w-full h-px bg-white/70 my-2" />
+   
           {/* RIGHT SECTION */}
-          <div className="space-y-8 md:border-l md:pl-8 border-white/20
+          <div className="space-y-8 md:border-l md:pl-8 border-white/70
             flex flex-col items-center text-center">
 
             <h2
               style={{ fontFamily: "Orbitron, sans-serif" }}
-              className="text-[1.55rem] tracking-wide text-violet-600"
+              className="text-[1.55rem] tracking-wide text-white"
             >
               Got queries?
             </h2>
 
             <div>
               <p
-                style={{ fontFamily: "Poppins, sans-serif" }}
-                className="text-[1rem] text-pink-400 mb-2"
+                style={{ fontFamily: "Orbitron, sans-serif" }}
+                className="text-[1rem] text-white mb-2"
               >
                 Drop a mail at
               </p>
               <div
                 style={{ fontFamily: "Orbitron, sans-serif", letterSpacing: "0.08em" }}
-                className="inline-block px-5 py-2.5 rounded-lg
-                  bg-black/40 border border-white/40
-                  text-violet-600 text-[0.8rem]"
+                className="inline-block px-5 py-2.5 rounded-3xl
+                    bg-violet-600
+                  text-white text-[0.8rem]"
               >
                 hospitality@cegtechforum.in
               </div>
@@ -235,8 +235,8 @@ export default function Accommodation() {
 
             <div>
               <p
-                style={{ fontFamily: "Poppins, sans-serif" }}
-                className="text-[1rem] text-pink-400 mb-2"
+                style={{ fontFamily: "Orbitron, sans-serif" }}
+                className="text-[1rem] text-white mb-2"
               >
                 Call our team
               </p>
@@ -248,13 +248,13 @@ export default function Accommodation() {
                 ].map(([n, p]) => (
                   <div
                     key={n}
-                    style={{ fontFamily: "Poppins, sans-serif" }}
-                    className="px-5 py-2.5 rounded-lg bg-black/20
-                      border border-white/25 text-[0.8rem] backdrop-blur-sm
+                    style={{ fontFamily: "Orbitron, sans-serif" }}
+                    className="px-5 py-2.5 rounded-lg 
+                      border border-white/70 text-[0.8rem] 
                       grid grid-cols-[1fr_auto] items-center gap-6"
                   >
-                    <span className="text-left text-white/85">{n}</span>
-                    <span className="text-violet-600 whitespace-nowrap">{p}</span>
+                    <span className="text-left text-white">{n}</span>
+                    <span className="text-white whitespace-nowrap">{p}</span>
                   </div>
                 ))}
               </div>

@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
   return (
     <nav className="fixed top-0 left-0 w-full z-50 transition-colors duration-300">
       {/* ===== MOBILE BAR ===== */}
-      <div className="flex items-center justify-between pr-6 pl-2 py-4 sm:hidden">
+      <div className="flex items-center justify-between pr-6 pl-2 py-4 lg:hidden">
         <img
           src={logo}
           alt="CTF Logo"
@@ -82,7 +82,7 @@ const Navbar: React.FC = () => {
           onClick={handleMenuClose}
           className="absolute top-4 right-4 text-white text-2xl"
         >
-          ×
+          x
         </button>
 
         <div className="mt-20 flex-1 flex flex-col justify-center divide-y divide-white/10 px-6">
@@ -104,15 +104,15 @@ const Navbar: React.FC = () => {
       {/* ===== MOBILE BACKDROP ===== */}
       {open && (
         <div
-          className="fixed inset-0 bg-black/60 sm:hidden z-40"
+          className="fixed inset-0 bg-black/60 lg:hidden z-40"
           onClick={handleMenuClose}
         />
       )}
 
       {/* ===== DESKTOP NAVBAR ===== */}
-      <div className="hidden sm:flex justify-center mt-6">
+      <div className="hidden lg:flex justify-center mt-6">
         <div
-          className={`relative flex items-center gap-3 px-6 py-2 rounded-full bg-white/5 backdrop-blur-2xl border border-white/10 shadow-[0_0_30px_rgba(168,85,247,0.25)] ${location.pathname === "/contact" ? "w-[96%] max-w-[1260px] justify-center" : "justify-center"}`}
+          className="relative flex items-center gap-3 px-6 py-2 rounded-full  backdrop-blur-xs border border-white/70 shadow-[0_0_30px_rgba(168,85,247,0.25)]"
         >
           {navItems.map((item: NavItem) => (
             <a
@@ -121,15 +121,16 @@ const Navbar: React.FC = () => {
               target={item.isExternal ? "_blank" : undefined}
               rel={item.isExternal ? "noopener noreferrer" : undefined}
               className={`
-                relative px-6 py-2
+                relative px-4 xl:px-6 py-1.5
+                text-center
                 rounded-full
                 text-xs tracking-wider
                 font-(family-name:--orbitron)
                 transition-all duration-300
                 ${
                   isActive(item.url)
-                    ? "bg-violet-600/80 text-white"
-                    : "text-white/80 hover:bg-violet-600/80 hover:text-white"
+                    ? "bg-violet-600 text-white"
+                    : "text-white hover:bg-violet-600/50 hover:text-white"
                 }
               `}
             >
