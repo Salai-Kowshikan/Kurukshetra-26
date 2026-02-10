@@ -1,5 +1,6 @@
 import { useState } from "react";
 import bg from "../assets/Img.png";
+import Instructions from "../assets/Instructions.pdf";
 import MagicBento from "./MagicBento";
 
 type Gender = "Male" | "Female" | "Others";
@@ -48,7 +49,7 @@ export default function Accommodation() {
         enableBorderGlow={true}
         enableTilt={false}
         clickEffect
-        spotlightRadius={400}
+        spotlightRadius={100}
         particleCount={12}
         glowColor="132, 0, 255"
         disableAnimations={false}
@@ -179,13 +180,15 @@ export default function Accommodation() {
                 Total – Rs.{total}/-
               </div>
 
-              <div
+              <a
+                href={Instructions}
+                target="_blank"
                 style={{ fontFamily: "Orbitron, sans-serif", letterSpacing: "0.04em" }}
                 className="px-6 py-2.5 rounded-3xl
                   border border-white/70 text-white text-[1rem] cursor-pointer"
               >
                 Instruction
-              </div>
+              </a>
             </div>
 
             {/* Submit */}
@@ -196,6 +199,7 @@ export default function Accommodation() {
               className="mt-3 px-10 py-3 rounded-3xl
                 bg-violet-600 text-white
                 border border-violet-600
+                cursor-pointer
                 disabled:opacity-50"
             >
               Submit
@@ -223,14 +227,15 @@ export default function Accommodation() {
               >
                 Drop a mail at
               </p>
-              <div
+              <a
+                href="mailto:hospitality@cegtechforum.in"
                 style={{ fontFamily: "Orbitron, sans-serif", letterSpacing: "0.08em" }}
                 className="inline-block px-5 py-2.5 rounded-3xl
                     bg-violet-600
                   text-white text-[0.8rem]"
               >
                 hospitality@cegtechforum.in
-              </div>
+              </a>
             </div>
 
             <div>

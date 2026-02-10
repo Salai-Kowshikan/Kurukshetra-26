@@ -98,7 +98,7 @@ const Contact = () => {
         enableBorderGlow={true}
         enableTilt={false}
         clickEffect
-        spotlightRadius={400}
+        spotlightRadius={100}
         particleCount={12}
         glowColor="132, 0, 255"
         disableAnimations={false}
