@@ -11,7 +11,7 @@ export default function Home() {
 
   useEffect(() => {
     setHomeNavbar();
-  }, []);
+  }, [setHomeNavbar]);
 
   return (
     <main
@@ -35,4 +35,6 @@ export default function Home() {
     </main>
   );
 }
+
+
 
