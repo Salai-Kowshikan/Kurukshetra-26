@@ -27,42 +27,42 @@ const ExternalRedirect = ({ url }: { url: string }) => {
 function App() {
   return (
     <Router>
-      <Navbar />
+      {/* <div className="min-h-screen flex flex-col"> */}
+        <Navbar />
 
-      <Routes>
-        {/* Visible pages */}
-        <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
+        {/* <main className="flex-1"> */}
+          <Routes>
+            {/* Visible pages */}
+            <Route path="/" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
 
-        {/* Pages redirected to ComingSoon */}
-        {comingSoonPaths.map((path) => (
-          <Route key={path} path={path} element={<ComingSoon />} />
-        ))}
+            {/* Pages redirected to ComingSoon */}
+            {comingSoonPaths.map((path) => (
+              <Route key={path} path={path} element={<ComingSoon />} />
+            ))}
 
-        {/* External redirects to Unstop */}
-        <Route
-          path="/events"
-          element={
-            <ExternalRedirect url="https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664" />
-          }
-        />
-        <Route
-          path="/workshops"
-          element={
-            <ExternalRedirect url="https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664" />
-          }
-        />
-        <Route
-          path="/technovation"
-          element={
-            <Technovation />
-          }
-        />
+            {/* External redirects to Unstop */}
+            <Route
+              path="/events"
+              element={
+                <ExternalRedirect url="https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664" />
+              }
+            />
+            <Route
+              path="/workshops"
+              element={
+                <ExternalRedirect url="https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664" />
+              }
+            />
+            <Route path="/technovation" element={<Technovation />} />
 
-        {/* Catch all - NotFound */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
+            {/* Catch all - NotFound */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        {/* </main> */}
+
+        <Footer />
+      {/* </div> */}
     </Router>
   );
 }
