@@ -1,129 +1,195 @@
 import bgImg from "@/assets/Img.png";
-import placeholder from "@/assets/ieee_logo.png";
+import NIOT from "@/assets/NIOT.png";
+import ShankarIAS from "@/assets/ShankarIAS.png";
+import Zentropy from "@/assets/zen.jpg";
 import Tilt from "react-parallax-tilt";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 
 type Sponsor = {
   src: string;
   alt: string;
+  title?: string;
+  desc?: string;
   url?: string;
 };
 
 const sponsors: Sponsor[] = [
-  { src: placeholder, alt: "Sponsor", url: "https://example.com" },
-  { src: placeholder, alt: "Sponsor 2" },
-  { src: placeholder, alt: "Sponsor 3", url: "https://example.org" },
-  // { src: placeholder, alt: "Sponsor 4" },
-  // { src: placeholder, alt: "Sponsor 5" },
-  // { src: placeholder, alt: "Sponsor 6" },
+  {
+    src: NIOT,
+    alt: "NIOT",
+    url: "https://www.niot.res.in",
+    title: "Co Sponsor",
+    desc: "The National Institute of Ocean Technology (NIOT) is an autonomous organization under the Ministry of Earth Sciences, Government of India, established in 1993 and headquartered in Chennai. It focuses on developing indigenous technologies for ocean exploration, deep-sea mining, underwater vehicles, desalination, marine renewable energy, and coastal protection. NIOT plays a vital role in advancing India’s ocean research and supports the country’s Deep Ocean Mission."
+  },
+  {
+    src: ShankarIAS,
+    alt: "ShankarIAS",
+    url: "https://www.shankariasacademy.com",
+    title: "Associate Sponsor",
+  },
+  {
+    src: Zentropy,
+    alt: "Zentropy",
+    url: "https://www.zentropytech.com/",
+    title: "Technology Partner",    
+  }
 ];
 
 export default function Sponsors() {
+  const [active, setActive] = useState<Sponsor | null>(null);
+
+  const [hoverPos, setHoverPos] = useState({ x: 50, y: 50 });
+
+  
+
   const openLink = (url?: string) => {
     if (!url) return;
     window.open(url, "_blank", "noopener,noreferrer");
   };
+  const [glitch, setGlitch] = useState(false);
 
-  const [hoverPos, setHoverPos] = useState({ x: 50, y: 50 });
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGlitch(true);
+      setTimeout(() => setGlitch(false), 500);
+    }, 3000 + Math.random() * 2000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center  pb-16 overflow-hidden" style={{ background: "var(--contact-bg)" }}>
-      
-      {/* BACKGROUND */}
-      <img
-        src={bgImg}
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover object-bottom z-0"
-      />
-      <div className="absolute inset-0 bg-black/25 z-0" />
+    <section className="relative min-h-screen flex items-center justify-center pb-20 overflow-hidden" 
+    style={{ background: "var(--contact-bg)" }}
+    >
+
+      <img src={bgImg} className="absolute inset-0 w-full h-full object-cover" />
+      <div className="absolute inset-0 bg-black/40" />
 
       <div className="relative z-10 w-[90%] max-w-7xl mx-auto">
-        <h3 className="text-center text-2xl md:text-3xl font-bold text-white mb-14 tracking-widest font-(family-name:--wallpoet)">
-          OUR SPONSORS
-        </h3>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-12">
+        {/* GLITCH HEADING */}
+        <div className="flex justify-center mb-16">
+          <div className={`relative ${glitch ? "glitch-active" : ""}`}>
+            <h2
+            className="sponsor-glitch text-3xl md:text-5xl lg:mt-20 mt-28 font-medium text-white font-(family-name:--wallpoet)"
+            data-text="OUR SPONSORS"
+          >
+              OUR SPONSORS
+            </h2>
+          </div>
+        </div>
+
+
+
+        {/* FLEX WRAP */}
+        <div className="flex flex-wrap justify-center gap-14">
+
           {sponsors.map((s, i) => (
             <button
               key={i}
-              onClick={() => openLink(s.url)}
-              className="group relative"
+              onClick={() => {
+                if (s.desc) {
+                  setActive(s);
+                } else {
+                  openLink(s.url);
+                }
+              }}
+              className="group relative w-full md:w-[45%] lg:w-[30%] max-w-[420px]"
             >
-              <Tilt
-                glareEnable
-                glareMaxOpacity={0.15}
-                scale={1.02}
-                tiltMaxAngleX={7}
-                tiltMaxAngleY={7}
-                className="relative rounded-2xl"
-              >
-                {/* OUTER GLOW */}
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 
-                  transition duration-300 shadow-[0_0_40px_#8A05FF]" />
 
-                {/* GLASS CARD */}
-                <div
-                  onMouseMove={(e) => {
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    const x = ((e.clientX - rect.left) / rect.width) * 100;
-                    const y = ((e.clientY - rect.top) / rect.height) * 100;
-                    setHoverPos({ x, y });
-                  }}
-                  className="relative rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20
-                  h-[35vh] flex items-center justify-center overflow-hidden"
-                >
+              <Tilt tiltMaxAngleX={6} tiltMaxAngleY={6} scale={1.02} glareEnable glareMaxOpacity={0.1}>
+
+                <div className="relative bg-white/10 backdrop-blur-lg border border-white/20 h-[320px] flex flex-col items-center justify-center overflow-hidden rounded-xl">
+
+                  {/* TITLE */}
+                  {s.title && (
+                    <div className="absolute top-4 text-lg tracking-widest text-white font-(family-name:--wallpoet)">
+                      {s.title}
+                    </div>
+                  )}
+
                   {/* GRID */}
-                  <div
-                    className="absolute inset-0 opacity-20"
+                  <div className="absolute inset-0 opacity-20"
                     style={{
                       backgroundImage: `
-                        linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)
+                        linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px)
                       `,
-                      backgroundSize: "40px 40px",
+                      backgroundSize: "40px 40px"
                     }}
                   />
 
-                  {/* GRID HIGHLIGHT */}
+                  {/* HOVER SPOT */}
                   <div
-                    className="pointer-events-none absolute w-24 h-24 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition"
+                    className="pointer-events-none absolute w-32 h-32 blur-xl opacity-0 group-hover:opacity-100 transition"
                     style={{
-                      background:
-                        "radial-gradient(circle, rgba(138,5,255,0.35), transparent 70%)",
+                      background: "radial-gradient(circle, rgba(138,5,255,0.4), transparent 70%)",
                       left: `${hoverPos.x}%`,
                       top: `${hoverPos.y}%`,
-                      transform: "translate(-50%, -50%)",
+                      transform: "translate(-50%, -50%)"
                     }}
                   />
-
-                  {/* EDGE SCAN */}
-                  <span className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
-                    <span className="absolute top-0 left-[-100%] h-full w-1/2 
-                      bg-gradient-to-r from-transparent via-white/40 to-transparent
-                      opacity-0 group-hover:opacity-100
-                      group-hover:animate-[scan_1.2s_linear]" />
-                  </span>
 
                   {/* LOGO */}
                   <img
                     src={s.src}
                     alt={s.alt}
-                    className="relative max-h-[60%] object-contain transition duration-500
-                    group-hover:scale-110 group-hover:[filter:drop-shadow(0_0_10px_#8A05FF)]"
+                    onMouseMove={(e) => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setHoverPos({
+                        x: ((e.clientX - rect.left) / rect.width) * 100,
+                        y: ((e.clientY - rect.top) / rect.height) * 100
+                      });
+                    }}
+                    className="max-h-[55%] object-contain transition duration-500 group-hover:scale-110"
                   />
+
                 </div>
               </Tilt>
             </button>
           ))}
         </div>
+
+        {active && active.desc && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center"
+            onClick={() => setActive(null)}
+          >
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-[40%] h-[50vh] bg-black/80 backdrop-blur-xl border border-white/20 rounded-xl shadow-[0_0_40px_#8A05FF] flex flex-col"
+            >
+              <div className="flex-1 overflow-y-auto p-6">
+                <h3 className="text-xl mb-3 font-(family-name:--wallpoet) text-center text-white">
+                  {active.title} - {active.alt}
+                </h3>
+
+                <p className="text-white/80 text-sm leading-relaxed">
+                  {active.desc}
+                </p>
+              </div>
+
+              {active.url && (
+                <div className="pb-6 flex justify-center">
+                  <button
+                    onClick={() => openLink(active.url)}
+                    className="px-6 py-2 bg-[#8A05FF] rounded-md text-white text-sm hover:brightness-125 transition shadow-[0_0_15px_#8A05FF]"
+                  >
+                    Visit Site →
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+
+
       </div>
 
-      <style>{`
-        @keyframes scan {
-          0% { left:-100% }
-          100% { left:120% }
-        }
-      `}</style>
+      
     </section>
   );
 }

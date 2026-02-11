@@ -112,7 +112,7 @@ const Navbar: React.FC = () => {
       {/* ===== DESKTOP NAVBAR ===== */}
       <div className="hidden lg:flex justify-center mt-6">
         <div
-          className="relative flex items-center gap-3 px-6 py-2 rounded-full  backdrop-blur-xs border border-white/70 shadow-[0_0_30px_rgba(168,85,247,0.25)]"
+          className="relative flex items-center gap-1 px-4 py-2 rounded-full  backdrop-blur-xs border border-white/70 shadow-[0_0_30px_rgba(168,85,247,0.25)]"
         >
           {navItems.map((item: NavItem) => (
             <a
@@ -121,7 +121,7 @@ const Navbar: React.FC = () => {
               target={item.isExternal ? "_blank" : undefined}
               rel={item.isExternal ? "noopener noreferrer" : undefined}
               className={`
-                relative px-4 xl:px-6 py-1.5
+                relative px-3 xl:px-5 py-1.5
                 text-center
                 rounded-full
                 text-xs tracking-wider
