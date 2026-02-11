@@ -224,7 +224,7 @@ const MagicBento: React.FC<MagicBentoProps> = ({
 
       {!textAutoHide || !hasInteracted ? (
         <div className="absolute inset-0 flex items-center justify-center text-[10px] sm:text-xs md:text-sm text-white/60">
-          {children ?? "Move your cursor to explore the magic ✨"}
+          {children ?? ""}
         </div>
       ) : null}
     </div>

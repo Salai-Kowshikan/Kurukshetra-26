@@ -8,7 +8,7 @@ import Footer from "@/components/Footer";
 import Contact from "@/pages/Contact";
 import Accommodation from "@/pages/Accommodation";
 import ComingSoon from "@/pages/ComingSoon";
-
+import Sponsors from "@/pages/Sponsors";
 const comingSoonPaths = [
   "/login",
   "/register",
@@ -33,6 +33,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/accommodation" element={<Accommodation />} />
+        <Route path="/sponsors" element={<Sponsors />} />
 
         {/* Pages redirected to ComingSoon */}
         {comingSoonPaths.map((path) => (

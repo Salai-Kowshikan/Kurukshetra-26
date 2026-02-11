@@ -20,6 +20,7 @@ const baseNavItems: NavItem[] = [
   { label: "Projects", url: "https://www.projects.cegtechforum.in/", isExternal: true },
   { label: "Accommodation", url: "/accommodation" },
   { label: "Contacts", url: "/contact" },
+  { label: "sponsors", url: "/sponsors" },
   // { label: "Login", url: "/login" },
 ];
 

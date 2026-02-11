@@ -200,7 +200,7 @@ export default function Accommodation() {
                 bg-violet-600 text-white
                 border border-violet-600
                 cursor-pointer
-                disabled:opacity-50"
+                disabled:opacity-50 hover:shadow-[0_0_24px_rgba(122,40,255,0.85)] transition"
             >
               Submit
             </button>
@@ -232,7 +232,7 @@ export default function Accommodation() {
                 style={{ fontFamily: "Orbitron, sans-serif", letterSpacing: "0.08em" }}
                 className="inline-block px-5 py-2.5 rounded-3xl
                     bg-violet-600
-                  text-white text-[0.8rem]"
+                  text-white text-[0.8rem] hover:shadow-[0_0_24px_rgba(122,40,255,0.85)] transition"
               >
                 hospitality@cegtechforum.in
               </a>
@@ -259,7 +259,7 @@ export default function Accommodation() {
                       grid grid-cols-[1fr_auto] items-center gap-6"
                   >
                     <span className="text-left text-white">{n}</span>
-                    <span className="text-white whitespace-nowrap">{p}</span>
+                    <a href={`tel:${p.replace(/\s+/g, '')}`} className="text-white/90 whitespace-nowrap hover:text-white transition-colors">{p}</a>
                   </div>
                 ))}
               </div>
