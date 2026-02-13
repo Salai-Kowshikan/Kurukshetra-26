@@ -51,7 +51,7 @@ export default function Register() {
   ];
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center lg:justify-end px-4 pt-20 pb-12 lg:pr-12 xl:pr-24 overflow-hidden"
+<div className="min-h-screen relative flex items-center justify-center px-4 pt-24 pb-12 overflow-hidden"
          style={{
            backgroundImage: `url(${spaceBg})`,
            backgroundSize: 'cover',
