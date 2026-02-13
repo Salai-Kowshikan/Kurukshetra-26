@@ -56,7 +56,7 @@ const ButtonGroup = ({ items }: { items: Listing[] }) => {
 
 export default function Listings() {
   const listings: Listing[] = [
-    { title: "Events", path: "https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664", image: calendarImg, isExternal: true },
+    { title: "Events", path: "/events", image: calendarImg, isExternal: true },
     { title: "Workshops", path: "https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664", image: screwdriverImg, isExternal: true },
     { title: "Guest Lectures", path: "/guest-lectures", image: microphoneImg },
     { title: "Technovation", path: "https://unstop.com/p/technovation-kurukshetra-2026-anna-university-ceg-tech-forum-1628748?utm_medium=Share&utm_source=vhcnzgkj55361&utm_campaign=Competitions", image: laptopImg, isExternal: true },
