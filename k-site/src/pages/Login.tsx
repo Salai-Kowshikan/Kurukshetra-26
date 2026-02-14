@@ -111,7 +111,7 @@ export default function Login() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-[#E500A4] hover:bg-[#D40096] text-white text-base py-1.5 rounded-[15px] transition-all transform hover:scale-[1.02] active:scale-[0.98] border border-white/20 shadow-[0_0_15px_rgba(229,0,164,0.3)] disabled:opacity-50"
+                className="w-full bg-[#E900BD] hover:bg-[#D40096] text-white text-base py-1.5 rounded-[15px] transition-all transform hover:scale-[1.02] active:scale-[0.98] border border-white/20 shadow-[0_0_15px_rgba(229,0,164,0.3)] disabled:opacity-50"
               >
                 {isSubmitting ? "Logging in..." : "Login"}
               </button>
@@ -124,7 +124,7 @@ export default function Login() {
               don't have account ?{" "}
               <Link
                 to="/register"
-                className="text-[#E500A4] hover:text-[#FF33C4] transition-colors ml-0.5"
+                className="text-[#E900BD] hover:text-[#FF33C4] transition-colors ml-0.5"
               >
                 Register Now
               </Link>
