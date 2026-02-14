@@ -1,7 +1,7 @@
-import about1 from "@/assets/ceg_logo.png";
-import about2 from "@/assets/CTF1.png";
+import about1 from "/Ceg.png";
+import about2 from "/Ctf.png";
 import about3 from "@/assets/K'26_Logo.png";
-import about4 from "@/assets/vyuhaa_logo.png";
+import about4 from "/Vyuhaa.png";
 
 const TITLES = [
 	"COLLEGE OF ENGINEERING GUINDY",
@@ -26,14 +26,14 @@ export default function About() {
 					/* Gradient border wrapper */
 					<div
 						key={i}
-						className="rounded-xl p-0.5 bg-linear-to-l from-[#6101FE] to-[#FF00B3]"
+						className="rounded-xl p-0.5 "
 					>
-						<article className="relative w-full rounded-xl p-12 bg-black/60 backdrop-blur-md">
+						<article className="relative w-full rounded-xl p-12 bg-white/5 border border-white/50 backdrop-blur-xs\">
 							{/* Title */}
 							<div className="flex justify-center -mt-6">
 								<div
 									className="px-5 py-1.5 rounded-full
-									           bg-linear-to-l from-[#6101FE] to-[#FF00B3]
+									           bg-violet-600 
 									           text-white text-sm md:text-base text-center
 									           font-(family-name:--wallpoet)"
 								>
