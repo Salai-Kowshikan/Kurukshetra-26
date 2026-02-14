@@ -7,11 +7,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Contact from "@/pages/Contact";
 import ComingSoon from "@/pages/ComingSoon";
-
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 const comingSoonPaths = [
   "/accommodation",
-  "/login",
-  "/register",
   "/guest-lectures",
 ];
 
@@ -57,7 +56,8 @@ function App() {
             <ExternalRedirect url="https://unstop.com/p/technovation-kurukshetra-2026-anna-university-ceg-tech-forum-1628748?utm_medium=Share&utm_source=vhcnzgkj55361&utm_campaign=Competitions" />
           }
         />
-
+        <Route path="/login" element={<Login/>} />
+        <Route path="/register" element={<Register/>} />
         {/* Catch all - NotFound */}
         <Route path="*" element={<NotFound />} />
       </Routes>
