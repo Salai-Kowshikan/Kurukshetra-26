@@ -7,12 +7,16 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Contact from "@/pages/Contact";
 import ComingSoon from "@/pages/ComingSoon";
+import Events from "./pages/Events";
+import EventsNew from "./pages/EventsNew";
 
 const comingSoonPaths = [
   "/accommodation",
   "/login",
   "/register",
   "/guest-lectures",
+  "/events",
+  "/eventsnew"
 ];
 
 // External redirect component
@@ -32,19 +36,21 @@ function App() {
         {/* Visible pages */}
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
-
+        <Route path="/events" element={<Events />} />
+        <Route path="/events/:eventName" element={<EventsNew />} />
         {/* Pages redirected to ComingSoon */}
         {comingSoonPaths.map((path) => (
           <Route key={path} path={path} element={<ComingSoon />} />
         ))}
 
         {/* External redirects to Unstop */}
-        <Route
+        {/* <Route
           path="/events"
           element={
-            <ExternalRedirect url="https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664" />
+            // <ExternalRedirect url="https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664" />
+            <Events/>
           }
-        />
+        /> */}
         <Route
           path="/workshops"
           element={
