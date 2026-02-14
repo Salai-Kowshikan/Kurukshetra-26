@@ -41,7 +41,7 @@ export default function Patronage() {
 						<button
 							key={i}
 							onClick={() => openCard(i)}
-							className="w-full h-48 flex items-center justify-center rounded-xl p-4 bg-white/5 border border-white/10 backdrop-blur-md hover:scale-105 transform transition-shadow duration-200 focus:outline-none"
+							className="w-full h-48 flex items-center justify-center rounded-xl p-4 bg-white/5 border border-white/50 backdrop-blur-xs hover:scale-105 transform transition-shadow duration-200 focus:outline-none shadow-[0_0_40px_rgba(140,0,255,0.25)]"
 							aria-label={`Open ${img.alt}`}
 						>
 							<img
