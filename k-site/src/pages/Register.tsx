@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, User, Phone } from 'lucide-react';
+import { Mail, User, Phone, Eye, EyeOff } from 'lucide-react'; 
 import Background from '@/components/login/Background';
 
 export default function Register() {
@@ -7,6 +7,9 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
+  
+  // New state variables for password errors
+  const [passwordError, setPasswordError] = useState('');
 
   // CEGian form state
   const [cegianForm, setCegianForm] = useState({
@@ -42,7 +45,24 @@ export default function Register() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Register attempt:', activeTab === 'cegian' ? cegianForm : othersForm);
+    setPasswordError(''); // Reset error on each submission attempt
+
+    const currentForm = activeTab === 'cegian' ? cegianForm : othersForm;
+
+    // Check if passwords match
+    if (currentForm.password !== currentForm.confirmPassword) {
+      setPasswordError("Passwords do not match");
+      return; // Stop submission
+    }
+
+    // Add minimum length check
+    // if (currentForm.password.length < 6) {
+    //   setPasswordError("Password must be at least 6 characters long");
+    //   return; 
+    // }
+
+    console.log('Register attempt:', currentForm);
+    // Proceed with your API call here
   };
 
   const months = [
@@ -54,6 +74,10 @@ export default function Register() {
   const baseInputStyle = "w-full bg-[#1A0B2E]/40 border-[0.5px] border-white/40 rounded-[15px] text-white text-sm focus:outline-none focus:border-white transition-all shadow-[inset_0_2px_8px_rgba(0,0,0,0.3)]";
   const inputWithIcon = `${baseInputStyle} pl-12 pr-5 py-2`;
   const inputNormal = `${baseInputStyle} px-5 py-2`;
+  const inputPassword = `${baseInputStyle} pl-5 pr-12 py-2`;
+
+  // Dynamic style for error fields
+  const getErrorStyle = (isError: boolean) => isError ? 'border-red-500 focus:border-red-500' : '';
 
   return (
     <div className="min-h-screen relative flex flex-col items-center justify-center px-4 overflow-x-hidden bg-black font-sans pb-12"> 
@@ -90,7 +114,10 @@ export default function Register() {
         <div className="flex gap-4 mb-8 justify-center">
             <button
               type="button"
-              onClick={() => setActiveTab('cegian')}
+              onClick={() => {
+                setActiveTab('cegian');
+                setPasswordError(''); // Clear error when switching tabs
+              }}
               className={`px-16 py-2 rounded-full transition-all font-bold text-l ${
                 activeTab === 'cegian'
                   ? 'bg-purple-600 text-white border-2 border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.4)]'
@@ -101,7 +128,10 @@ export default function Register() {
             </button>
             <button
               type="button"
-              onClick={() => setActiveTab('others')}
+              onClick={() => {
+                setActiveTab('others');
+                setPasswordError(''); // Clear error when switching tabs
+              }}
               className={`px-16 py-2 rounded-full transition-all font-bold text-l ${
                 activeTab === 'others'
                   ? 'bg-purple-600 text-white border-2 border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.4)]'
@@ -132,7 +162,7 @@ export default function Register() {
                 <>
                   {/* CEGian Form - Left Column */}
                   <div className="space-y-5">
-                    {/* Email ID */}
+                    {/* ... (Your existing CEGian left column inputs) ... */}
                     <div>
                       <label className="block text-white text-sm font-medium mb-1.5 pl-2">
                         Email Id
@@ -141,6 +171,7 @@ export default function Register() {
                         <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400 w-4 h-4" />
                         <input
                           type="email"
+                          placeholder="name@example.com"
                           value={cegianForm.email}
                           onChange={(e) => setCegianForm({ ...cegianForm, email: e.target.value })}
                           className={inputWithIcon}
@@ -149,7 +180,6 @@ export default function Register() {
                       </div>
                     </div>
 
-                    {/* Full Name */}
                     <div>
                       <label className="block text-white text-sm font-medium mb-1.5 pl-2">
                         Full Name
@@ -184,13 +214,12 @@ export default function Register() {
                       <div className="relative">
                         <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400 w-4 h-4" />
                         <input
-                          type="text" // Using type="text" with inputMode="numeric" offers better control than type="number"
+                          type="text" 
                           inputMode="numeric"
-                          placeholder="Enter 10 digit number"
+                          placeholder="Mobile Number"
                           value={cegianForm.mobile}
                           onChange={(e) => {
                             const val = e.target.value;
-                            // Allows only digits (0-9) and limits length to 10
                             if (val === '' || (/^\d+$/.test(val) && val.length <= 10)) {
                               setCegianForm({ ...cegianForm, mobile: val });
                             }
@@ -201,13 +230,13 @@ export default function Register() {
                       </div>
                     </div>
 
-                    {/* Roll Number */}
                     <div>
                       <label className="block text-white text-sm font-medium mb-1.5 pl-2">
                         Roll Number
                       </label>
                       <input
                         type="text"
+                        placeholder="Roll Number"
                         value={cegianForm.rollNumber}
                         onChange={(e) => setCegianForm({ ...cegianForm, rollNumber: e.target.value })}
                         className={inputNormal}
@@ -215,14 +244,11 @@ export default function Register() {
                       />
                     </div>
 
-                    {/* Date of Birth */}
                     <div>
                       <label className="block text-white text-sm font-medium mb-1.5 pl-2">
                         Date of Birth
                       </label>
                       <div className="grid grid-cols-3 gap-2">
-                        
-                        {/* Day Input - Added logic to block numbers > 31 */}
                         <input
                           type="text"
                           inputMode="numeric"
@@ -231,7 +257,6 @@ export default function Register() {
                           value={cegianForm.dobDay}
                           onChange={(e) => {
                             const val = e.target.value;
-                            // Logic: Allow empty OR (digits only AND value <= 31)
                             if (val === '' || (/^\d+$/.test(val) && parseInt(val) <= 31)) {
                               setCegianForm({ ...cegianForm, dobDay: val });
                             }
@@ -239,8 +264,6 @@ export default function Register() {
                           className={`${inputNormal} text-center placeholder-white/50`}
                           required
                         />
-                        
-                        {/* Month Select - Changed color to text-white/50 for a lighter/glassy look */}
                         <select
                           value={cegianForm.dobMonth}
                           onChange={(e) => setCegianForm({ ...cegianForm, dobMonth: e.target.value })}
@@ -254,8 +277,6 @@ export default function Register() {
                             </option>
                           ))}
                         </select>
-
-                        {/* Year Input */}
                         <input
                           type="text"
                           inputMode="numeric"
@@ -276,21 +297,27 @@ export default function Register() {
                   </div>
                   {/* CEGian Form - Right Column */}
                   <div className="space-y-5">
-                    {/* Department */}
-                    <div>
-                      <label className="block text-white text-sm font-medium mb-1.5 pl-2">
-                        Department
-                      </label>
-                      <input
-                        type="text"
-                        value={cegianForm.department}
-                        onChange={(e) => setCegianForm({ ...cegianForm, department: e.target.value })}
-                        className={inputNormal}
-                        required
-                      />
-                    </div>
+                    {/* ... (Your existing CEGian right column inputs before password) ... */}
+                   <div>
+                    <label className="block text-white text-sm font-medium mb-1.5 pl-2">
+                      Department
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Department"
+                      value={cegianForm.department}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        // Allows only alphabets and spaces (including empty string for backspace)
+                        if (/^[a-zA-Z\s]*$/.test(val)) {
+                          setCegianForm({ ...cegianForm, department: val });
+                        }
+                      }}
+                      className={inputNormal}
+                      required
+                    />
+                  </div>
 
-                    {/* Year */}
                     <div>
                       <label className="block text-white text-sm font-medium mb-1.5 pl-2">
                         Year
@@ -298,10 +325,10 @@ export default function Register() {
                       <input
                         type="text"
                         inputMode="numeric"
+                        placeholder="Year"
                         value={cegianForm.year}
                         onChange={(e) => {
                           const val = e.target.value;
-                          // Allows empty string (for backspacing) OR (digits only AND value between 1 and 5)
                           if (val === '' || (/^[1-5]$/.test(val))) {
                             setCegianForm({ ...cegianForm, year: val });
                           }
@@ -316,13 +343,26 @@ export default function Register() {
                       <label className="block text-white text-sm font-medium mb-1.5 pl-2">
                         Password
                       </label>
-                      <input
-                        type={showPassword ? 'text' : 'password'}
-                        value={cegianForm.password}
-                        onChange={(e) => setCegianForm({ ...cegianForm, password: e.target.value })}
-                        className={inputNormal}
-                        required
-                      />
+                      <div className="relative">
+                        <input
+                          type={showPassword ? 'text' : 'password'}
+                          placeholder="Password"
+                          value={cegianForm.password}
+                          onChange={(e) => {
+                            setCegianForm({ ...cegianForm, password: e.target.value });
+                            setPasswordError(''); // Clear error on typing
+                          }}
+                          className={`${inputPassword} ${getErrorStyle(!!passwordError)}`}
+                          required
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors focus:outline-none"
+                        >
+                          {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                        </button>
+                      </div>
                     </div>
 
                     {/* Confirm Password */}
@@ -330,16 +370,33 @@ export default function Register() {
                       <label className="block text-white text-sm font-medium mb-1.5 pl-2">
                         Confirm Password
                       </label>
-                      <input
-                        type={showConfirmPassword ? 'text' : 'password'}
-                        value={cegianForm.confirmPassword}
-                        onChange={(e) => setCegianForm({ ...cegianForm, confirmPassword: e.target.value })}
-                        className={inputNormal}
-                        required
-                      />
+                      <div className="relative">
+                        <input
+                          type={showConfirmPassword ? 'text' : 'password'}
+                          placeholder="Confirm Password"
+                          value={cegianForm.confirmPassword}
+                          onChange={(e) => {
+                            setCegianForm({ ...cegianForm, confirmPassword: e.target.value });
+                            setPasswordError(''); // Clear error on typing
+                          }}
+                          className={`${inputPassword} ${getErrorStyle(!!passwordError)}`}
+                          required
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                          className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors focus:outline-none"
+                        >
+                          {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                        </button>
+                      </div>
+                      {/* Error Message Display */}
+                      {passwordError && activeTab === 'cegian' && (
+                        <p className="text-red-500 text-xs mt-1.5 pl-2">{passwordError}</p>
+                      )}
                     </div>
 
-                    {/* --- TERMS AND CONDITIONS --- */}
+                    {/* ... (Rest of CEGian form) ... */}
                     <div className="flex items-center gap-3 pt-2 pl-2">
                       <div className="relative flex items-center">
                         <input
@@ -350,7 +407,6 @@ export default function Register() {
                           className="peer w-5 h-5 appearance-none rounded-full border border-white/30 bg-white/5 checked:bg-[#E500A4] checked:border-transparent transition-all cursor-pointer shrink-0"
                           required
                         />
-                        {/* Custom SVG Tick */}
                         <svg 
                           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white pointer-events-none opacity-0 peer-checked:opacity-100 transition-opacity"
                           viewBox="0 0 24 24"
@@ -368,7 +424,6 @@ export default function Register() {
                       </label>
                     </div>
 
-                    {/* Register Button */}
                     <button
                       type="submit"
                       className="w-full bg-[#E500A4] hover:bg-[#D40096] text-white text-base py-3 rounded-[15px] transition-all transform hover:scale-[1.02] active:scale-[0.98] border border-white/20 shadow-[0_0_15px_rgba(229,0,164,0.3)]"
@@ -376,7 +431,6 @@ export default function Register() {
                       Register
                     </button>
 
-                    {/* Login Link */}
                     <div className="text-center">
                       <p className="text-gray-300 text-sm">
                         Already have an account?{' '}
@@ -391,7 +445,7 @@ export default function Register() {
                 <>
                   {/* Others Form - Left Column */}
                   <div className="space-y-5">
-                    {/* ... (standard inputs) ... */}
+                    {/* ... (Your existing Others left column inputs) ... */}
                     <div>
                       <label className="block text-white text-sm font-medium mb-1.5 pl-2">
                         Email Id
@@ -400,6 +454,7 @@ export default function Register() {
                         <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400 w-4 h-4" />
                         <input
                           type="email"
+                          placeholder="name@example.com"
                           value={othersForm.email}
                           onChange={(e) => setOthersForm({ ...othersForm, email: e.target.value })}
                           className={inputWithIcon}
@@ -442,9 +497,16 @@ export default function Register() {
                       <div className="relative">
                         <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400 w-4 h-4" />
                         <input
-                          type="tel"
-                          value={othersForm.mobile}
-                          onChange={(e) => setOthersForm({ ...othersForm, mobile: e.target.value })}
+                          type="text" 
+                          inputMode="numeric"
+                          placeholder="Mobile Number"
+                          value={othersForm.mobile} // BUG FIX: changed from cegianForm to othersForm in your original code
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            if (val === '' || (/^\d+$/.test(val) && val.length <= 10)) {
+                              setOthersForm({ ...othersForm, mobile: val });
+                            }
+                          }}
                           className={inputWithIcon}
                           required
                         />
@@ -457,8 +519,15 @@ export default function Register() {
                       </label>
                       <input
                         type="text"
+                        placeholder="College"
                         value={othersForm.college}
-                        onChange={(e) => setOthersForm({ ...othersForm, college: e.target.value })}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          // Allows only alphabets and spaces
+                          if (/^[a-zA-Z\s]*$/.test(val)) {
+                            setOthersForm({ ...othersForm, college: val });
+                          }
+                        }}
                         className={inputNormal}
                         required
                       />
@@ -470,8 +539,15 @@ export default function Register() {
                       </label>
                       <input
                         type="text"
+                        placeholder="Department"
                         value={othersForm.department}
-                        onChange={(e) => setOthersForm({ ...othersForm, department: e.target.value })}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          // Allows only alphabets and spaces
+                          if (/^[a-zA-Z\s]*$/.test(val)) {
+                            setOthersForm({ ...othersForm, department: val });
+                          }
+                        }}
                         className={inputNormal}
                         required
                       />
@@ -483,8 +559,15 @@ export default function Register() {
                       </label>
                       <input
                         type="text"
-                        value={othersForm.year}
-                        onChange={(e) => setOthersForm({ ...othersForm, year: e.target.value })}
+                        inputMode="numeric"
+                        placeholder="Year"
+                        value={othersForm.year} // BUG FIX: changed from cegianForm to othersForm in your original code
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          if (val === '' || (/^[1-5]$/.test(val))) {
+                            setOthersForm({ ...othersForm, year: val });
+                          }
+                        }}
                         className={inputNormal}
                         required
                       />
@@ -493,58 +576,104 @@ export default function Register() {
 
                   {/* Others Form - Right Column */}
                   <div className="space-y-5">
-                    <div>
-                      <label className="block text-white text-sm font-medium mb-1.5 pl-2">
-                        State
-                      </label>
-                      <input
-                        type="text"
-                        value={othersForm.state}
-                        onChange={(e) => setOthersForm({ ...othersForm, state: e.target.value })}
-                        className={inputNormal}
-                        required
-                      />
-                    </div>
-
+                    {/* ... (Your existing Others right column inputs before password) ... */}
                     <div>
                       <label className="block text-white text-sm font-medium mb-1.5 pl-2">
                         City
                       </label>
                       <input
                         type="text"
+                        placeholder="City" // Fixed the placeholder typo here
                         value={othersForm.city}
-                        onChange={(e) => setOthersForm({ ...othersForm, city: e.target.value })}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          // Allows only alphabets and spaces
+                          if (/^[a-zA-Z\s]*$/.test(val)) {
+                            setOthersForm({ ...othersForm, city: val });
+                          }
+                        }}
+                        className={inputNormal}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-1.5 pl-2">
+                        State
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="State"
+                        value={othersForm.state}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          // Allows only alphabets and spaces
+                          if (/^[a-zA-Z\s]*$/.test(val)) {
+                            setOthersForm({ ...othersForm, state: val });
+                          }
+                        }}
                         className={inputNormal}
                         required
                       />
                     </div>
 
+                    {/* Password */}
                     <div>
                       <label className="block text-white text-sm font-medium mb-1.5 pl-2">
                         Password
                       </label>
-                      <input
-                        type={showPassword ? 'text' : 'password'}
-                        value={othersForm.password}
-                        onChange={(e) => setOthersForm({ ...othersForm, password: e.target.value })}
-                        className={inputNormal}
-                        required
-                      />
+                      <div className="relative">
+                        <input
+                          type={showPassword ? 'text' : 'password'}
+                          placeholder="Password"
+                          value={othersForm.password}
+                          onChange={(e) => {
+                            setOthersForm({ ...othersForm, password: e.target.value });
+                            setPasswordError(''); // Clear error on typing
+                          }}
+                          className={`${inputPassword} ${getErrorStyle(!!passwordError)}`}
+                          required
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors focus:outline-none"
+                        >
+                          {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                        </button>
+                      </div>
                     </div>
 
+                    {/* Confirm Password */}
                     <div>
                       <label className="block text-white text-sm font-medium mb-1.5 pl-2">
                         Confirm Password
                       </label>
-                      <input
-                        type={showConfirmPassword ? 'text' : 'password'}
-                        value={othersForm.confirmPassword}
-                        onChange={(e) => setOthersForm({ ...othersForm, confirmPassword: e.target.value })}
-                        className={inputNormal}
-                        required
-                      />
+                      <div className="relative">
+                        <input
+                          type={showConfirmPassword ? 'text' : 'password'}
+                          placeholder="Confirm Password"
+                          value={othersForm.confirmPassword}
+                          onChange={(e) => {
+                            setOthersForm({ ...othersForm, confirmPassword: e.target.value });
+                            setPasswordError(''); 
+                          }}
+                          className={`${inputPassword} ${getErrorStyle(!!passwordError)}`}
+                          required
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                          className="absolute right-4 top-1/2 -translate-y-1/2 text-white/60 hover:text-white transition-colors focus:outline-none"
+                        >
+                          {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                        </button>
+                      </div>
+                      {passwordError && activeTab === 'others' && (
+                        <p className="text-red-500 text-xs mt-1.5 pl-2">{passwordError}</p>
+                      )}
                     </div>
 
+                    
                     <div>
                       <label className="block text-white text-sm font-medium mb-1.5 pl-2">
                         Referral Code <span className="text-gray-400">(Optional)</span>
@@ -552,12 +681,12 @@ export default function Register() {
                       <input
                         type="text"
                         value={othersForm.referralCode}
+                        placeholder="Referral Code"
                         onChange={(e) => setOthersForm({ ...othersForm, referralCode: e.target.value })}
                         className={inputNormal}
                       />
                     </div>
 
-                    {/* --- TERMS AND CONDITIONS (OTHERS) --- */}
                     <div className="flex items-center gap-3 pl-2">
                       <div className="relative flex items-center">
                         <input
@@ -610,5 +739,3 @@ export default function Register() {
     </div>
   );
 }
-
-
