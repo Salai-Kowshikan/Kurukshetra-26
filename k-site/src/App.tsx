@@ -37,7 +37,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/events" element={<Events />} />
-      <Route path="/eventsnew" element={<EventsNew />} />
+        <Route path="/events/:eventName" element={<EventsNew />} />
         {/* Pages redirected to ComingSoon */}
         {comingSoonPaths.map((path) => (
           <Route key={path} path={path} element={<ComingSoon />} />

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useFullNavbar from "@/hooks/useFullNavbar";
+import { useParams } from "react-router-dom";
 import {
   FileText,
   Swords,
@@ -21,9 +22,92 @@ type TabKey =
   | "schedule"
   | "contact";
 
+  const EVENT_DETAILS: Record<string, any> = {
+    Robowars: {
+      title: "Robowars",
+      description: "Bring your best bot to the fight!",
+      participation: "Team (4–5 Members)",
+  
+      rounds: [
+        "Knockout Battle",
+        "Semi Final",
+        "Grand Finale",
+      ],
+  
+      rules: [
+        "Max weight 15kg",
+        "No explosives",
+        "4–5 members per team",
+      ],
+  
+      prize: [
+        "🥇 ₹20,000",
+        "🥈 ₹10,000",
+        "🥉 ₹5,000",
+      ],
+  
+      schedule: [
+        "March 20 – Registration Close",
+        "March 28 – Battle Day",
+      ],
+  
+      contact: [
+        "9876543210",
+        "robotics@collegefest.com",
+      ],
+    },
+  
+    "Robo Race": {
+      title: "Robo Race",
+      description: "Speed + control + precision",
+      participation: "Team (3 Members)",
+  
+      rounds: ["Qualifiers", "Final Race"],
+  
+      rules: [
+        "Max weight 10kg",
+        "Autonomous bots only",
+      ],
+  
+      prize: [
+        "🥇 ₹10,000",
+        "🥈 ₹5,000",
+      ],
+  
+      schedule: [
+        "March 22 – Qualifiers",
+        "March 29 – Final",
+      ],
+  
+      contact: [
+        "9123456780",
+        "race@collegefest.com",
+      ],
+    },
+  };
+
 export default function EventsNew() {
   useFullNavbar();
+  const { eventName } = useParams();
+  const decodedEventName = eventName
+    ? decodeURIComponent(eventName)
+    : null;
 
+  const event = decodedEventName
+    ? EVENT_DETAILS[decodedEventName]
+    : null;
+
+    const renderList = (items: string[], prefix?: string) => (
+      <ul className="mt-4 text-gray-300 space-y-2 text-sm md:text-base">
+        {items.map((item, index) => (
+          <li key={index}>
+            {prefix && <span className="mr-1">{prefix}</span>}
+            {item}
+          </li>
+        ))}
+      </ul>
+    );
+    
   const tabs = [
     { key: "description", name: "Description", icon: FileText },
     { key: "rounds", name: "Rounds", icon: Swords },
@@ -47,73 +131,81 @@ export default function EventsNew() {
   };
 
   const tabContent: Record<TabKey, React.ReactNode> = {
+    // description: (
+    //   <>
+    //     <h2 className="text-xl md:text-2xl font-semibold flex items-center gap-3">
+    //       <Phone size={20} className="text-purple-400" />
+    //       Bring your best bot to the fight!
+    //     </h2>
+    //     <p className="text-base md:text-lg text-gray-300 mt-1">
+    //       Participation: Team (4–5 Members)
+    //     </p>
+    //     <p className="mt-6 text-sm md:text-base leading-relaxed text-gray-300 max-w-3xl">
+    //       Gear up for an electrifying battle of machines in our Robowars
+    //       Showdown! Teams design and battle custom robots using power,
+    //       precision and strategy.
+    //     </p>
+    //   </>
+    // ),
     description: (
       <>
         <h2 className="text-xl md:text-2xl font-semibold flex items-center gap-3">
           <Phone size={20} className="text-purple-400" />
-          Bring your best bot to the fight!
+          {event.description}
         </h2>
+    
         <p className="text-base md:text-lg text-gray-300 mt-1">
-          Participation: Team (4–5 Members)
-        </p>
-        <p className="mt-6 text-sm md:text-base leading-relaxed text-gray-300 max-w-3xl">
-          Gear up for an electrifying battle of machines in our Robowars
-          Showdown! Teams design and battle custom robots using power,
-          precision and strategy.
+          Participation: {event.participation}
         </p>
       </>
     ),
 
+    // rounds: (
+    //   <>
+    //     <h2 className="text-xl md:text-2xl font-semibold">Event Rounds</h2>
+    //     <ul className="mt-4 text-gray-300 space-y-2 text-sm md:text-base">
+    //       <li>⚡ Knockout Battle</li>
+    //       <li>🔥 Semi Final</li>
+    //       <li>🏆 Grand Finale</li>
+    //     </ul>
+    //   </>
+    // ),
     rounds: (
       <>
         <h2 className="text-xl md:text-2xl font-semibold">Event Rounds</h2>
         <ul className="mt-4 text-gray-300 space-y-2 text-sm md:text-base">
-          <li>⚡ Knockout Battle</li>
-          <li>🔥 Semi Final</li>
-          <li>🏆 Grand Finale</li>
+          {event.rounds.map((round: string) => (
+            <li key={round}>⚡ {round}</li>
+          ))}
         </ul>
       </>
     ),
-
+    
     rules: (
       <>
         <h2 className="text-xl md:text-2xl font-semibold">Rules</h2>
-        <ul className="mt-4 text-gray-300 space-y-2 text-sm md:text-base">
-          <li>• Max weight 15kg</li>
-          <li>• No explosives</li>
-          <li>• 4–5 members per team</li>
-        </ul>
+        {renderList(event.rules, "•")}
       </>
     ),
 
     prize: (
       <>
         <h2 className="text-xl md:text-2xl font-semibold">Prize Pool</h2>
-        <ul className="mt-4 text-gray-300 space-y-2 text-sm md:text-base">
-          <li>🥇 ₹20,000</li>
-          <li>🥈 ₹10,000</li>
-          <li>🥉 ₹5,000</li>
-        </ul>
+        {renderList(event.prize)}
       </>
     ),
-
+    
     schedule: (
       <>
         <h2 className="text-xl md:text-2xl font-semibold">Schedule</h2>
-        <ul className="mt-4 text-gray-300 space-y-2 text-sm md:text-base">
-          <li>📅 March 20 – Registration Close</li>
-          <li>⚔ March 28 – Battle Day</li>
-        </ul>
+        {renderList(event.schedule, "📅")}
       </>
     ),
-
+    
     contact: (
       <>
         <h2 className="text-xl md:text-2xl font-semibold">Contact</h2>
-        <ul className="mt-4 text-gray-300 space-y-2 text-sm md:text-base">
-          <li>📞 9876543210</li>
-          <li>📧 robotics@collegefest.com</li>
-        </ul>
+        {renderList(event.contact)}
       </>
     ),
   };
@@ -135,8 +227,12 @@ export default function EventsNew() {
                           px-5 py-2 md:px-6 md:py-3 rounded-full
                           shadow-[0_0_25px_#a855f7]
                           font-semibold tracking-wide text-sm md:text-base">
-            <Bot size={18} />
-            ROBOTICS EVENTS
+            {/* <Bot size={18} />
+            ROBOTICS EVENTS */}
+            <div className="inline-flex items-center gap-3 ...">
+              <Bot size={18} />
+              {event.title.toUpperCase()}
+            </div>
           </div>
         </div>
 

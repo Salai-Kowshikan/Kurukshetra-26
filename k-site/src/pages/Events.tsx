@@ -1,62 +1,202 @@
 import useFullNavbar from "@/hooks/useFullNavbar";
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ring from "../assets/Events/events.png";
-import icon1 from "../assets/Events/Electronics.svg";
-import icon2 from "../assets/Events/Extravaganza.svg";
-import icon3 from "../assets/Events/Management.svg";
-import icon4 from "../assets/Events/Quiz.svg";
-import icon5 from "../assets/Events/Robot.svg";
-import icon6 from "../assets/Events/coding.svg";
-import icon7 from "../assets/Events/engineering.svg";
-import icon8 from "../assets/Events/online.svg";
+import Electronics from "../assets/Events/Electronics.svg";
+import Extravaganza from "../assets/Events/Extravaganza.svg";
+import Management from "../assets/Events/Management.svg";
+import Quiz from "../assets/Events/Quiz.svg";
+import Robotics from "../assets/Events/Robot.svg";
+import Coding from "../assets/Events/coding.svg";
+import Engineering from "../assets/Events/engineering.svg";
+import Online from "../assets/Events/online.svg";
+import Shuffle from '../components/ui/eventsheading';
 
+const EVENTS_DATA = {
+  Robotics: {
+    label: "ROBOTICS EVENTS",
+    description:
+      "Dive into robotics competitions designed to test innovation, speed, and intelligence.",
+    events: [
+      "Robowars",
+      "God Speed",
+      "Robo Race",
+      "RoboSoccer",
+      "Ultimate Line Tracer",
+      "Pacbot",
+      "Micromouse",
+    ],
+  },
+
+  Coding: {
+    label: "CODING EVENTS",
+    description:
+      "Showcase your programming skills through logic, speed, and problem-solving challenges.",
+    events: [
+      "Code Hunt",
+      "Debug It",
+      "Hack Sprint",
+      "Algo Master",
+      "Blind Coding",
+      "Tech Quiz",
+      "Code Relay",
+    ],
+  },
+
+  Electronics: {
+    label: "ELECTRONICS EVENTS",
+    description:
+      "Test your circuit design and hardware problem-solving skills.",
+    events: [
+      "Circuitrix",
+      "ElectroQuest",
+      "PCB Design",
+      "Component Hunt",
+      "Signal Sprint",
+      "Hardware Debug",
+      "Electro Quiz",
+    ],
+  },
+
+  Extravaganza: {
+    label: "EXTRAVAGANZA EVENTS",
+    description:
+      "Fun, creativity, and excitement-packed technical challenges.",
+    events: [
+      "Tech Treasure Hunt",
+      "Funathon",
+      "Mystery Box",
+      "Innovation Jam",
+      "Brain Storm",
+      "Rapid Fire",
+      "Surprise Event",
+    ],
+  },
+
+  Management: {
+    label: "MANAGEMENT EVENTS",
+    description:
+      "Leadership, strategy, and business decision-making challenges.",
+    events: [
+      "Biz Plan",
+      "Marketing Mania",
+      "Case Study",
+      "HR Hunt",
+      "Startup Pitch",
+      "Finance Frenzy",
+      "Management Quiz",
+    ],
+  },
+
+  Engineering: {
+    label: "ENGINEERING EVENTS",
+    description:
+      "Core engineering challenges across disciplines.",
+    events: [
+      "Bridge Builder",
+      "CAD Clash",
+      "Mechathon",
+      "Design Sprint",
+      "Civil Draft",
+      "Tech Expo",
+      "Build-a-thon",
+    ],
+  },
+
+  Quiz: {
+    label: "QUIZ EVENTS",
+    description:
+      "Test your technical and general knowledge under pressure.",
+    events: [
+      "Tech Quiz",
+      "General Quiz",
+      "Rapid Fire",
+      "Visual Quiz",
+      "Logic Quiz",
+      "Surprise Round",
+      "Final Showdown",
+    ],
+  },
+
+  Online: {
+    label: "ONLINE EVENTS",
+    description:
+      "Compete remotely in exciting online challenges.",
+    events: [
+      "Online Coding",
+      "Virtual Quiz",
+      "Remote Hackathon",
+      "AI Challenge",
+      "Web Design",
+      "Online Debate",
+      "E-Sports Tech",
+    ],
+  },
+};
 export default function Events() {
   useFullNavbar();
+  const navigate = useNavigate();
   const [rotation, setRotation] = useState(0);
   const total = 8;
   const targetIndex = 1;
-  const icons = [icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8];
-
-  const handleClick = (index:number) => {
+  const icons = [Electronics, Extravaganza, Management, Quiz, Robotics, Coding, Engineering, Online];
+  const iconToEventType: (keyof typeof EVENTS_DATA)[] = [
+    "Electronics",
+    "Extravaganza",
+    "Management",
+    "Quiz",
+    "Robotics",
+    "Coding",
+    "Engineering",
+    "Online",
+  ];
+  
+  const handleClick = (index: number) => {
     const anglePerPetal = 360 / total;
-
-    // absolute rotation so clicked icon moves to targetIndex
     const newRotation = (targetIndex - index) * anglePerPetal;
-
+  
     setRotation(newRotation);
+    setSelectedType(iconToEventType[index]); // 🔥 THIS is the key
   };
 
-  const menuItems = [
-    "Robotics Events",
-    "Coding Events",
-    "Electronics Events",
-    "Extravaganza Events",
-    "Management Events",
-    "Engineering Events",
-    "Quiz Events",
-    "Online Events",
-  ];
+  const [selectedType, setSelectedType] =
+  useState<keyof typeof EVENTS_DATA>("Robotics");
 
-  const events = [
-    "Robowars",
-    "God Speed",
-    "Robo Race",
-    "RoboSoccer",
-    "Ultimate Line Tracer",
-    "Pacbot",
-    "Micromouse",
-  ];
+  const menuItems = Object.keys(EVENTS_DATA);
+ 
+
+  
 
   return (
     <div className="min-h-screen bg-black text-white">
 
       {/* HEADER */}
-      <div className="w-full h-40 sm:h-52 bg-gradient-to-r from-purple-700 via-fuchsia-600 to-purple-900 flex items-center justify-center">
-        <h1 className="text-2xl sm:text-4xl tracking-widest font-bold">
-          EVENTS
-        </h1>
-      </div>
+      {/* <div className="w-full bg-gradient-to-r from-purple-700 via-fuchsia-600 to-purple-900 flex items-center justify-center py-20"> */}
+      <div className="w-full min-h-[160px] sm:min-h-[260px] lg:min-h-[350px]
+                flex items-center justify-center overflow-visible">
+          <Shuffle
+            text="Events"
+            style={{
+              fontSize: "clamp(40px, 12vw, 100px)",
+              
+              lineHeight: "1",
+              whiteSpace: "nowrap",
+            }}
+            shuffleDirection="right"
+            duration={0.1}
+            animationMode="evenodd"
+            shuffleTimes={1}
+            ease="power3.out"
+            stagger={0.03}
+            threshold={0.1}
+            triggerOnce
+            triggerOnHover
+            respectReducedMotion
+            loop
+            loopDelay={2}
+          />
+        </div>
+
 
       {/* MAIN CONTAINER */}
       <div className="max-w-6xl mx-auto -mt-12 sm:-mt-16 px-4 sm:px-6">
@@ -112,46 +252,49 @@ export default function Events() {
               </h3>
 
               <ul className="space-y-2">
-                {menuItems.map((item) => (
-                  <li
-                    key={item}
-                    className="text-sm text-gray-200 hover:bg-purple-600 rounded-lg px-3 py-2 cursor-pointer transition"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
+                  {menuItems.map((item) => (
+                    <li
+                      key={item}
+                      onClick={() => setSelectedType(item as keyof typeof EVENTS_DATA)}
+                      className={`text-sm rounded-lg px-3 py-2 cursor-pointer transition
+                        ${
+                          selectedType === item
+                            ? "bg-purple-600 text-white"
+                            : "text-gray-200 hover:bg-purple-600"
+                        }`}
+                    >
+                      {item} Events
+                    </li>
+                  ))}
+                </ul>
             </div>
           </div>
+          
 
           {/* RIGHT SIDE */}
           <div className="flex-1 w-full">
-            <div className="mb-6 text-center lg:text-left">
-              <Link
-              to="/eventsnew"
-              className="bg-purple-600 px-4 py-2 rounded-full text-sm
-                          hover:bg-purple-500 transition
-                          shadow-[0_0_10px_#a855f7]"
-              >
-              ROBOTICS EVENTS
-              </Link>
+            <div className="flex-1 w-full">
+                <div className="mb-6 text-center lg:text-left">
+                  <span className="bg-purple-600 px-4 py-2 rounded-full text-sm">
+                    {EVENTS_DATA[selectedType].label}
+                  </span>
 
-              <h2 className="mt-4 text-lg font-semibold">
-                What to Expect?
-              </h2>
+                  <h2 className="mt-4 text-lg font-semibold">
+                    What to Expect?
+                  </h2>
 
-              <p className="text-gray-400 text-sm max-w-xl mt-2 mx-auto lg:mx-0">
-                Dive into robotics competitions designed to test innovation,
-                speed, and intelligence. Build, code, and battle your machines
-                in exciting challenges.
-              </p>
-            </div>
+                  <p className="text-gray-400 text-sm max-w-xl mt-2 mx-auto lg:mx-0">
+                    {EVENTS_DATA[selectedType].description}
+                  </p>
+                </div>
+              </div>
 
             {/* ⭐ RESPONSIVE GRID */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-              {events.map((title) => (
+              {EVENTS_DATA[selectedType].events.map((title) => (
                 <div
                   key={title}
+                  onClick={() => navigate(`/events/${encodeURIComponent(title)}`)}
                   className="w-40 h-36 border border-purple-500/40 rounded-xl flex items-end justify-center p-3 hover:border-purple-400 transition"
                 >
                   <span className="bg-purple-600 text-white text-xs px-3 py-1 rounded-full">
