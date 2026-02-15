@@ -8,7 +8,8 @@ import Footer from "@/components/Footer";
 import Contact from "@/pages/Contact";
 import Accommodation from "@/pages/Accommodation";
 import ComingSoon from "@/pages/ComingSoon";
-import Sponsors from "@/pages/Sponsors";
+import Sponsors from "@/pages/Sponsors";import Technovation from "./pages/Technovation";
+
 const comingSoonPaths = [
   "/login",
   "/register",
@@ -26,7 +27,8 @@ const ExternalRedirect = ({ url }: { url: string }) => {
 function App() {
   return (
     <Router>
-      <Navbar />
+      {/* <div className="min-h-screen flex flex-col"> */}
+        <Navbar />
 
       <Routes>
         {/* Visible pages */}
@@ -35,35 +37,33 @@ function App() {
         <Route path="/accommodation" element={<Accommodation />} />
         <Route path="/sponsors" element={<Sponsors />} />
 
-        {/* Pages redirected to ComingSoon */}
-        {comingSoonPaths.map((path) => (
-          <Route key={path} path={path} element={<ComingSoon />} />
-        ))}
+            {/* Pages redirected to ComingSoon */}
+            {comingSoonPaths.map((path) => (
+              <Route key={path} path={path} element={<ComingSoon />} />
+            ))}
 
-        {/* External redirects to Unstop */}
-        <Route
-          path="/events"
-          element={
-            <ExternalRedirect url="https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664" />
-          }
-        />
-        <Route
-          path="/workshops"
-          element={
-            <ExternalRedirect url="https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664" />
-          }
-        />
-        <Route
-          path="/technovation"
-          element={
-            <ExternalRedirect url="https://unstop.com/p/technovation-kurukshetra-2026-anna-university-ceg-tech-forum-1628748?utm_medium=Share&utm_source=vhcnzgkj55361&utm_campaign=Competitions" />
-          }
-        />
+            {/* External redirects to Unstop */}
+            <Route
+              path="/events"
+              element={
+                <ExternalRedirect url="https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664" />
+              }
+            />
+            <Route
+              path="/workshops"
+              element={
+                <ExternalRedirect url="https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664" />
+              }
+            />
+            <Route path="/technovation" element={<Technovation />} />
 
-        {/* Catch all - NotFound */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
+            {/* Catch all - NotFound */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        {/* </main> */}
+
+        <Footer />
+      {/* </div> */}
     </Router>
   );
 }

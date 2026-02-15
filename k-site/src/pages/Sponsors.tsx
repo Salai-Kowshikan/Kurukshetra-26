@@ -103,7 +103,7 @@ export default function Sponsors() {
                 glareEnable
                 glareMaxOpacity={0.1}
               >
-                <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 h-[320px] flex flex-col items-center justify-center overflow-hidden rounded-xl">
+                <div className="relative bg-white/10 backdrop-blur-[5px] border border-white/20 h-[320px] flex flex-col items-center justify-center overflow-hidden rounded-xl">
                   {/* TITLE */}
                   {s.title && (
                     <div className="absolute top-4 text-lg tracking-widest text-white font-(family-name:--wallpoet)">
@@ -168,11 +168,11 @@ export default function Sponsors() {
             className="fixed inset-0 z-50 flex items-center justify-center"
             onClick={() => setActive(null)}
           >
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-[5px]" />
 
             <div
               onClick={(e) => e.stopPropagation()}
-              className="relative lg:w-[40%] w-[85%] lg:h-[50vh] h-[60vh] bg-black/80 backdrop-blur-xl border border-white/20 rounded-xl shadow-[0_0_40px_#8A05FF] flex flex-col"
+              className="relative lg:w-[40%] w-[85%] lg:h-[50vh] h-[60vh] bg-black/80 backdrop-blur-md border border-white/20 rounded-xl shadow-[0_0_40px_#8A05FF] flex flex-col"
             >
               <div className="flex-1 overflow-y-auto p-6">
                 <h3 className="text-xl mb-3 font-(family-name:--wallpoet) text-center text-white">

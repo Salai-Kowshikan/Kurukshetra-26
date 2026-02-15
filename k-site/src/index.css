@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
@@ -58,6 +59,7 @@
   --stalinist: 'Stalinist One', ui-serif, Georgia, serif;
   --wallpoet: 'Wallpoet', ui-serif, Georgia, serif;
   --orbitron: 'Orbitron', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --jost: Jost, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -99,6 +101,60 @@
     radial-gradient(1200px 600px at 20% 20%, rgba(142, 0, 255, 0.35), transparent 60%),
     radial-gradient(1000px 500px at 80% 30%, rgba(255, 0, 200, 0.25), transparent 55%),
     linear-gradient(180deg, #1a002a 0%, #0c0015 100%);
+}
+.gradient-border {
+  position: relative;
+  border-radius: 15px;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;                 /* border thickness */
+  border-radius: 15px;
+
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    #8A05FF 0deg,
+    #E900BD 180deg,
+    #8A05FF 360deg
+  );
+
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  pointer-events: none;
+}
+.gradient-border {
+  position: relative;
+  border-radius: 15px;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;                 /* border thickness */
+  border-radius: 15px;
+
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    #8A05FF 0deg,
+    #E900BD 180deg,
+    #8A05FF 360deg
+  );
+
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+
+  pointer-events: none;
 }
 
 .dark {
@@ -479,6 +535,33 @@
   }
   75% {
     transform: translate(0, 1px) skew(0.3deg) scaleX(0.98);
+  }
+}
+
+.hero-title {
+  top: 21vh;
+  left: 7vw;
+  width: 90vw;
+  font-size: 46px;
+}
+
+/* near tablet boundary (765px) */
+@media (min-width: 765px) {
+  .hero-title {
+    top: 25vh;
+    left: 12vw;
+    width: 75vw;
+    font-size: 70px;
+  }
+}
+
+/* larger tablets / md */
+@media (min-width: 1024px) {
+  .hero-title {
+    top: 210px;
+    left: 267px;
+    width: 1045px;
+    font-size: 103px;
   }
 }
 
