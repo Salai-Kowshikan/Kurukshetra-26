@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Contact from "@/pages/Contact";
 import ComingSoon from "@/pages/ComingSoon";
+import Terms from "@/pages/Terms";
 
 const comingSoonPaths = [
   "/accommodation",
@@ -32,6 +33,7 @@ function App() {
         {/* Visible pages */}
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/terms" element={<Terms />} />
 
         {/* Pages redirected to ComingSoon */}
         {comingSoonPaths.map((path) => (
