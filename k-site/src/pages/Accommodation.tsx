@@ -185,7 +185,7 @@ export default function Accommodation() {
                 target="_blank"
                 style={{ fontFamily: "Orbitron, sans-serif", letterSpacing: "0.04em" }}
                 className="px-6 py-2.5 rounded-3xl
-                  border border-white/70 text-white text-[1rem] cursor-pointer"
+                  border border-white/70 text-white text-[1rem] cursor-pointer hover:shadow-[0_0_15px_rgba(122,40,255,0.85)] transition"
               >
                 Instruction
               </a>
@@ -247,9 +247,9 @@ export default function Accommodation() {
               </p>
               <div className="flex flex-col gap-2.5">
                 {[
-                  ["Pooja T", "+91 94457 32972"],
-                  ["Sham Arul Brightwin R", "+91 82481 84034"],
-                  ["Thirumurugan K", "+91 88381 74405"],
+                  ["Ajithkumar", "+91 90256 24766"],
+                  ["Mohamed Sahul Hameed H", "+91 90428 50775"],
+                  ["Surekaa S", "+91 63827 77055"],
                 ].map(([n, p]) => (
                   <div
                     key={n}
