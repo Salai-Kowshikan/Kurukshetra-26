@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="relative z-50 mt-auto w-full px-3 py-3 sm:px-4 sm:py-4 font-(family-name:--orbitron) text-white/85">
+    <footer className="relative mt-auto w-full px-3 py-3 sm:px-4 sm:py-4 font-(family-name:--orbitron) text-white/85 z-20">
       {/* <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[#8A05FF]/40 via-[#240038]/60 to-[#8A05FF]/40" /> */}
       <div className="pointer-events-none absolute left-1/2 top-0 h-px w-[78%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#8A05FF]/60 to-transparent" />
 
