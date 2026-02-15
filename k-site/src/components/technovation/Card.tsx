@@ -21,11 +21,11 @@ export default function Card({ title, children, className = "" }: CardProps) {
         ${className}
       `}
     >
-      <h2 className="text-[#8A05FF] text-[22px] sm:text-[26px] lg:text-[29px] font-bold tracking-[0.02em] font-(family-name:--orbitron) text-center mb-4 drop-shadow-[0_0_10px_black]">
+      <h2 className="text-[#8A05FF] text-[22px] sm:text-[26px]  lg:text-[29px] font-bold tracking-[0.02em] font-(family-name:--orbitron) text-center mb-4 drop-shadow-[0_0_10px_black]">
         {title}
       </h2>
       
-      <div className="w-[90%] font-normal sm:w-[460px] lg:w-[490px] text-[13px] sm:text-[16px] lg:text-[20px] leading-[1.1] tracking-[0.045em] font-(family-name:--jost)">
+      <div className="w-[90%] font-normal sm:w-[460px] lg:w-[490px] text-[12px] sm:text-[14px] md:text-[13px] lg:text-[18px] xl:text-[20px] leading-[1.1] tracking-[0.045em] font-(family-name:--jost)">
         {children}
       </div>
     </div>
