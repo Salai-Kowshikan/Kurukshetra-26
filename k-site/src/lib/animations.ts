@@ -257,3 +257,28 @@ export const staggerFadeIn = (delay = 0): Variants => ({
     },
   }),
 });
+
+/* ─── Content Entry Animation (Slide from Left + Fade) ───────────────────── */
+export const slideInFromLeft: Variants = {
+  hidden: { opacity: 0, x: -40 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { type: "spring", stiffness: 100, damping: 20, duration: 0.5 },
+  },
+};
+
+export const slideInFromLeftStaggered = (delay = 0): Variants => ({
+  hidden: { opacity: 0, x: -40 },
+  visible: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 20,
+      delay: delay + i * 0.08,
+      duration: 0.4,
+    },
+  }),
+});

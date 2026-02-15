@@ -18,6 +18,7 @@ export default function Events() {
   const navigate = useNavigate();
   const [rotation, setRotation] = useState(0);
   const [glitch, setGlitch] = useState(false);
+  const [selectedType, setSelectedType] = useState<keyof typeof EVENTS_DATA>("Robotics");
 
   useEffect(() => {
     const interval = setInterval(
@@ -30,6 +31,7 @@ export default function Events() {
 
     return () => clearInterval(interval);
   }, []);
+
   const total = 7;
   const targetIndex = 1;
   const icons = [
@@ -51,16 +53,24 @@ export default function Events() {
     "Online",
   ];
 
-  const handleClick = (index: number) => {
+  // ⭐ UNIFIED HANDLER - works for both petal clicks AND dropdown selection
+  const handleCategoryChange = (eventType: keyof typeof EVENTS_DATA) => {
+    // Find the index of this event type in the petal array
+    const index = iconToEventType.indexOf(eventType);
+    
+    // Calculate rotation to align the petal at targetIndex
     const anglePerPetal = 360 / total;
     const newRotation = (targetIndex - index) * anglePerPetal;
 
+    // Update both rotation and selected type simultaneously
     setRotation(newRotation);
-    setSelectedType(iconToEventType[index]); // 🔥 THIS is the key
+    setSelectedType(eventType);
   };
 
-  const [selectedType, setSelectedType] =
-    useState<keyof typeof EVENTS_DATA>("Robotics");
+  // Handle petal click - now uses unified handler
+  const handleClick = (index: number) => {
+    handleCategoryChange(iconToEventType[index]);
+  };
 
   const menuItems = Object.keys(EVENTS_DATA);
 
@@ -130,9 +140,7 @@ export default function Events() {
                 {menuItems.map((item) => (
                   <li
                     key={item}
-                    onClick={() =>
-                      setSelectedType(item as keyof typeof EVENTS_DATA)
-                    }
+                    onClick={() => handleCategoryChange(item as keyof typeof EVENTS_DATA)}
                     className={`text-sm rounded-lg px-3 py-2 cursor-pointer transition-all duration-700 ease-in-out
                         ${
                           selectedType === item

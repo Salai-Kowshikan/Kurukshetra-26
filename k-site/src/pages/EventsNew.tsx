@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import useFullNavbar from "@/hooks/useFullNavbar";
 import { useParams } from "react-router-dom";
 import { EVENT_DETAILS } from "@/constants/events.tsx";
-import { parseContact, getContactHref, isLinkableContact } from "@/lib/contactUtils";
+import {
+  parseContact,
+  getContactHref,
+  isLinkableContact,
+} from "@/lib/contactUtils";
 import {
   FileText,
   Swords,
@@ -14,7 +18,12 @@ import {
   ChevronRight,
   Bot,
   ExternalLink,
+  Zap,
+  CheckCircle2,
+  Award,
 } from "lucide-react";
+import { motion } from "motion/react";
+import { slideInFromLeftStaggered } from "@/lib/animations";
 
 type TabKey =
   | "description"
@@ -31,13 +40,9 @@ const GLOBAL_REGISTRATION_URL =
 export default function EventsNew() {
   useFullNavbar();
   const { eventName } = useParams();
-  const decodedEventName = eventName
-    ? decodeURIComponent(eventName)
-    : null;
+  const decodedEventName = eventName ? decodeURIComponent(eventName) : null;
 
-  const event = decodedEventName
-    ? EVENT_DETAILS[decodedEventName]
-    : null;
+  const event = decodedEventName ? EVENT_DETAILS[decodedEventName] : null;
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [glitch, setGlitch] = useState(false);
@@ -59,8 +64,12 @@ export default function EventsNew() {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">Event Not Found</h1>
-          <p className="text-xl text-gray-300 mb-8">The event you're looking for doesn't exist or is not available yet.</p>
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+            Event Not Found
+          </h1>
+          <p className="text-xl text-gray-300 mb-8">
+            The event you're looking for doesn't exist or is not available yet.
+          </p>
           <a
             href="/events"
             className="inline-block px-8 py-3 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition"
@@ -72,44 +81,63 @@ export default function EventsNew() {
     );
   }
 
-  const renderList = (items: string[], prefix?: string) => (
+  const renderListWithIcon = (
+    items: string[],
+    Icon: React.ComponentType<{ size: number; className: string }>
+  ) => (
     <ul className="mt-4 text-gray-300 space-y-2 text-sm md:text-base overflow-x-hidden lg:text-left text-center">
       {items.map((item, index) => (
-        <li key={index} className="flex flex-wrap gap-1 items-center lg:justify-start justify-center min-w-0">
-          {prefix && <span className="mr-1 shrink-0">{prefix}</span>}
-          <span className="min-w-0" style={{ wordBreak: "break-word" }}>{item}</span>
-        </li>
+        <motion.li
+          key={index}
+          className="flex flex-wrap gap-2 items-start lg:justify-start justify-center min-w-0"
+          variants={slideInFromLeftStaggered(0.3)}
+          initial="hidden"
+          animate="visible"
+          custom={index}
+        >
+          <Icon size={18} className="text-purple-400 shrink-0 mt-0.5" />
+          <span className="min-w-0" style={{ wordBreak: "break-word" }}>
+            {item}
+          </span>
+        </motion.li>
       ))}
     </ul>
   );
 
   // Render contacts with phone/email links
   const renderContacts = (contacts: string[]) => (
-    <ul className="mt-4 text-gray-300 space-y-2 text-sm md:text-base overflow-x-hidden lg:text-left text-center">
+    <ul className="mt-4 text-gray-300 space-y-2 text-sm md:text-base overflow-x-hidden lg:text-left text-justify">
       {contacts.map((contact, index) => {
         const parsed = parseContact(contact);
         const isLinkable = isLinkableContact(parsed);
-        const href = isLinkable ? getContactHref(parsed) : '#';
+        const href = isLinkable ? getContactHref(parsed) : "#";
 
-        if (isLinkable) {
-          return (
-            <li key={index} className="flex flex-wrap gap-1 items-center lg:justify-start justify-center min-w-0">
-              <a
-                href={href}
-                target={parsed.type === 'email' ? '_blank' : undefined}
-                rel={parsed.type === 'email' ? 'noopener noreferrer' : undefined}
-                className="text-purple-400 hover:text-purple-300 hover:underline transition"
-              >
-                {parsed.displayText}
-              </a>
-            </li>
-          );
-        }
+        const content = isLinkable ? (
+          <a
+            href={href}
+            target={parsed.type === "email" ? "_blank" : undefined}
+            rel={parsed.type === "email" ? "noopener noreferrer" : undefined}
+            className="text-purple-400 hover:text-purple-300 hover:underline transition"
+          >
+            {parsed.displayText}
+          </a>
+        ) : (
+          <span className="min-w-0" style={{ wordBreak: "break-word" }}>
+            {parsed.displayText}
+          </span>
+        );
 
         return (
-          <li key={index} className="flex flex-wrap gap-1 items-center lg:justify-start justify-center min-w-0">
-            <span className="min-w-0" style={{ wordBreak: "break-word" }}>{parsed.displayText}</span>
-          </li>
+          <motion.li
+            key={index}
+            className="flex flex-wrap gap-1 items-center lg:justify-start justify-center min-w-0"
+            variants={slideInFromLeftStaggered(0.3)}
+            initial="hidden"
+            animate="visible"
+            custom={index}
+          >
+            {content}
+          </motion.li>
         );
       })}
     </ul>
@@ -131,60 +159,105 @@ export default function EventsNew() {
   };
 
   const prevTab = () => {
-    setActiveIndex((prev) =>
-      prev === 0 ? tabs.length - 1 : prev - 1
-    );
+    setActiveIndex((prev) => (prev === 0 ? tabs.length - 1 : prev - 1));
   };
 
   const tabContent: Record<TabKey, React.ReactNode> = {
     description: (
       <>
-        <h2 className="text-md md:text-lg font-normal flex items-center lg:justify-start justify-center gap-3 mb-3">
-          {/* <Bot size={20} className="text-purple-400" /> */}
+        <motion.h2
+          className="text-md md:text-lg font-normal flex items-center text-justify lg:justify-start justify-center gap-3 mb-3"
+          variants={slideInFromLeftStaggered(0.3)}
+          initial="hidden"
+          animate="visible"
+          custom={0}
+        >
           {event.description}
-        </h2>
+        </motion.h2>
 
-        <p className="text-base md:text-lg text-gray-300 mt-4 lg:text-left text-center">
+        <motion.p
+          className="text-base md:text-lg text-gray-300 mt-4 lg:text-left text-justify"
+          variants={slideInFromLeftStaggered(0.3)}
+          initial="hidden"
+          animate="visible"
+          custom={1}
+        >
           Participation: {event.participation}
-        </p>
+        </motion.p>
       </>
     ),
 
     rounds: (
       <>
-        <h2 className="text-xl md:text-2xl font-semibold lg:text-left text-center mb-3">Event Rounds</h2>
-        <ul className="mt-4 text-gray-300 space-y-2 text-sm md:text-base lg:text-left text-center">
-          {event.rounds.map((round: string) => (
-            <li key={round} className="mb-2">⚡ {round}</li>
-          ))}
-        </ul>
+        <motion.h2
+          className="text-xl md:text-2xl font-semibold lg:text-left text-justify mb-3"
+          variants={slideInFromLeftStaggered(0.2)}
+          initial="hidden"
+          animate="visible"
+          custom={0}
+        >
+          Event Rounds
+        </motion.h2>
+        {renderListWithIcon(event.rounds, Zap)}
       </>
     ),
 
     rules: (
       <>
-        <h2 className="text-xl md:text-2xl font-semibold lg:text-left text-center mb-3">Rules</h2>
-        {renderList(event.rules, "•")}
+        <motion.h2
+          className="text-xl md:text-2xl font-semibold lg:text-left text-justify mb-3"
+          variants={slideInFromLeftStaggered(0.2)}
+          initial="hidden"
+          animate="visible"
+          custom={0}
+        >
+          Rules
+        </motion.h2>
+        {renderListWithIcon(event.rules, CheckCircle2)}
       </>
     ),
 
     prize: (
       <>
-        <h2 className="text-xl md:text-2xl font-semibold lg:text-left text-center mb-3">Prize Pool</h2>
-        {renderList(event.prize)}
+        <motion.h2
+          className="text-xl md:text-2xl font-semibold lg:text-left text-justify mb-3"
+          variants={slideInFromLeftStaggered(0.2)}
+          initial="hidden"
+          animate="visible"
+          custom={0}
+        >
+          Prize Pool
+        </motion.h2>
+        {renderListWithIcon(event.prize, Award)}
       </>
     ),
 
     schedule: (
       <>
-        <h2 className="text-xl md:text-2xl font-semibold lg:text-left text-center mb-3">Schedule</h2>
-        {renderList(event.schedule, "📅")}
+        <motion.h2
+          className="text-xl md:text-2xl font-semibold lg:text-left text-justify mb-3"
+          variants={slideInFromLeftStaggered(0.2)}
+          initial="hidden"
+          animate="visible"
+          custom={0}
+        >
+          Schedule
+        </motion.h2>
+        {renderListWithIcon(event.schedule, Calendar)}
       </>
     ),
 
     contact: (
       <>
-        <h2 className="text-xl md:text-2xl font-semibold lg:text-left text-center mb-3">Contact</h2>
+        <motion.h2
+          className="text-xl md:text-2xl font-semibold lg:text-left text-justify mb-3"
+          variants={slideInFromLeftStaggered(0.2)}
+          initial="hidden"
+          animate="visible"
+          custom={0}
+        >
+          Contact
+        </motion.h2>
         {renderContacts(event.contact)}
       </>
     ),
@@ -209,32 +282,44 @@ export default function EventsNew() {
       {/* MAIN CONTENT AREA - CENTERED VERTICALLY */}
       <div className="grow flex items-center justify-center px-4 py-8">
         <div className="relative w-full max-w-6xl">
-          <div className="bg-linear-to-b from-[#2d0057]/80 to-[#140024]/90
+          <div
+            className="bg-linear-to-b from-[#2d0057]/80 to-[#140024]/90
                           backdrop-blur-xl
                           border border-purple-500/40
                           rounded-2xl
                           shadow-[0_0_40px_#7c3aed]
-                          p-5 md:p-8">
-
+                          p-5 md:p-8"
+          >
             {/* EVENT NAME - JUST ABOVE TABS */}
-            <div className="mb-6 text-center">
-              <div className="inline-flex items-center gap-3 
+            <motion.div
+              className="mb-6 text-center"
+              variants={slideInFromLeftStaggered(0.1)}
+              initial="hidden"
+              animate="visible"
+              custom={0}
+            >
+              <div
+                className="inline-flex items-center gap-3 
                               bg-linear-to-r from-purple-600 to-fuchsia-500
                               px-5 py-2 md:px-6 md:py-3 rounded-full
                               shadow-[0_0_25px_#a855f7]
-                              font-semibold tracking-wide text-sm md:text-base">
+                              font-semibold tracking-wide text-sm md:text-base"
+              >
                 <Bot size={18} />
                 <span className="text-center">{event.title.toUpperCase()}</span>
               </div>
-            </div>
+            </motion.div>
 
             {/* DESKTOP/LANDSCAPE LAYOUT (lg and above) */}
             <div className="hidden lg:flex flex-row gap-6 lg:gap-8">
-
               {/* IMAGE SIDE */}
               <div className="w-full md:w-56 h-52 md:h-56 bg-gray-800 rounded-2xl shrink-0 overflow-hidden">
                 {event.image ? (
-                  <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="w-full h-full object-cover"
+                  />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-gray-500">
                     <span className="text-sm">No image available</span>
@@ -244,10 +329,8 @@ export default function EventsNew() {
 
               {/* RIGHT SIDE */}
               <div className="flex-1 min-w-0">
-
                 {/* Tabs + Arrows */}
                 <div className="flex items-center mb-6 pr-2 md:pr-4">
-
                   {/* Tabs */}
                   <div className="flex gap-3 overflow-x-hidden whitespace-nowrap scrollbar-hide flex-1">
                     {tabs.map((tab, index) => {
@@ -275,12 +358,12 @@ export default function EventsNew() {
 
                   {/* Arrow Buttons */}
                   <div className="ml-3 mr-4 md:mr-6 flex gap-3 shrink-0">
-
                     <button
                       onClick={prevTab}
                       className="w-9 h-9 md:w-10 md:h-10 flex items-center justify-center
                                 rounded-full border border-purple-400/40
-                                hover:bg-purple-600 hover:shadow-[0_0_10px_#a855f7]">
+                                hover:bg-purple-600 hover:shadow-[0_0_10px_#a855f7]"
+                    >
                       <ChevronLeft size={18} />
                     </button>
 
@@ -288,20 +371,20 @@ export default function EventsNew() {
                       onClick={nextTab}
                       className="w-9 h-9 md:w-10 md:h-10 flex items-center justify-center
                                 rounded-full border border-purple-400/40
-                                hover:bg-purple-600 hover:shadow-[0_0_10px_#a855f7]">
+                                hover:bg-purple-600 hover:shadow-[0_0_10px_#a855f7]"
+                    >
                       <ChevronRight size={18} />
                     </button>
                   </div>
-
                 </div>
 
                 {/* Content */}
-                <div className="transition-all duration-300 overflow-y-auto overflow-x-hidden lg:text-left text-center scrollbar-hide" style={{ maxHeight: "55vh" }}>
-                  <div className="space-y-2">
-                    {tabContent[activeTab]}
-                  </div>
+                <div
+                  className="transition-all duration-300 overflow-y-auto overflow-x-hidden lg:text-left text-center scrollbar-hide"
+                  style={{ maxHeight: "50vh" }}
+                >
+                  <div className="space-y-2">{tabContent[activeTab]}</div>
                 </div>
-
               </div>
             </div>
 
@@ -313,25 +396,32 @@ export default function EventsNew() {
                   onClick={prevTab}
                   className="w-9 h-9 flex items-center justify-center
                             rounded-full border border-purple-400/40
-                            hover:bg-purple-600 hover:shadow-[0_0_10px_#a855f7]">
+                            hover:bg-purple-600 hover:shadow-[0_0_10px_#a855f7]"
+                >
                   <ChevronLeft size={18} />
                 </button>
 
                 <div className="flex-1 text-center">
-                  <h2 className="text-xl font-semibold text-purple-300">{tabs[activeIndex].name}</h2>
+                  <h2 className="text-xl font-semibold text-purple-300">
+                    {tabs[activeIndex].name}
+                  </h2>
                 </div>
 
                 <button
                   onClick={nextTab}
                   className="w-9 h-9 flex items-center justify-center
                             rounded-full border border-purple-400/40
-                            hover:bg-purple-600 hover:shadow-[0_0_10px_#a855f7]">
+                            hover:bg-purple-600 hover:shadow-[0_0_10px_#a855f7]"
+                >
                   <ChevronRight size={18} />
                 </button>
               </div>
 
-              {/* Content Area */}
-              <div className="transition-all duration-300 overflow-y-auto overflow-x-hidden text-center scrollbar-hide" style={{ maxHeight: "60vh" }}>
+              {/* Content Area - Fixed Height with Internal Scrolling */}
+              <div
+                className="transition-all duration-300 overflow-y-auto overflow-x-hidden text-center scrollbar-hide"
+                style={{ height: "35vh" }}
+              >
                 <div className="pr-4 min-w-0 flex flex-col items-center justify-center lg:items-start space-y-3">
                   {tabContent[activeTab]}
                 </div>
@@ -340,7 +430,13 @@ export default function EventsNew() {
           </div>
 
           {/* REGISTRATION BUTTON - OUTSIDE CARD */}
-          <div className="mt-6 flex justify-center">
+          <motion.div
+            className="mt-6 flex justify-center"
+            variants={slideInFromLeftStaggered(0.5)}
+            initial="hidden"
+            animate="visible"
+            custom={0}
+          >
             <a
               href={event.registrationLink || GLOBAL_REGISTRATION_URL}
               target="_blank"
@@ -352,7 +448,7 @@ export default function EventsNew() {
               Register Now
               <ExternalLink size={18} />
             </a>
-          </div>
+          </motion.div>
         </div>
       </div>
 
