@@ -20,7 +20,7 @@ const ButtonGroup = ({ items }: { items: Listing[] }) => {
 
   return (
     <div className="flex flex-col gap-3 max-md:hidden sm:gap-4 md:gap-6 lg:gap-8 w-full items-center md:items-start">
-      {items.map((item) => (
+      {items.map((item, idx) => (
         <div
           key={item.title}
           onClick={() => {
@@ -30,7 +30,7 @@ const ButtonGroup = ({ items }: { items: Listing[] }) => {
               navigate(item.path);
             }
           }}
-          className="cursor-pointer"
+          className="cursor-pointer animate-[buttonPulse_2.5s_ease-in-out_infinite]"
         >
           <SpotlightCard 
             className="flex items-center justify-center p-6 sm:p-8 w-40 h-40 sm:w-48 sm:h-48"

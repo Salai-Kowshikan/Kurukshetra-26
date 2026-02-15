@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import Instructions from "../assets/Instructions.pdf";
-import MagicBento from "./MagicBento";
+// import MagicBento from "./MagicBento";
 
 type Gender = "Male" | "Female" | "Others";
 
@@ -10,6 +10,7 @@ export default function Accommodation() {
   const [gender, setGender] = useState<Gender | null>(null);
   const [food, setFood] = useState(false);
   const [glitch, setGlitch] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const dates = ["MAR 7", "MAR 8", "MAR 9"];
   const total = selectedDates.length * (food ? 450 : 300);
@@ -48,20 +49,6 @@ export default function Accommodation() {
       className="relative min-h-screen flex items-center justify-center px-3 sm:px-4 pt-28 sm:pt-24 pb-8 sm:pb-16 font-(family-name:--orbitron) overflow-hidden"
     >
 
-
-      <MagicBento
-        className="z-[2]"
-        textAutoHide={true}
-        enableStars
-        enableSpotlight
-        enableBorderGlow={true}
-        enableTilt={false}
-        clickEffect
-        spotlightRadius={100}
-        particleCount={12}
-        glowColor="132, 0, 255"
-        disableAnimations={false}
-      />
 
       <div className="relative z-10 w-full max-w-[1140px] flex flex-col items-center mt-4 sm:mt-0">
         {/* PAGE TITLE */}
@@ -198,18 +185,30 @@ export default function Accommodation() {
             </div>
 
             {/* Submit */}
-            <button
-              style={{ fontFamily: "Orbitron, sans-serif", letterSpacing: "0.04em" }}
-              disabled={!gender || selectedDates.length === 0}
-              onClick={handleSubmit}
-              className="mt-3 px-10 py-3 rounded-3xl
-                bg-violet-600 text-white
-                border border-violet-600
-                cursor-pointer
-                disabled:opacity-50 hover:shadow-[0_0_24px_rgba(122,40,255,0.85)] transition"
-            >
-              Submit
-            </button>
+            {isOpen ? (
+              <button
+                style={{ fontFamily: "Orbitron, sans-serif", letterSpacing: "0.04em" }}
+                disabled={!gender || selectedDates.length === 0}
+                onClick={handleSubmit}
+                className="mt-3 px-10 py-3 rounded-3xl
+                  bg-violet-600 text-white
+                  border border-violet-600
+                  cursor-pointer
+                  disabled:opacity-50 hover:shadow-[0_0_24px_rgba(122,40,255,0.85)] transition"
+              >
+                Submit
+              </button>
+            ) : (
+              <div
+                style={{ fontFamily: "Orbitron, sans-serif", letterSpacing: "0.04em" }}
+                className="mt-3 px-10 py-3 rounded-3xl
+                  bg-violet-600/50 text-white
+                  border border-violet-600
+                  text-center"
+              >
+                Accommodation opens soon
+              </div>
+            )}
           </div>
 
            {/* Mobile separator */} 

@@ -49,8 +49,10 @@ export default function About() {
       <div className="max-w-5xl mx-auto px-4 space-y-8">
         {TITLES.map((title, i) => (
           /* Gradient border wrapper */
-          <div key={i} className="rounded-xl p-0.5 ">
-            <article className="relative w-full rounded-xl lg:p-12 p-6 bg-white/5 border border-white/50 backdrop-blur-xs">
+          <div key={i} className="rounded-xl p-0.5">
+            <article className="relative w-full rounded-xl lg:p-12 p-6 bg-white/5 border border-white/50 backdrop-blur-xs" style={{
+              animation: i % 2 === 0 ? `slideInFromLeft 0.6s ease-out ${i * 0.1}s both` : `slideInFromRight 0.6s ease-out ${i * 0.1}s both`
+            }}>
               {/* CYBER CORNER BORDERS */}
               <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-0 rounded-tl-xl left-0 w-10 h-10 border-l-2 border-t-2 border-white/90" />

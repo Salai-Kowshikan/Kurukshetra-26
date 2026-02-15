@@ -11,6 +11,7 @@ import Accommodation from "@/pages/Accommodation";
 import ComingSoon from "@/pages/ComingSoon";
 import Sponsors from "@/pages/Sponsors";import Technovation from "./pages/Technovation";
 import Terms from "@/pages/Terms";
+import MagicBento from "./pages/MagicBento";
 
 const comingSoonPaths = [
   "/login",
@@ -29,6 +30,19 @@ const ExternalRedirect = ({ url }: { url: string }) => {
 function App() {
   return (
     <Router>
+      <MagicBento
+        className="z-[2]"
+        textAutoHide={true}
+        enableStars
+        enableSpotlight
+        enableBorderGlow={true}
+        enableTilt={false}
+        clickEffect
+        spotlightRadius={100}
+        particleCount={12}
+        glowColor="132, 0, 255"
+        disableAnimations={false}
+      />
       {/* <div className="min-h-screen flex flex-col"> */}
         <Navbar />
         <Background />

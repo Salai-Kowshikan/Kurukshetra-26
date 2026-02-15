@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import MagicBento from "./MagicBento";
+// import MagicBento from "./MagicBento";
 import {
   FaUser,
   FaPhoneAlt,
@@ -96,19 +96,6 @@ const Contact = () => {
     >
       {/* <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/15 z-[1]" /> */}
 
-      <MagicBento
-        className="z-[2]"
-        textAutoHide={true}
-        enableStars
-        enableSpotlight
-        enableBorderGlow={true}
-        enableTilt={false}
-        clickEffect
-        spotlightRadius={100}
-        particleCount={12}
-        glowColor="132, 0, 255"
-        disableAnimations={false}
-      />
 
       <div className="relative z-10 w-full max-w-[1140px] grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 items-stretch mt-4 sm:mt-0">
         {/* LEFT PANEL */}
@@ -139,6 +126,9 @@ const Contact = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 text-sm sm:text-base md:text-lg box-border flex items-center justify-center border border-white/50 text-white rounded-full backdrop-blur-xs hover:border-[#8A05FF] hover:bg-[#8A05FF] hover:text-white hover:shadow-[0_0_18px_rgba(138,5,255,0.8)] transition-all duration-200"
+                  style={{
+                    animation: `popIn 0.5s ease-out ${i * 0.1}s both`
+                  }}
                 >
                   {item.icon}
                 </a>
@@ -261,9 +251,9 @@ const Contact = () => {
             <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_template" value="table" />
 
-            <div className="space-y-3 sm:space-y-4">
+            <div className="space-y-3 sm:space-y-4 transition-all duration-500">
               {/* Name */}
-              <div className="flex items-center rounded-full px-4 sm:px-5 py-2 sm:py-2.5 border border-white/50">
+              <div className="flex items-center rounded-full px-4 sm:px-5 py-2 sm:py-2.5 border border-white/50 transition-all duration-500 animate-[slideInFromBottom_0.5s_ease-out]">
                 <FaUser className="text-white mr-2 sm:mr-3 flex-shrink-0 text-sm sm:text-base" />
                 <input
                   type="text"
@@ -323,25 +313,27 @@ const Contact = () => {
               </div>
 
               {/* Company */}
-              {activeTab === "collaborate" && (
-                <div className="flex items-center rounded-full px-4 sm:px-5 py-2 sm:py-2.5 border border-white/50">
-                  <FaBuilding className="mr-2 sm:mr-3 text-white text-sm sm:text-lg flex-shrink-0" />
-                  <input
-                    type="text"
-                    name="Company"
-                    placeholder="Company / Organization Name"
-                    value={formData.company}
-                    onChange={(e) =>
-                      setFormData((prev) => ({
-                        ...prev,
-                        company: e.target.value,
-                      }))
-                    }
-                    required
-                    className="bg-transparent outline-none text-white/90 text-sm sm:text-base w-full placeholder:text-white/70"
-                  />
-                </div>
-              )}
+              <div className={`flex items-center rounded-full px-4 sm:px-5 py-2 sm:py-2.5 border border-white/50 transition-all duration-500 overflow-hidden ${
+                activeTab === "collaborate"
+                  ? "max-h-16 opacity-100 animate-[slideInFromBottom_0.5s_ease-out]"
+                  : "max-h-0 opacity-0 -my-4"
+              }`}>
+                <FaBuilding className="mr-2 sm:mr-3 text-white text-sm sm:text-lg flex-shrink-0" />
+                <input
+                  type="text"
+                  name="Company"
+                  placeholder="Company / Organization Name"
+                  value={formData.company}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      company: e.target.value,
+                    }))
+                  }
+                  required={activeTab === "collaborate"}
+                  className="bg-transparent outline-none text-white/90 text-sm sm:text-base w-full placeholder:text-white/70"
+                />
+              </div>
 
               {/* Message */}
               <div className="flex rounded-[18px] sm:rounded-[22px] px-4 sm:px-5 py-2.5 sm:py-3 min-h-[120px] sm:min-h-[140px] border border-white/50">

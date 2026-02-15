@@ -66,6 +66,9 @@ export default function Patronage() {
               key={i}
               onClick={() => openCard(i)}
               className="relative w-full max-w-sm lg:h-[45vh] h-[40vh] flex flex-col rounded-xl p-4 bg-white/5 border border-white/50 backdrop-blur-xs hover:scale-105 transform transition-all duration-200 focus:outline-none shadow-[0_0_40px_rgba(140,0,255,0.25)] hover:shadow-[0_0_40px_rgba(138,5,255,0.6)] hover:border-violet-400"
+              style={{
+                animation: `slideInFromLeft 0.6s ease-out ${i * 0.1}s both`
+              }}
               aria-label={`Open ${img.alt}`}
             >
               {/* CYBER CORNER BORDERS */}
