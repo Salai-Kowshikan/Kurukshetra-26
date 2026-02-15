@@ -1,8 +1,21 @@
+import { motion } from "motion/react";
 import about1 from "/Ceg.png";
 import about2 from "/Ctf.png";
 import about3 from "@/assets/K'26_Logo.png";
 import about4 from "/Vyuhaa.png";
-import { useState, useEffect } from "react";
+import useGlitch from "@/hooks/useGlitch";
+import CyberCorners from "@/components/CyberCorners";
+import {
+  pageVariants,
+  blurIn,
+  cardVariants,
+  staggerContainer,
+  slideLeft,
+  slideRight,
+  hoverLift,
+  tapShrink,
+  breathe,
+} from "@/lib/animations";
 
 const TITLES = [
   "COLLEGE OF ENGINEERING GUINDY",
@@ -20,23 +33,17 @@ const PARAGRAPHS = [
   "Vyuhaa is a magnificent techno-management fest exclusively hosted for students of the University Department campuses of Anna University. This idea was set forth with the mission of celebrating the virtuoso of innovation and instilling an incandescent fervor for technology among incoming college freshmen.",
 ];
 export default function About() {
-  const [glitch, setGlitch] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(
-      () => {
-        setGlitch(true);
-        setTimeout(() => setGlitch(false), 500);
-      },
-      3000 + Math.random() * 2000
-    );
-
-    return () => clearInterval(interval);
-  }, []);
+  const glitch = useGlitch();
 
   return (
-    <section className="w-full py-12">
-      <div className="flex justify-center mb-16">
+    <motion.section
+      className="w-full py-12"
+      variants={pageVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.05 }}
+    >
+      <motion.div className="flex justify-center mb-16" variants={blurIn}>
         <div className={`relative ${glitch ? "glitch-active" : ""}`}>
           <h2
             className="sponsor-glitch text-3xl md:text-4xl lg:mt-20 mt-28 font-medium text-white font-(family-name:--wallpoet)"
@@ -45,56 +52,76 @@ export default function About() {
             ABOUT US
           </h2>
         </div>
-      </div>
-      <div className="max-w-5xl mx-auto px-4 space-y-8">
+      </motion.div>
+      <motion.div
+        className="max-w-5xl mx-auto px-4 space-y-8"
+        variants={staggerContainer(0.15)}
+      >
         {TITLES.map((title, i) => (
           /* Gradient border wrapper */
-          <div key={i} className="rounded-xl p-0.5">
-            <article className="relative w-full rounded-xl lg:p-12 p-6 bg-white/5 border border-white/50 backdrop-blur-xs" style={{
-              animation: i % 2 === 0 ? `slideInFromLeft 0.6s ease-out ${i * 0.1}s both` : `slideInFromRight 0.6s ease-out ${i * 0.1}s both`
-            }}>
+          <motion.div
+            key={i}
+            className="rounded-xl p-0.5"
+            variants={cardVariants}
+            whileHover={hoverLift}
+            whileTap={tapShrink}
+          >
+            <article className="relative w-full rounded-xl lg:p-12 p-6 bg-white/5 border border-white/50 backdrop-blur-xs overflow-hidden">
+              {/* Animated background gradient */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-fuchsia-500/5 pointer-events-none"
+                animate={breathe}
+              />
+
               {/* CYBER CORNER BORDERS */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 rounded-tl-xl left-0 w-10 h-10 border-l-2 border-t-2 border-white/90" />
-                <div className="absolute top-0 rounded-tr-xl right-0 w-10 h-10 border-r-2 border-t-2 border-white/90" />
-                <div className="absolute bottom-0 rounded-bl-xl left-0 w-10 h-10 border-l-2 border-b-2 border-white/90" />
-                <div className="absolute bottom-0 rounded-br-xl right-0 w-10 h-10 border-r-2 border-b-2 border-white/90" />
-              </div>
+              <CyberCorners />
               {/* Title */}
-              <div className="flex justify-center lg:-mt-6">
-                <div
+              <div className="flex justify-center lg:-mt-6 relative z-10">
+                <motion.div
                   className="px-5 py-1.5 rounded-full
 									           bg-violet-600 
 									           text-white text-sm md:text-base text-center
 									           font-(family-name:--wallpoet)"
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0 0 20px rgba(168, 85, 247, 0.5)",
+                  }}
                 >
                   {title}
-                </div>
+                </motion.div>
               </div>
 
               <div
-                className={`mt-6  backdrop-blur-[5px] p-5 rounded-xl flex flex-col md:flex-row items-center gap-6 ${
+                className={`mt-6  backdrop-blur-[5px] p-5 rounded-xl flex flex-col md:flex-row items-center gap-6 relative z-10 ${
                   i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
                 }`}
               >
-                <div className="w-full md:w-1/2 flex items-center justify-center">
+                <motion.div
+                  className="w-full md:w-1/2 flex items-center justify-center"
+                  variants={i % 2 === 0 ? slideLeft : slideRight}
+                  whileHover={{ scale: 1.05, rotate: i % 2 === 0 ? -2 : 2 }}
+                >
                   <img
                     src={IMAGES[i]}
                     alt={title}
-                    className="w-full max-h-64 object-contain rounded"
+                    loading="lazy"
+                    className="w-full max-h-64 object-contain rounded drop-shadow-[0_0_15px_rgba(168,85,247,0.3)]"
                   />
-                </div>
+                </motion.div>
 
-                <div className="w-full md:w-1/2 text-justify">
+                <motion.div
+                  className="w-full md:w-1/2 text-justify"
+                  variants={i % 2 === 0 ? slideRight : slideLeft}
+                >
                   <p className="text-base leading-relaxed text-white/90">
                     {PARAGRAPHS[i]}
                   </p>
-                </div>
+                </motion.div>
               </div>
             </article>
-          </div>
+          </motion.div>
         ))}
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 }

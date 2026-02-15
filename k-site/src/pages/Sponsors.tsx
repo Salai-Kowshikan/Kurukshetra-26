@@ -2,7 +2,19 @@ import NIOT from "@/assets/NIOT.png";
 import ShankarIAS from "@/assets/ShankarIAS.png";
 import Zentropy from "@/assets/zen.jpg";
 import Tilt from "react-parallax-tilt";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import useGlitch from "@/hooks/useGlitch";
+import CyberCorners from "@/components/CyberCorners";
+import {
+  pageVariants,
+  blurIn,
+  cardVariants,
+  staggerContainer,
+  tapShrink,
+  breathe,
+  floatSlow,
+} from "@/lib/animations";
 
 type Sponsor = {
   src: string;
@@ -36,36 +48,41 @@ const sponsors: Sponsor[] = [
 
 export default function Sponsors() {
   const [active, setActive] = useState<Sponsor | null>(null);
-
   const [hoverPos, setHoverPos] = useState({ x: 50, y: 50 });
+  const glitch = useGlitch();
 
   const openLink = (url?: string) => {
     if (!url) return;
     window.open(url, "_blank", "noopener,noreferrer");
   };
-  const [glitch, setGlitch] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(
-      () => {
-        setGlitch(true);
-        setTimeout(() => setGlitch(false), 500);
-      },
-      3000 + Math.random() * 2000
-    );
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
-    <section
+    <motion.section
       className="relative min-h-screen flex items-center justify-center pb-20 overflow-hidden"
+      variants={pageVariants}
+      initial="hidden"
+      animate="visible"
     >
-      {/* <div className="absolute inset-0 bg-black/10" /> */}
+      {/* Animated background gradients */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-br from-purple-900/10 via-transparent to-fuchsia-900/10"
+        animate={breathe}
+      />
+      <motion.div
+        className="absolute top-0 left-0 w-96 h-96 bg-purple-600/15 rounded-full blur-[120px]"
+        animate={floatSlow}
+      />
+      <motion.div
+        className="absolute bottom-0 right-0 w-96 h-96 bg-fuchsia-600/15 rounded-full blur-[120px]"
+        animate={{
+          ...floatSlow,
+          transition: { ...floatSlow.transition, delay: 1.5 },
+        }}
+      />
 
       <div className="relative z-10 w-[90%] max-w-7xl mx-auto">
         {/* GLITCH HEADING */}
-        <div className="flex justify-center mb-16">
+        <motion.div className="flex justify-center mb-16" variants={blurIn}>
           <div className={`relative ${glitch ? "glitch-active" : ""}`}>
             <h2
               className="sponsor-glitch text-3xl md:text-5xl lg:mt-20 mt-28 font-medium text-white font-(family-name:--wallpoet)"
@@ -74,12 +91,15 @@ export default function Sponsors() {
               OUR SPONSORS
             </h2>
           </div>
-        </div>
+        </motion.div>
 
         {/* FLEX WRAP */}
-        <div className="flex flex-wrap justify-center gap-14">
+        <motion.div
+          className="flex flex-wrap justify-center gap-14"
+          variants={staggerContainer(0.15)}
+        >
           {sponsors.map((s, i) => (
-            <button
+            <motion.button
               key={i}
               onClick={() => {
                 if (s.desc) {
@@ -88,7 +108,10 @@ export default function Sponsors() {
                   openLink(s.url);
                 }
               }}
-              className="group relative w-full md:w-[45%] lg:w-[30%] max-w-[420px]"
+              className="group relative w-full md:w-[45%] lg:w-[30%] max-w-105"
+              variants={cardVariants}
+              whileHover={{ y: -8, scale: 1.03 }}
+              whileTap={tapShrink}
             >
               <Tilt
                 tiltMaxAngleX={6}
@@ -97,7 +120,12 @@ export default function Sponsors() {
                 glareEnable
                 glareMaxOpacity={0.1}
               >
-                <div className="relative bg-white/10 backdrop-blur-[5px] border border-white/20 h-[320px] flex flex-col items-center justify-center overflow-hidden rounded-xl">
+                <div className="relative bg-white/10 backdrop-blur-[5px] border border-white/20 h-80 flex flex-col items-center justify-center overflow-hidden rounded-xl">
+                  {/* Animated background */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-fuchsia-500/5 pointer-events-none"
+                    animate={breathe}
+                  />
                   {/* TITLE */}
                   {s.title && (
                     <div className="absolute top-4 text-lg tracking-widest text-white font-(family-name:--wallpoet)">
@@ -105,12 +133,7 @@ export default function Sponsors() {
                     </div>
                   )}
                   {/* CYBER CORNER CUT MASK */}
-                  <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute top-0 rounded-tl-xl left-0 w-10 h-10 border-l-2 border-t-2 border-white/90" />
-                    <div className="absolute top-0 rounded-tr-xl right-0 w-10 h-10 border-r-2 border-t-2 border-white/90" />
-                    <div className="absolute bottom-0 rounded-bl-xl left-0 w-10 h-10 border-l-2 border-b-2 border-white/90" />
-                    <div className="absolute bottom-0 rounded-br-xl right-0 w-10 h-10 border-r-2 border-b-2 border-white/90" />
-                  </div>
+                  <CyberCorners />
                   {/* GRID */}
                   <div
                     className="absolute inset-0 opacity-20"
@@ -136,12 +159,13 @@ export default function Sponsors() {
                   {/* EDGE SCAN */}{" "}
                   <span className="pointer-events-none absolute inset-0 overflow-hidden ">
                     {" "}
-                    <span className="absolute top-0 left-[-100%] h-full w-1/2 bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-60 animate-[scan_6s_linear_infinite]" />{" "}
+                    <span className="absolute top-0 -left-full h-full w-1/2 bg-linear-to-r from-transparent via-white/40 to-transparent opacity-60 animate-[scan_6s_linear_infinite]" />{" "}
                   </span>
                   {/* LOGO */}
                   <img
                     src={s.src}
                     alt={s.alt}
+                    loading="lazy"
                     onMouseMove={(e) => {
                       const rect = e.currentTarget.getBoundingClientRect();
                       setHoverPos({
@@ -153,54 +177,56 @@ export default function Sponsors() {
                   />
                 </div>
               </Tilt>
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
 
-        {active && active.desc && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center"
-            onClick={() => setActive(null)}
-          >
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-[5px]" />
-
-            <div
-              onClick={(e) => e.stopPropagation()}
-              className="relative lg:w-[40%] w-[85%] lg:h-[50vh] h-[60vh] bg-black/80 backdrop-blur-md border border-white/20 rounded-xl shadow-[0_0_40px_#8A05FF] flex flex-col"
+        <AnimatePresence>
+          {active && active.desc && (
+            <motion.div
+              className="fixed inset-0 z-50 flex items-center justify-center"
+              onClick={() => setActive(null)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
             >
-              <div className="flex-1 overflow-y-auto p-6">
-                <h3 className="text-xl mb-3 font-(family-name:--wallpoet) text-center text-white">
-                  {active.title} - {active.alt}
-                </h3>
+              <div className="absolute inset-0 bg-black/60 backdrop-blur-[5px]" />
 
-                <p className="text-white/80 text-md leading-relaxed text-justify">
-                  {active.desc}
-                </p>
-              </div>
+              <motion.div
+                onClick={(e) => e.stopPropagation()}
+                className="relative lg:w-[40%] w-[85%] lg:h-[50vh] h-[60vh] bg-black/80 backdrop-blur-md border border-white/20 rounded-xl shadow-[0_0_40px_#8A05FF] flex flex-col"
+                initial={{ scale: 0.85, opacity: 0, y: 30 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.85, opacity: 0, y: 30 }}
+                transition={{ type: "spring", stiffness: 200, damping: 22 }}
+              >
+                <div className="flex-1 overflow-y-auto p-6">
+                  <h3 className="text-xl mb-3 font-(family-name:--wallpoet) text-center text-white">
+                    {active.title} - {active.alt}
+                  </h3>
 
-              {active.url && (
-                <div className="pb-6 flex justify-center">
-                  <button
-                    onClick={() => openLink(active.url)}
-                    className="px-6 py-2 bg-[#8A05FF] rounded-md text-white text-sm hover:brightness-125 transition shadow-[0_0_15px_#8A05FF]"
-                  >
-                    Visit Site →
-                  </button>
+                  <p className="text-white/80 text-md leading-relaxed text-justify">
+                    {active.desc}
+                  </p>
                 </div>
-              )}
-            </div>
-          </div>
-        )}
+
+                {active.url && (
+                  <div className="pb-6 flex justify-center">
+                    <motion.button
+                      onClick={() => openLink(active.url)}
+                      className="px-6 py-2 bg-[#8A05FF] rounded-md text-white text-sm hover:brightness-125 transition shadow-[0_0_15px_#8A05FF]"
+                      whileHover={{ scale: 1.08 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Visit Site →
+                    </motion.button>
+                  </div>
+                )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-      <style>
-        {`
-          @keyframes scan {
-            0% { left: -100%; }
-            50% { left: 120%; }
-            100% { left: 120%; }
-          }
-        `}
-      </style>
-    </section>
+    </motion.section>
   );
 }

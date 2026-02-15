@@ -1,6 +1,6 @@
-import bgImg from '@/assets/technovation/Img.png';
-import mobImg from '@/assets/technovation/mobileImg.png';
-import tabImg from '@/assets/technovation/tabImg.png';
+import bgImg from "@/assets/technovation/Img.png";
+import mobImg from "@/assets/technovation/mobileImg.png";
+import tabImg from "@/assets/technovation/tabImg.png";
 
 const Background = () => {
   return (
@@ -17,8 +17,8 @@ const Background = () => {
 
       {/* Inset black overlay for consistent styling across pages */}
       <div className="pointer-events-none absolute inset-0 bg-black/20" />
-      <div className="pointer-events-none absolute bottom-0 left-0 w-full h-50 bg-gradient-to-b from-transparent via-black/40 opacity-100 to-black" />
-      </div>
+      <div className="pointer-events-none absolute bottom-0 left-0 w-full h-50 bg-linear-to-b from-transparent via-black/40 opacity-100 to-black" />
+    </div>
   );
 };
 
