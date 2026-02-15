@@ -45,7 +45,7 @@ export default function Hero() {
         <div className="flex justify-center mb-6">
           <div className={`relative ${glitch ? "glitch-active" : ""}`}>
             <h2
-              className="sponsor-glitch text-xl sm:text-3xl md:text-6xl font-extrabold font-(family-name:--wallpoet) text-white"
+              className="sponsor-glitch text-3xl md:text-6xl font-extrabold font-(family-name:--wallpoet) text-white"
               data-text="MULTIVERSE   RENAISSANCE"
             >
               MULTIVERSE <br /> RENAISSANCE

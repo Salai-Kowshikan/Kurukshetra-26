@@ -4,7 +4,7 @@ export default function Footer() {
       {/* <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[#8A05FF]/40 via-[#240038]/60 to-[#8A05FF]/40" /> */}
       <div className="pointer-events-none absolute left-1/2 top-0 h-px w-[78%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#8A05FF]/60 to-transparent" />
 
-      <div className="mx-auto w-full max-w-6xl rounded-[18px] sm:rounded-[22px] border border-white/20 bg-[#8A05FF]/50 px-3 py-2 text-center text-[12px] md:text-[13px] leading-4 shadow-[0_0_20px_rgba(138,5,255,0.2)] backdrop-blur-lg sm:px-8 sm:py-3 font-semibold">
+      <div className="mx-auto w-full max-w-6xl rounded-[18px] sm:rounded-[22px] border border-white/20 bg-[#8A05FF]/85 px-3 py-2 text-center text-[12px] md:text-[13px] leading-4 shadow-[0_0_20px_rgba(138,5,255,0.2)] backdrop-blur-lg sm:px-8 sm:py-3 font-semibold">
         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2 sm:gap-3">
           {/* CEG Tech Forum & Copyright */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 flex-wrap">

@@ -112,7 +112,7 @@ const Navbar: React.FC = () => {
       {/* ===== DESKTOP NAVBAR ===== */}
       <div className="hidden lg:flex justify-center mt-6">
         <div
-          className="relative flex items-center gap-1 px-4 py-2 rounded-full  backdrop-blur-xs border border-white/70 shadow-[0_0_30px_rgba(168,85,247,0.25)]"
+          className="relative flex items-center gap-1 px-4 py-2 rounded-full  backdrop-blur-xl border border-white/70 shadow-[0_0_30px_rgba(168,85,247,0.25)]"
         >
           {navItems.map((item: NavItem) => (
             <a

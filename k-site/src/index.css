@@ -641,6 +641,13 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .glitch-active .sponsor-glitch::before,
+  .glitch-active .sponsor-glitch::after {
+    opacity: 1;
   }
 
   .sponsor-glitch::before {
