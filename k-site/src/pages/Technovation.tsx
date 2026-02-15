@@ -2,12 +2,26 @@ import Background from "@/components/technovation/Background";
 import Card from "@/components/technovation/Card";
 import Drone from "@/components/technovation/Drone";
 import useFullNavbar from "@/hooks/useFullNavbar";
+import { useState, useEffect } from "react";
 
 export default function Technovation() {
   useFullNavbar();
+  const [glitch, setGlitch] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(
+      () => {
+        setGlitch(true);
+        setTimeout(() => setGlitch(false), 500);
+      },
+      3000 + Math.random() * 2000
+    );
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="relative min-h-screen bg-black text-white overflow-x-clip">
+    <div className="relative min-h-screen text-white overflow-x-clip">
       <section className="relative min-h-screen lg:min-h-[1280px] xl:min-h-[1340px] pb-16 sm:pb-20">
         <Background />
 
@@ -16,9 +30,11 @@ export default function Technovation() {
         </div>
 
         {/* <h1 className="absolute top-[24vh] xs:top-[18vh] sm:top-[2vh] md:top-[23vh] lg:top-[200px] xl:top-[210px] left-[7vw] sm:left-[10vw] md:left-[15vw] lg:left-[267px] w-[90vw] sm:w-[80vw] md:w-[70vw] lg:w-[1045px] text-white text-center text-[46px] sm:text-[60px] md:text-[80px] lg:text-[103px] leading-tight tracking-[0.035em] font-(family-name:--wallpoet) font-normal z-10"> */}
-        <h1 className="hero-title absolute text-white text-center leading-tight tracking-[0.035em] font-(family-name:--wallpoet) font-normal z-10">
-          Technovation
-        </h1>
+        <div className={`absolute text-white text-center leading-tight tracking-[0.035em] font-(family-name:--wallpoet) font-normal z-10 text-[40px] sm:text-[50px] md:text-[70px] lg:text-[80px] ${glitch ? "glitch-active" : ""}`}>
+          <h1 className="sponsor-glitch hero-title" data-text="Technovation">
+            Technovation
+          </h1>
+        </div>
 
         <div className="relative z-20 mx-auto w-full max-w-[1200px] px-4 sm:px-6 pt-[40svh] sm:pt-[38svh] md:pt-[44svh] lg:pt-0">
           <div className="flex flex-col gap-10 lg:absolute lg:top-[380px] lg:left-1/2 lg:-translate-x-1/2 lg:w-full lg:flex-row lg:items-start lg:justify-between">

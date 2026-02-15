@@ -2,8 +2,23 @@ import logo from "@/assets/K'26_Logo.png";
 // import heroVideo from "@/assets/landing_vid.mp4";
 import Countdown from "@/components/Landing/Countdown";
 import Listings from "@/components/Landing/Listings";
+import { useState, useEffect } from "react";
 
 export default function Hero() {
+  const [glitch, setGlitch] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(
+      () => {
+        setGlitch(true);
+        setTimeout(() => setGlitch(false), 500);
+      },
+      3000 + Math.random() * 2000
+    );
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative w-full min-h-screen overflow-hidden flex items-center justify-center pt-20">
       {/* Background Video */}
@@ -27,14 +42,16 @@ export default function Hero() {
           className="h-16  md:h-24 object-contain mb-6 lg:p-2 p-0"
         />
 
-        <h2
-          className="text-xl sm:text-3xl md:text-6xl font-extrabold font-(family-name:--wallpoet)
-             bg-linear-to-r from-[#6101FE] to-[#FF00B3]
-             bg-clip-text text-transparent
-             "
-        >
-          MULTIVERSE <br /> RENAISSANCE
-        </h2>
+        <div className="flex justify-center mb-6">
+          <div className={`relative ${glitch ? "glitch-active" : ""}`}>
+            <h2
+              className="sponsor-glitch text-xl sm:text-3xl md:text-6xl font-extrabold font-(family-name:--wallpoet) text-white"
+              data-text="MULTIVERSE   RENAISSANCE"
+            >
+              MULTIVERSE <br /> RENAISSANCE
+            </h2>
+          </div>
+        </div>
 
         <Listings />
 

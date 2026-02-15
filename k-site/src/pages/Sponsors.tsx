@@ -1,4 +1,3 @@
-import bgImg from "@/assets/Img.png";
 import NIOT from "@/assets/NIOT.png";
 import ShankarIAS from "@/assets/ShankarIAS.png";
 import Zentropy from "@/assets/zen.jpg";
@@ -61,13 +60,8 @@ export default function Sponsors() {
   return (
     <section
       className="relative min-h-screen flex items-center justify-center pb-20 overflow-hidden"
-      style={{ background: "var(--contact-bg)" }}
     >
-      <img
-        src={bgImg}
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-black/40" />
+      {/* <div className="absolute inset-0 bg-black/10" /> */}
 
       <div className="relative z-10 w-[90%] max-w-7xl mx-auto">
         {/* GLITCH HEADING */}

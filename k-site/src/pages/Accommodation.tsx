@@ -1,5 +1,5 @@
 import { useState } from "react";
-import bg from "../assets/Img.png";
+import { useEffect } from "react";
 import Instructions from "../assets/Instructions.pdf";
 import MagicBento from "./MagicBento";
 
@@ -9,9 +9,22 @@ export default function Accommodation() {
   const [selectedDates, setSelectedDates] = useState<string[]>([]);
   const [gender, setGender] = useState<Gender | null>(null);
   const [food, setFood] = useState(false);
+  const [glitch, setGlitch] = useState(false);
 
   const dates = ["MAR 7", "MAR 8", "MAR 9"];
   const total = selectedDates.length * (food ? 450 : 300);
+
+  useEffect(() => {
+    const interval = setInterval(
+      () => {
+        setGlitch(true);
+        setTimeout(() => setGlitch(false), 500);
+      },
+      3000 + Math.random() * 2000
+    );
+
+    return () => clearInterval(interval);
+  }, []);
 
   const toggleDate = (d: string) => {
     setSelectedDates((prev) =>
@@ -33,13 +46,8 @@ export default function Accommodation() {
   return (
     <section 
       className="relative min-h-screen flex items-center justify-center px-3 sm:px-4 pt-28 sm:pt-24 pb-8 sm:pb-16 font-(family-name:--orbitron) overflow-hidden"
-      style={{ background: "var(--contact-bg)" }}
     >
-      <img 
-        src={bg} 
-        alt="Kurukshetra accommodation background" 
-        className="absolute inset-0 w-full h-full object-cover object-bottom pointer-events-none z-0" 
-      />
+
 
       <MagicBento
         className="z-[2]"
@@ -57,22 +65,20 @@ export default function Accommodation() {
 
       <div className="relative z-10 w-full max-w-[1140px] flex flex-col items-center mt-4 sm:mt-0">
         {/* PAGE TITLE */}
-        <h1
-          style={{
-            fontFamily: "Orbitron, sans-serif",
-            fontWeight: 700,
-          }}
-          className="
-            text-center mx-auto mb-6 text-white
-            max-w-[92vw]
-            text-[1.15rem] tracking-[0.005em]
-            xs:text-[1.35rem] xs:tracking-[0.01em]
-            sm:text-[1.8rem] sm:tracking-[0.035em]
-            md:text-[2.4rem] md:tracking-[0.06em]
-          "
-        >
-          ACCOMMODATION
-        </h1>
+        <div className="flex justify-center mb-6">
+          <div className={`relative ${glitch ? "glitch-active" : ""}`}>
+            <h1
+              className="sponsor-glitch text-center mx-auto text-white max-w-[92vw] text-[1.15rem] tracking-[0.005em] xs:text-[1.35rem] xs:tracking-[0.01em] sm:text-[1.8rem] sm:tracking-[0.035em] md:text-[2.4rem] md:tracking-[0.06em]"
+              data-text="ACCOMMODATION"
+              style={{
+                fontFamily: "Orbitron, sans-serif",
+                fontWeight: 700,
+              }}
+            >
+              ACCOMMODATION
+            </h1>
+          </div>
+        </div>
 
         {/* CONTAINER */}
         <div className="w-full max-w-[960px] rounded-[20px] sm:rounded-[28px]

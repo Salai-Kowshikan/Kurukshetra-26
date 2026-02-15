@@ -16,15 +16,7 @@ export default function Home() {
   return (
     <main
       className="relative min-h-screen overflow-hidden text-white"
-      style={{
-        background: "linear-gradient(180deg, #000000 0%, #30005A 100%)",
-      }}
     >
-      {/* Background */}
-      <div className="absolute inset-0 z-0">
-        <Background />
-      </div>
-
       {/* Foreground content */}
       <div className="relative z-10 w-full ">
         <Hero />

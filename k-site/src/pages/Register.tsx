@@ -59,7 +59,7 @@ export default function Register() {
            backgroundRepeat: 'no-repeat'
          }}>
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/30"></div>
+      {/* <div className="absolute inset-0 bg-black/30"></div> */}
       <div className="w-full max-w-md relative z-10">
         <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/60 backdrop-blur-md rounded-xl p-6 border border-slate-700/50 shadow-2xl max-h-[90vh] overflow-y-auto">
           {/* Title */}

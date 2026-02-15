@@ -5,6 +5,7 @@ import Home from "@/pages/Home";
 import NotFound from "@/pages/NotFound";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Background from "@/components/technovation/Background";
 import Contact from "@/pages/Contact";
 import Accommodation from "@/pages/Accommodation";
 import ComingSoon from "@/pages/ComingSoon";
@@ -29,6 +30,7 @@ function App() {
     <Router>
       {/* <div className="min-h-screen flex flex-col"> */}
         <Navbar />
+        <Background />
 
       <Routes>
         {/* Visible pages */}

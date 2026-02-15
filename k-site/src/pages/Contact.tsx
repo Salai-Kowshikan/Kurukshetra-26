@@ -1,5 +1,4 @@
-import { useState } from "react";
-import bg from "../assets/Img.png";
+import { useState, useEffect } from "react";
 import MagicBento from "./MagicBento";
 import {
   FaUser,
@@ -26,6 +25,19 @@ type FormData = {
 const Contact = () => {
   const [open, setOpen] = useState(true);
   const [activeTab, setActiveTab] = useState<"query" | "collaborate">("query");
+  const [glitch, setGlitch] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(
+      () => {
+        setGlitch(true);
+        setTimeout(() => setGlitch(false), 500);
+      },
+      3000 + Math.random() * 2000
+    );
+
+    return () => clearInterval(interval);
+  }, []);
 
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -81,14 +93,8 @@ const Contact = () => {
   return (
     <div
       className="relative min-h-screen flex items-center justify-center px-3 sm:px-4 pt-28 sm:pt-24 pb-8 sm:pb-16 font-(family-name:--orbitron) overflow-hidden"
-      style={{ background: "var(--contact-bg)" }}
     >
-      <img
-        src={bg}
-        alt="Kurukshetra contact background"
-        className="absolute inset-0 w-full h-full object-cover object-bottom pointer-events-none z-0"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/15 z-[1]" />
+      {/* <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/15 z-[1]" /> */}
 
       <MagicBento
         className="z-[2]"
@@ -108,9 +114,14 @@ const Contact = () => {
         {/* LEFT PANEL */}
         <div className="rounded-[20px] sm:rounded-[28px] border border-white/50 backdrop-blur-xs shadow-[0_0_40px_rgba(140,0,255,0.25)] p-4 sm:p-6 md:p-8 w-full md:max-w-[540px] md:justify-self-start flex flex-col h-full">
           <div className="flex flex-col gap-4 h-full">
-            <h2 className="text-base sm:text-lg font-semibold text-white tracking-widest">
-              CONNECT
-            </h2>
+            <div className={`relative ${glitch ? "glitch-active" : ""}`}>
+              <h2
+                className="sponsor-glitch text-base sm:text-lg font-semibold text-white tracking-widest"
+                data-text="CONNECT"
+              >
+                CONNECT
+              </h2>
+            </div>
 
 
             {/* Social Icons */}
@@ -191,9 +202,14 @@ const Contact = () => {
 
         {/* RIGHT PANEL */}
         <div className="rounded-[20px] sm:rounded-[28px] border border-white/50 backdrop-blur-xs shadow-[0_0_40px_rgba(140,0,255,0.25)] p-4 sm:p-6 md:p-8 w-full md:max-w-[540px] md:justify-self-end flex flex-col h-full">
-          <h2 className="text-base sm:text-lg md:text-xl font-semibold mb-4 sm:mb-5 tracking-widest text-white/90">
-            CONTACT US
-          </h2>
+          <div className={`relative ${glitch ? "glitch-active" : ""}`}>
+            <h2
+              className="sponsor-glitch text-base sm:text-lg md:text-xl font-semibold mb-4 sm:mb-5 tracking-widest text-white"
+              data-text="CONTACT US"
+            >
+              CONTACT US
+            </h2>
+          </div>
 
           {/* Tabs */}
           <div className="flex rounded-full mb-4 sm:mb-6 p-1 sm:p-1.5 border border-white/50">
