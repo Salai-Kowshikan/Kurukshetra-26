@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-// import MagicBento from "./MagicBento";
+import { useState } from "react";
+import { motion } from "motion/react";
+import useGlitch from "@/hooks/useGlitch";
 import {
   FaUser,
   FaPhoneAlt,
@@ -12,6 +13,19 @@ import {
   FaChevronDown,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import {
+  pageVariants,
+  fadeUp,
+  blurIn,
+  slideLeft,
+  slideRight,
+  staggerContainer,
+  scalePop,
+  pulseGlow,
+  hoverLift,
+  breathe,
+  floatSlow,
+} from "@/lib/animations";
 
 type FormData = {
   name: string;
@@ -25,19 +39,8 @@ type FormData = {
 const Contact = () => {
   const [open, setOpen] = useState(true);
   const [activeTab, setActiveTab] = useState<"query" | "collaborate">("query");
-  const [glitch, setGlitch] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(
-      () => {
-        setGlitch(true);
-        setTimeout(() => setGlitch(false), 500);
-      },
-      3000 + Math.random() * 2000
-    );
-
-    return () => clearInterval(interval);
-  }, []);
+  const [, setSubmitting] = useState(false);
+  const glitch = useGlitch();
 
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -57,14 +60,16 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitting(true);
 
     const output = {
       ...formData,
       type: activeTab,
     };
 
-    console.log("Form Data:");
-    console.log(JSON.stringify(output, null, 2));
+    if (import.meta.env.DEV) {
+      console.log("Form Data:", JSON.stringify(output, null, 2));
+    }
 
     // Submit to FormSubmit
     try {
@@ -76,7 +81,11 @@ const Contact = () => {
         body: formDataToSubmit,
       });
     } catch (error) {
-      console.error("Form submission error:", error);
+      if (import.meta.env.DEV) {
+        console.error("Form submission error:", error);
+      }
+    } finally {
+      setSubmitting(false);
     }
 
     // Reset form after submission
@@ -91,64 +100,105 @@ const Contact = () => {
   };
 
   return (
-    <div
+    <motion.div
       className="relative min-h-screen flex items-center justify-center px-3 sm:px-4 pt-28 sm:pt-24 pb-8 sm:pb-16 font-(family-name:--orbitron) overflow-hidden"
+      variants={pageVariants}
+      initial="hidden"
+      animate="visible"
     >
-      {/* <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/15 z-[1]" /> */}
+      {/* Animated background gradients */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-br from-purple-900/10 via-transparent to-fuchsia-900/10"
+        animate={breathe}
+      />
+      <motion.div
+        className="absolute top-[-5%] right-[-5%] w-96 h-96 bg-purple-600/15 rounded-full blur-[120px]"
+        animate={floatSlow}
+      />
+      <motion.div
+        className="absolute bottom-[-5%] left-[-5%] w-96 h-96 bg-fuchsia-600/15 rounded-full blur-[120px]"
+        animate={{
+          ...floatSlow,
+          transition: { ...floatSlow.transition, delay: 1.5 },
+        }}
+      />
 
-
-      <div className="relative z-10 w-full max-w-[1140px] grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 items-stretch mt-4 sm:mt-0">
+      <div className="relative z-10 w-full max-w-285 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 items-stretch mt-4 sm:mt-0">
         {/* LEFT PANEL */}
-        <div className="rounded-[20px] sm:rounded-[28px] border border-white/50 backdrop-blur-xs shadow-[0_0_40px_rgba(140,0,255,0.25)] p-4 sm:p-6 md:p-8 w-full md:max-w-[540px] md:justify-self-start flex flex-col h-full">
-          <div className="flex flex-col gap-4 h-full">
-            <div className={`relative ${glitch ? "glitch-active" : ""}`}>
+        <motion.div
+          className="rounded-4xl sm:rounded-[28px] border border-white/50 backdrop-blur-xs shadow-[0_0_40px_rgba(140,0,255,0.25)] p-4 sm:p-6 md:p-8 w-full md:max-w-135 md:justify-self-start flex flex-col h-full relative overflow-hidden"
+          variants={slideLeft}
+          whileHover={hoverLift}
+        >
+          {/* Inner animated background */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-fuchsia-500/5 pointer-events-none"
+            animate={breathe}
+          />
+          <div className="flex flex-col gap-4 h-full relative z-10">
+            <motion.div
+              className={`relative ${glitch ? "glitch-active" : ""}`}
+              variants={blurIn}
+            >
               <h2
                 className="sponsor-glitch text-base sm:text-lg font-semibold text-white tracking-widest"
                 data-text="CONNECT"
               >
                 CONNECT
               </h2>
-            </div>
-
+            </motion.div>
 
             {/* Social Icons */}
-            <div className="flex gap-3 sm:gap-4 mt-1 flex-wrap justify-center sm:justify-start">
+            <motion.div
+              className="flex gap-3 sm:gap-4 mt-1 flex-wrap justify-center sm:justify-start"
+              variants={staggerContainer(0.08)}
+            >
               {[
                 { icon: <FaEnvelope />, url: "mailto:hr@cegtechforum.in" },
-                { icon: <FaFacebookF />, url: "https://www.facebook.com/kurukshetraceg.org.in/" },
-                { icon: <FaInstagram />, url: "https://www.instagram.com/kurukshetra_ceg/" },
+                {
+                  icon: <FaFacebookF />,
+                  url: "https://www.facebook.com/kurukshetraceg.org.in/",
+                },
+                {
+                  icon: <FaInstagram />,
+                  url: "https://www.instagram.com/kurukshetra_ceg/",
+                },
                 { icon: <FaXTwitter />, url: "https://x.com/kurukshetra_ceg" },
-                { icon: <FaLinkedinIn />, url: "https://www.linkedin.com/in/cegtechforum/" },
+                {
+                  icon: <FaLinkedinIn />,
+                  url: "https://www.linkedin.com/in/cegtechforum/",
+                },
               ].map((item, i) => (
-                <a
+                <motion.a
                   key={i}
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 text-sm sm:text-base md:text-lg box-border flex items-center justify-center border border-white/50 text-white rounded-full backdrop-blur-xs hover:border-[#8A05FF] hover:bg-[#8A05FF] hover:text-white hover:shadow-[0_0_18px_rgba(138,5,255,0.8)] transition-all duration-200"
-                  style={{
-                    animation: `popIn 0.5s ease-out ${i * 0.1}s both`
-                  }}
+                  variants={scalePop}
+                  whileHover={{ scale: 1.15, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
                 >
                   {item.icon}
-                </a>
+                </motion.a>
               ))}
-            </div>
+            </motion.div>
 
             {/* Map Embed */}
-            <div className="rounded-xl sm:rounded-2xl overflow-hidden border border-white/25 bg-black/5 mt-1 backdrop-blur-sm">
+            <motion.div
+              className="rounded-xl sm:rounded-2xl overflow-hidden border border-white/25 bg-black/5 mt-1 backdrop-blur-sm"
+              variants={fadeUp}
+            >
               <iframe
-                title="map"
+                title="CEG Tech Forum Location"
                 src="https://maps.google.com/maps?q=CEG%20Tech%20Forum&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                loading="lazy"
                 className="w-full h-48 sm:h-52 md:h-60"
               />
-            </div>
-
-
+            </motion.div>
 
             {/* Contact Info */}
             <div className="mt-4 backdrop-blur-xs border border-white/50 rounded-xl sm:rounded-2xl text-white overflow-hidden">
-
               {/* Header Bar */}
               <button
                 onClick={() => setOpen(!open)}
@@ -156,7 +206,7 @@ const Contact = () => {
               >
                 <span className="text-left pr-2">General Inquiries [HR]:</span>
                 <FaChevronDown
-                  className={`transition-transform duration-300 flex-shrink-0 ${
+                  className={`transition-transform duration-300 shrink-0 ${
                     open ? "rotate-180" : ""
                   }`}
                 />
@@ -169,37 +219,62 @@ const Contact = () => {
                 } overflow-hidden border-t border-white/10`}
               >
                 <div className="px-4 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm space-y-2 sm:space-y-3">
-                  
                   <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0">
                     <span>Madhan R</span>
-                    <a href="tel:+916383747371" className="text-white/90 hover:text-white">+91 63837 47371</a>
+                    <a
+                      href="tel:+916383747371"
+                      className="text-white/90 hover:text-white"
+                    >
+                      +91 63837 47371
+                    </a>
                   </div>
-                  
+
                   <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0">
                     <span>Vinothini K</span>
-                    <a href="tel:+916381744539" className="text-white/90 hover:text-white">+91 63817 44539</a>
+                    <a
+                      href="tel:+916381744539"
+                      className="text-white/90 hover:text-white"
+                    >
+                      +91 63817 44539
+                    </a>
                   </div>
 
                   <div className="flex justify-start sm:justify-end pt-2">
-                    <a href="mailto:hr@cegtechforum.in" className="text-white/90 hover:text-white break-all">hr@cegtechforum.in</a>
+                    <a
+                      href="mailto:hr@cegtechforum.in"
+                      className="text-white/90 hover:text-white break-all"
+                    >
+                      hr@cegtechforum.in
+                    </a>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* RIGHT PANEL */}
-        <div className="rounded-[20px] sm:rounded-[28px] border border-white/50 backdrop-blur-xs shadow-[0_0_40px_rgba(140,0,255,0.25)] p-4 sm:p-6 md:p-8 w-full md:max-w-[540px] md:justify-self-end flex flex-col h-full">
-          <div className={`relative ${glitch ? "glitch-active" : ""}`}>
+        <motion.div
+          className="rounded-4xl sm:rounded-[28px] border border-white/50 backdrop-blur-xs shadow-[0_0_40px_rgba(140,0,255,0.25)] p-4 sm:p-6 md:p-8 w-full md:max-w-135 md:justify-self-end flex flex-col h-full relative overflow-hidden"
+          variants={slideRight}
+          whileHover={hoverLift}
+        >
+          {/* Inner animated background */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/5 via-transparent to-purple-500/5 pointer-events-none"
+            animate={breathe}
+          />
+          <motion.div
+            className={`relative z-10 ${glitch ? "glitch-active" : ""}`}
+            variants={blurIn}
+          >
             <h2
               className="sponsor-glitch text-base sm:text-lg md:text-xl font-semibold mb-4 sm:mb-5 tracking-widest text-white"
               data-text="CONTACT US"
             >
               CONTACT US
             </h2>
-          </div>
+          </motion.div>
 
           {/* Tabs */}
           <div className="flex rounded-full mb-4 sm:mb-6 p-1 sm:p-1.5 border border-white/50">
@@ -254,7 +329,7 @@ const Contact = () => {
             <div className="space-y-3 sm:space-y-4 transition-all duration-500">
               {/* Name */}
               <div className="flex items-center rounded-full px-4 sm:px-5 py-2 sm:py-2.5 border border-white/50 transition-all duration-500 animate-[slideInFromBottom_0.5s_ease-out]">
-                <FaUser className="text-white mr-2 sm:mr-3 flex-shrink-0 text-sm sm:text-base" />
+                <FaUser className="text-white mr-2 sm:mr-3 shrink-0 text-sm sm:text-base" />
                 <input
                   type="text"
                   name="Name"
@@ -273,7 +348,7 @@ const Contact = () => {
 
               {/* Mobile */}
               <div className="flex items-center rounded-full px-4 sm:px-5 py-2 sm:py-2.5 border border-white/50">
-                <FaPhoneAlt className="text-white mr-2 sm:mr-3 flex-shrink-0 text-sm sm:text-base" />
+                <FaPhoneAlt className="text-white mr-2 sm:mr-3 shrink-0 text-sm sm:text-base" />
                 <input
                   type="tel"
                   name="Mobile"
@@ -295,7 +370,7 @@ const Contact = () => {
 
               {/* Email */}
               <div className="flex items-center rounded-full px-4 sm:px-5 py-2 sm:py-2.5 border border-white/50">
-                <FaEnvelope className="text-white mr-2 sm:mr-3 flex-shrink-0 text-sm sm:text-base" />
+                <FaEnvelope className="text-white mr-2 sm:mr-3 shrink-0 text-sm sm:text-base" />
                 <input
                   type="email"
                   name="Email"
@@ -313,12 +388,14 @@ const Contact = () => {
               </div>
 
               {/* Company */}
-              <div className={`flex items-center rounded-full px-4 sm:px-5 py-2 sm:py-2.5 border border-white/50 transition-all duration-500 overflow-hidden ${
-                activeTab === "collaborate"
-                  ? "max-h-16 opacity-100 animate-[slideInFromBottom_0.5s_ease-out]"
-                  : "max-h-0 opacity-0 -my-4"
-              }`}>
-                <FaBuilding className="mr-2 sm:mr-3 text-white text-sm sm:text-lg flex-shrink-0" />
+              <div
+                className={`flex items-center rounded-full px-4 sm:px-5 py-2 sm:py-2.5 border border-white/50 transition-all duration-500 overflow-hidden ${
+                  activeTab === "collaborate"
+                    ? "max-h-16 opacity-100 animate-[slideInFromBottom_0.5s_ease-out]"
+                    : "max-h-0 opacity-0 -my-4"
+                }`}
+              >
+                <FaBuilding className="mr-2 sm:mr-3 text-white text-sm sm:text-lg shrink-0" />
                 <input
                   type="text"
                   name="Company"
@@ -336,8 +413,8 @@ const Contact = () => {
               </div>
 
               {/* Message */}
-              <div className="flex rounded-[18px] sm:rounded-[22px] px-4 sm:px-5 py-2.5 sm:py-3 min-h-[120px] sm:min-h-[140px] border border-white/50">
-                <FaCommentDots className="text-white mr-2 sm:mr-3 mt-1 flex-shrink-0 text-sm sm:text-base" />
+              <div className="flex rounded-[18px] sm:rounded-[22px] px-4 sm:px-5 py-2.5 sm:py-3 min-h-30 sm:min-h-35 border border-white/50">
+                <FaCommentDots className="text-white mr-2 sm:mr-3 mt-1 shrink-0 text-sm sm:text-base" />
                 <textarea
                   name="Message"
                   placeholder="Your Message"
@@ -355,34 +432,20 @@ const Contact = () => {
             </div>
 
             {/* Submit */}
-            <button
+            <motion.button
               type="submit"
               className="mt-4 sm:mt-6 w-full bg-[#7a28ff] text-white font-semibold py-3 sm:py-3.5 rounded-full hover:shadow-[0_0_24px_rgba(122,40,255,0.85)] transition text-sm sm:text-base"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              animate={pulseGlow}
             >
               Submit
-            </button>
+            </motion.button>
           </form>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 export default Contact;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -13,19 +13,12 @@ export default function Home() {
   }, [setHomeNavbar]);
 
   return (
-    <main
-      className="relative min-h-screen overflow-hidden text-white"
-    >
-      {/* Foreground content */}
-      <div className="relative z-10 w-full ">
+    <main className="relative min-h-screen overflow-hidden text-white">
+      <div className="relative z-10 w-full">
         <Hero />
         <Patronage />
         <About />
       </div>
-      
     </main>
   );
 }
-
-
-
