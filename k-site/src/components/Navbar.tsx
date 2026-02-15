@@ -46,8 +46,8 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 transition-colors duration-300">
-      {/* ===== MOBILE BAR (UP TO 1280px) ===== */}
-      <div className="flex items-center justify-between pr-6 pl-2 py-4 xl:hidden">
+      {/* ===== MOBILE BAR (UP TO lg) ===== */}
+      <div className="flex items-center justify-between pr-6 pl-2 py-4 lg:hidden">
         <img
           src={logo}
           alt="CTF Logo"
@@ -74,7 +74,7 @@ const Navbar: React.FC = () => {
           bg-black
           transform transition-transform duration-300
           ${open ? "translate-x-0" : "-translate-x-full"}
-          xl:hidden
+          lg:hidden
           z-50
           flex flex-col
         `}
@@ -117,7 +117,7 @@ const Navbar: React.FC = () => {
       {/* ===== MOBILE BACKDROP ===== */}
       {open && (
         <div
-          className="fixed inset-0 bg-black/60 xl:hidden z-40"
+          className="fixed inset-0 bg-black/60 lg:hidden z-40"
           onClick={handleMenuClose}
         />
       )}

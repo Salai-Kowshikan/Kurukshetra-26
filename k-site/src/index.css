@@ -546,7 +546,7 @@ h1, h2, h3, h4, h5, h6, img, button {
 
 .hero-title {
   top: 21vh;
-  left: 7vw;
+  left: 2vw;
   width: 90vw;
   font-size: 46px;
 }
@@ -555,7 +555,7 @@ h1, h2, h3, h4, h5, h6, img, button {
 @media (min-width: 765px) {
   .hero-title {
     top: 25vh;
-    left: 12vw;
+    left: 11vw;
     width: 75vw;
     font-size: 70px;
   }
