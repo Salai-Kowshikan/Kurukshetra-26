@@ -10,6 +10,7 @@ import Contact from "@/pages/Contact";
 import Accommodation from "@/pages/Accommodation";
 import ComingSoon from "@/pages/ComingSoon";
 import Sponsors from "@/pages/Sponsors";import Technovation from "./pages/Technovation";
+import Terms from "@/pages/Terms";
 
 const comingSoonPaths = [
   "/login",
@@ -38,6 +39,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/accommodation" element={<Accommodation />} />
         <Route path="/sponsors" element={<Sponsors />} />
+        <Route path="/terms" element={<Terms />} />
 
             {/* Pages redirected to ComingSoon */}
             {comingSoonPaths.map((path) => (
