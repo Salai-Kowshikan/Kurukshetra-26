@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import useFullNavbar from "@/hooks/useFullNavbar";
 import { useParams } from "react-router-dom";
-import { EVENT_DETAILS } from "@/constants/events";
+import { EVENT_DETAILS } from "@/constants/events.tsx";
+import { parseContact, getContactHref, isLinkableContact } from "@/lib/contactUtils";
 import {
   FileText,
   Swords,
@@ -12,6 +13,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Bot,
+  ExternalLink,
 } from "lucide-react";
 
 type TabKey =
@@ -21,6 +23,10 @@ type TabKey =
   | "prize"
   | "schedule"
   | "contact";
+
+// Global registration link from App.tsx
+const GLOBAL_REGISTRATION_URL =
+  "https://unstop.com/college-fests/kurukshetra-2026-anna-university-ceg-tech-forum-436664";
 
 export default function EventsNew() {
   useFullNavbar();
@@ -77,6 +83,38 @@ export default function EventsNew() {
     </ul>
   );
 
+  // Render contacts with phone/email links
+  const renderContacts = (contacts: string[]) => (
+    <ul className="mt-4 text-gray-300 space-y-2 text-sm md:text-base overflow-x-hidden lg:text-left text-center">
+      {contacts.map((contact, index) => {
+        const parsed = parseContact(contact);
+        const isLinkable = isLinkableContact(parsed);
+        const href = isLinkable ? getContactHref(parsed) : '#';
+
+        if (isLinkable) {
+          return (
+            <li key={index} className="flex flex-wrap gap-1 items-center lg:justify-start justify-center min-w-0">
+              <a
+                href={href}
+                target={parsed.type === 'email' ? '_blank' : undefined}
+                rel={parsed.type === 'email' ? 'noopener noreferrer' : undefined}
+                className="text-purple-400 hover:text-purple-300 hover:underline transition"
+              >
+                {parsed.displayText}
+              </a>
+            </li>
+          );
+        }
+
+        return (
+          <li key={index} className="flex flex-wrap gap-1 items-center lg:justify-start justify-center min-w-0">
+            <span className="min-w-0" style={{ wordBreak: "break-word" }}>{parsed.displayText}</span>
+          </li>
+        );
+      })}
+    </ul>
+  );
+
   const tabs = [
     { key: "description", name: "Description", icon: FileText },
     { key: "rounds", name: "Rounds", icon: Swords },
@@ -101,12 +139,12 @@ export default function EventsNew() {
   const tabContent: Record<TabKey, React.ReactNode> = {
     description: (
       <>
-        <h2 className="text-xl md:text-2xl font-semibold flex items-center lg:justify-start justify-center gap-3">
-          <Bot size={20} className="text-purple-400" />
+        <h2 className="text-md md:text-lg font-normal flex items-center lg:justify-start justify-center gap-3 mb-3">
+          {/* <Bot size={20} className="text-purple-400" /> */}
           {event.description}
         </h2>
 
-        <p className="text-base md:text-lg text-gray-300 mt-1 lg:text-left text-center">
+        <p className="text-base md:text-lg text-gray-300 mt-4 lg:text-left text-center">
           Participation: {event.participation}
         </p>
       </>
@@ -114,10 +152,10 @@ export default function EventsNew() {
 
     rounds: (
       <>
-        <h2 className="text-xl md:text-2xl font-semibold lg:text-left text-center">Event Rounds</h2>
+        <h2 className="text-xl md:text-2xl font-semibold lg:text-left text-center mb-3">Event Rounds</h2>
         <ul className="mt-4 text-gray-300 space-y-2 text-sm md:text-base lg:text-left text-center">
           {event.rounds.map((round: string) => (
-            <li key={round}>⚡ {round}</li>
+            <li key={round} className="mb-2">⚡ {round}</li>
           ))}
         </ul>
       </>
@@ -125,29 +163,29 @@ export default function EventsNew() {
 
     rules: (
       <>
-        <h2 className="text-xl md:text-2xl font-semibold lg:text-left text-center">Rules</h2>
+        <h2 className="text-xl md:text-2xl font-semibold lg:text-left text-center mb-3">Rules</h2>
         {renderList(event.rules, "•")}
       </>
     ),
 
     prize: (
       <>
-        <h2 className="text-xl md:text-2xl font-semibold lg:text-left text-center">Prize Pool</h2>
+        <h2 className="text-xl md:text-2xl font-semibold lg:text-left text-center mb-3">Prize Pool</h2>
         {renderList(event.prize)}
       </>
     ),
 
     schedule: (
       <>
-        <h2 className="text-xl md:text-2xl font-semibold lg:text-left text-center">Schedule</h2>
+        <h2 className="text-xl md:text-2xl font-semibold lg:text-left text-center mb-3">Schedule</h2>
         {renderList(event.schedule, "📅")}
       </>
     ),
 
     contact: (
       <>
-        <h2 className="text-xl md:text-2xl font-semibold lg:text-left text-center">Contact</h2>
-        {renderList(event.contact)}
+        <h2 className="text-xl md:text-2xl font-semibold lg:text-left text-center mb-3">Contact</h2>
+        {renderContacts(event.contact)}
       </>
     ),
   };
@@ -194,7 +232,15 @@ export default function EventsNew() {
             <div className="hidden lg:flex flex-row gap-6 lg:gap-8">
 
               {/* IMAGE SIDE */}
-              <div className="w-full md:w-56 h-52 md:h-56 bg-gray-300 rounded-2xl shrink-0" />
+              <div className="w-full md:w-56 h-52 md:h-56 bg-gray-800 rounded-2xl shrink-0 overflow-hidden">
+                {event.image ? (
+                  <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-gray-500">
+                    <span className="text-sm">No image available</span>
+                  </div>
+                )}
+              </div>
 
               {/* RIGHT SIDE */}
               <div className="flex-1 min-w-0">
@@ -250,8 +296,10 @@ export default function EventsNew() {
                 </div>
 
                 {/* Content */}
-                <div className="transition-all duration-300 overflow-hidden lg:text-left text-center">
-                  {tabContent[activeTab]}
+                <div className="transition-all duration-300 overflow-y-auto overflow-x-hidden lg:text-left text-center scrollbar-hide" style={{ maxHeight: "55vh" }}>
+                  <div className="space-y-2">
+                    {tabContent[activeTab]}
+                  </div>
                 </div>
 
               </div>
@@ -283,12 +331,27 @@ export default function EventsNew() {
               </div>
 
               {/* Content Area */}
-              <div className="transition-all duration-300 overflow-y-auto overflow-x-hidden text-center" style={{ maxHeight: "60vh" }}>
-                <div className="pr-4 min-w-0 flex flex-col items-center justify-center lg:items-start">
+              <div className="transition-all duration-300 overflow-y-auto overflow-x-hidden text-center scrollbar-hide" style={{ maxHeight: "60vh" }}>
+                <div className="pr-4 min-w-0 flex flex-col items-center justify-center lg:items-start space-y-3">
                   {tabContent[activeTab]}
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* REGISTRATION BUTTON - OUTSIDE CARD */}
+          <div className="mt-6 flex justify-center">
+            <a
+              href={event.registrationLink || GLOBAL_REGISTRATION_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 md:px-8 md:py-4 bg-linear-to-r from-purple-600 to-fuchsia-500 
+                         text-white font-semibold rounded-full hover:shadow-[0_0_30px_#a855f7] 
+                         transition-all duration-300 hover:scale-105"
+            >
+              Register Now
+              <ExternalLink size={18} />
+            </a>
           </div>
         </div>
       </div>

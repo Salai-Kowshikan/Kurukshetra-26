@@ -2,7 +2,6 @@ import useFullNavbar from "@/hooks/useFullNavbar";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ring from "../assets/Events/events.png";
-import Electronics from "../assets/Events/Electronics.svg";
 import Extravaganza from "../assets/Events/Extravaganza.svg";
 import Management from "../assets/Events/Management.svg";
 import Quiz from "../assets/Events/Quiz.svg";
@@ -10,7 +9,7 @@ import Robotics from "../assets/Events/Robot.svg";
 import Coding from "../assets/Events/coding.svg";
 import Engineering from "../assets/Events/engineering.svg";
 import Online from "../assets/Events/online.svg";
-import { EVENTS_CATEGORIES } from "../constants/events";
+import { EVENTS_CATEGORIES } from "../constants/events.tsx";
 
 const EVENTS_DATA = EVENTS_CATEGORIES;
 
@@ -31,10 +30,9 @@ export default function Events() {
 
     return () => clearInterval(interval);
   }, []);
-  const total = 8;
+  const total = 7;
   const targetIndex = 1;
   const icons = [
-    Electronics,
     Extravaganza,
     Management,
     Quiz,
@@ -44,7 +42,6 @@ export default function Events() {
     Online,
   ];
   const iconToEventType: (keyof typeof EVENTS_DATA)[] = [
-    "Electronics",
     "Extravaganza",
     "Management",
     "Quiz",
@@ -136,7 +133,7 @@ export default function Events() {
                     onClick={() =>
                       setSelectedType(item as keyof typeof EVENTS_DATA)
                     }
-                    className={`text-sm rounded-lg px-3 py-2 cursor-pointer transition
+                    className={`text-sm rounded-lg px-3 py-2 cursor-pointer transition-all duration-700 ease-in-out
                         ${
                           selectedType === item
                             ? "bg-purple-600 text-white"
@@ -159,26 +156,29 @@ export default function Events() {
                     {EVENTS_DATA[selectedType].label}
                   </span>
                 </div>
+                <div className="lg:ml-8 backdrop-blur-[2px] m-2 p-2 rounded-lg border border-purple-500/30 w-full lg:w-[90%]">
+                  <h2 className="mt-2 text-xl font-semibold">
+                    What to Expect?
+                  </h2>
 
-                <h2 className="mt-4 lg:ml-8 text-xl font-semibold">What to Expect?</h2>
-
-                <p className="text-gray-200 text-md mt-2 mx-auto lg:mx-0 lg:ml-8">
-                  {EVENTS_DATA[selectedType].description}
-                </p>
+                  <p className="text-gray-100 text-md mt-2 mx-auto ">
+                    {EVENTS_DATA[selectedType].description}
+                  </p>
+                </div>
               </div>
             </div>
 
             {/* ⭐ RESPONSIVE GRID */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 justify-items-center">
               {EVENTS_DATA[selectedType].events.map((title) => (
                 <div
                   key={title}
                   onClick={() =>
                     navigate(`/events/${encodeURIComponent(title)}`)
                   }
-                  className="w-40 h-36 border border-purple-500/40 rounded-xl flex items-end justify-center p-3 hover:border-purple-400 transition cursor-pointer"
+                  className="w-84 h-60 border border-purple-500/40 rounded-xl flex items-end justify-center p-3 hover:border-purple-400 transition cursor-pointer"
                 >
-                  <span className="bg-purple-600 text-white text-xs px-3 py-1 rounded-full">
+                  <span className="bg-purple-600 text-white text-sm font-semibold px-5 py-2 rounded-full w-[90%] text-center">
                     {title}
                   </span>
                 </div>
